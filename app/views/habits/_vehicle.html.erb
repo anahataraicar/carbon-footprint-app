@@ -1,0 +1,15 @@
+<h3>Question 1: Commuting in vehicle</h3>
+<%= form_tag "/habits/new", method: :get do %>
+
+  <div>
+    <p><%= label_tag "Car mileage:" %>
+       <%= text_field_tag :mileage %></p>
+    <p><%= label_tag "Miles roundtrip in your commute:" %>
+       <%= text_field_tag :car_miles %></p>
+       <%= hidden_field_tag :counter, 2  %>
+  <div>
+
+  <div>
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>

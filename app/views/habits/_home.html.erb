@@ -1,0 +1,17 @@
+<h3>Question 9: Home</h4>
+<%= form_tag "/habits", method: :post do %>
+
+  <div>
+    <p><%= label_tag "Home square footage:" %>
+       <%= text_field_tag :sqft %></p>
+      
+       <%= hidden_field_tag :type, "home"  %>
+       <%= hidden_field_tag :page, 9 %>
+  <div>
+
+  <div>
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>
+
+

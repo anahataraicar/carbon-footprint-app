@@ -1,0 +1,16 @@
+<h3>Question 10: Meat/fish/eggs</h3>
+<%= form_tag "/habits", method: :post do %>
+<% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
+
+  <div>
+    <p><%= label_tag "Meat/fish/eggs:" %>
+       <%= select_tag(:factor, options) %></p>
+
+       <%= hidden_field_tag :type, "meat"  %>
+       <%= hidden_field_tag :page, 10 %>
+  <div>
+
+  <div>
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>

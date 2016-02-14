@@ -1,0 +1,19 @@
+<h3>Question 5: Electricity</h4>
+<%= form_tag "/habits", method: :post do %>
+<% options = options_for_select([["kWh/year", "watts"], ["$/year", "yearly_cost"]]) %>
+
+  <div>
+    <p><%= label_tag "Electricity:" %>
+       <%= text_field_tag :electricity_input %>
+       <%= select_tag(:input_type, options) %></p>
+      
+       <%= hidden_field_tag :type, "electricity"  %>
+       <%= hidden_field_tag :page, 5 %>
+  <div>
+
+  <div>
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>
+
+

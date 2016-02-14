@@ -1,4 +1,8 @@
 <h2>Please answer every question in form</h2>
+<% @partials.each do |partial| %>
+  <%= render "#{partial}" %>
+<% end %>
+
 
 
 

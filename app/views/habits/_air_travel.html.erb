@@ -1,13 +1,17 @@
-<h3>Question 3: Air travel</h3>
-<%= form_tag "/habits/new", method: :get do %>
+<h3>Question 4: Air Travel</h3>
+<%= form_tag "/habits", method: :post do %>
 
   <div>
     <p><%= label_tag "Miles you fly in a year:" %>
        <%= text_field_tag :air_miles %></p>
-       <%= hidden_field_tag :counter, 4 %>
+       
+       <%= hidden_field_tag :type, "air_travel" %>
+       <%= hidden_field_tag :page, 4 %>
   <div>
 
   <div>
     <%= submit_tag "Submit" %>
   </div>
 <% end %>
+
+

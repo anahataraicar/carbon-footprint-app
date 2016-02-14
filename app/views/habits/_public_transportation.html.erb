@@ -1,14 +1,16 @@
-<h3>Question 2: Commuting via public transportation</h3>
-<%= form_tag "/habits/new", method: :get do %>
-<% options = options_for_select([["Bus",300], ["Commuter rail",165],["Transit rail",160], ["Amtrak",191]])%>
+<h3>Question 3: Commuting via Public Transportation</h3>
+<%= form_tag "/habits", method: :post do %>
+<% options = options_for_select([['Bus',300], ['Commuter rail',165],['Transit rail',160], ['Amtrak',191]])%>
 
   <div>
     <p><%= label_tag "Select a form of public transportation" %>
-    <%= select_tag(:mode, options) %></p>
+       <%= select_tag(:mode, options) %></p>
 
     <p><%= label_tag "Miles roundtrip in your commute:" %>
        <%= text_field_tag :public_miles %></p>
-       <%= hidden_field_tag :counter, 3  %>
+ 
+       <%= hidden_field_tag :type, "public_transportation"  %>
+       <%= hidden_field_tag :page, 3 %>
   </div>
 
   <div>

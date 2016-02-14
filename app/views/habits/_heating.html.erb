@@ -1,0 +1,20 @@
+<h3>Question 7: Heating oil</h4>
+<%= form_tag "/habits", method: :post do %>
+<% options = options_for_select([["gal/year", "gallons"], ["$/year", "yearly_cost"]]) %>
+
+  <div>
+    <p><%= label_tag "Heating oil:" %>
+       <%= text_field_tag :heating_input %>
+       <%= select_tag(:input_type, options) %></p>
+      
+       <%= hidden_field_tag :type, "heating"  %>
+       <%= hidden_field_tag :page, 7 %>
+  <div>
+
+  <div>
+    <%= submit_tag "Submit" %>
+  </div>
+<% end %>
+
+
+

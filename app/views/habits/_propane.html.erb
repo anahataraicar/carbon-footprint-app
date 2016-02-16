@@ -1,20 +1,18 @@
 <h3>Question 8: Propane</h4>
-<%= form_tag "/habits", method: :post do %>
-<% options = options_for_select([["gal/year", "gallons"], ["$/year", "yearly_cost"]]) %>
+
+<% options = options_for_select([["gal/year", 1], ["$/year", ]]) %>
 
   <div>
     <p><%= label_tag "Propane:" %>
-       <%= text_field_tag :heating_input %>
+       <%= text_field_tag :input %>
        <%= select_tag(:input_type, options) %></p>
       
        <%= hidden_field_tag :type, "propane"  %>
        <%= hidden_field_tag :page, 8 %>
   <div>
 
-  <div>
-    <%= submit_tag "Submit" %>
-  </div>
-<% end %>
+  
+
 
 
 

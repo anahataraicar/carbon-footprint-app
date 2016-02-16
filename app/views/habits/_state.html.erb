@@ -1,5 +1,4 @@
 <h3>Question 1: What state do you live in?</h3>
-<%= form_tag "/habits", method: :post do %>
 <% options = options_for_select([ [ "Alabama", "AL" ], 
                                   [ "Alaska", "AK" ], 
                                   [ "Arizona", "AZ" ], 
@@ -60,7 +59,5 @@
        <%= hidden_field_tag :page, 1 %>
   <div>
 
-  <div>
-    <%= submit_tag "Submit" %>
-  </div>
-<% end %>
+ 
+

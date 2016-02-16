@@ -1,0 +1,14 @@
+<h2>Update your footprint:</h2>
+<%= form_tag "/habits/#{current_user.id}", method: :patch do %>
+  <% @partials.each do |partial| %>
+    <%= render "#{partial}" %>
+  <% end %>
+
+  <div>
+    <%= submit_tag "Update your footprint" %>
+  </div>
+<% end %>
+
+
+
+

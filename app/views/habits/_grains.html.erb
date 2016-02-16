@@ -1,5 +1,4 @@
 <h3>Question 12: Grains</h3>
-<%= form_tag "/habits", method: :post do %>
 <% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
 
   <div>
@@ -9,8 +8,3 @@
        <%= hidden_field_tag :type, "grains"  %>
        <%= hidden_field_tag :page, 12 %>
   <div>
-
-  <div>
-    <%= submit_tag "Submit" %>
-  </div>
-<% end %>

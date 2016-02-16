@@ -1,6 +1,12 @@
 <h2>Please answer every question in form</h2>
-<% @partials.each do |partial| %>
-  <%= render "#{partial}" %>
+<%= form_tag "/habits", method: :post do %>
+  <% @partials.each do |partial| %>
+    <%= render "#{partial}" %>
+  <% end %>
+
+  <div>
+    <%= submit_tag "Sumbit your answers" %>
+  </div>
 <% end %>
 
 

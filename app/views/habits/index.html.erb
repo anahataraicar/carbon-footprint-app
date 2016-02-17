@@ -1,6 +1,6 @@
 <h1>Calculate your carbon footprint!</h1>
 <% if current_user %>
-  <h3>Hello! <%= current_user.email %></h3>
+  <h3>Welcome, <%= current_user.first_name %></h3>
   <h3><%= link_to "Click here to get started", "/habits/new" %></h3>
   <h3><%= link_to "Your profile", "/habits/#{current_user.id}" %></h3>
 <% else %>
@@ -8,6 +8,7 @@
   <h3><%= link_to "Sign in", "/users/sign_in" %></h3>
 <% end %>
 <h3><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></h3>
+
 
 
 

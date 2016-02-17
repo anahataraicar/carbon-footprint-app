@@ -3,9 +3,9 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   belongs_to :profile
 
-  def calc_vehicle(miles, mileage, gas)
+  def calc_vehicle(miles, mileage, fuel)
     # need to change 250 to 365
-    miles.to_f * 250 / mileage.to_f * gas.to_f / 1000
+    miles.to_f * 250 / mileage.to_f * fuel.to_f / 1000
   end
 
   def calc_public_transportation(miles,mode)
@@ -18,8 +18,8 @@ class Habit < ActiveRecord::Base
 
   def calc_electricity(input_type, input)
     if input_type == "watts"
-      watts.to_f * 0.000689551
-    elsif 
+      input.to_f * 0.000689551
+    else
       # electricity = Unirest.get("http://api.eia.gov/series/?api_key=0632EE78BEB53994A3CE648E3642C15C&series_id=ELEC.PRICE.#{current_user.state}-COM.A").body["series"][0]["data"][0][1]
       electricity = 10.15 # made up - need average
       input.to_f / (electricity/ 100) * 0.000689551

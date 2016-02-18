@@ -1,0 +1,18 @@
+<h2>Please answer every question in form</h2>
+<% @partials.each do |partial| %>
+  
+  <%= form_tag "/profiles", method: :post do %>
+    <%= render "#{partial}" %>
+  <div>
+    <%= submit_tag "Sumbit your answers" %>
+  </div>
+
+  <% end %>
+
+  
+<% end %>
+
+
+
+
+

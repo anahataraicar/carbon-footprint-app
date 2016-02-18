@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213201924) do
+ActiveRecord::Schema.define(version: 20160218005834) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20160213201924) do
     t.decimal  "value",                      precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "input1",                     precision: 8, scale: 2
+    t.decimal  "input2",                     precision: 8, scale: 2
+    t.decimal  "input3",                     precision: 8, scale: 2
   end
 
   create_table "profiles", force: :cascade do |t|

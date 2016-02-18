@@ -1,14 +1,17 @@
+<h4><%= link_to "Home", "/" %></h4>
 <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
 <h3><%= current_user.email %></h3>
 <h4>Carbon footprint breakdown (in MT CO2/year):</h4>
-<h4><%= link_to "Edit your footprint", "/habits/#{current_user.id}/edit" %></h4>
 <ul>
 <% @user_habits.each do |habit| %>
   <li><%= habit.footprint_type %>: <%= habit.value %></li>
 <% end %>
 </ul>
 
-<h4>Overall Footprint: <%= @total_footprint %> MT CO2/year</h4>
+<h4>Overall Footprint: <%= @user_profile.total_value %>
+ MT CO2/year</h4>
+
+<h4><%= link_to "Edit your footprint", "/footprints/#{current_user.id}/edit" %></h4>
 
 <h3>Here's some ideas on how to reduce your footprint:</h3>
 <ul>
@@ -19,8 +22,20 @@
   <li>Eat a vegetarian diet</li>
 </ul>
 
-<h3><a href="http://www.dsireusa.org/">Click here </a>to learn about incentives for going GREEN!</h3>
-  
+<h3>Here is how you stack up against other users:</h3>
+<ol>
+  <% @ordered_profiles.each do |profile| %>
+    <% if profile.user == current_user %>
+      <strong><li>You: <%= profile.total_value %> MT CO2/year</li></strong>
+    <% else %>
+     <li><%= profile.user.first_name %>:
+        <%= profile.total_value %> MT CO2/year</li>
+    <% end %>
+  <% end %>
+</ol>
+
+
+
 
 
 

@@ -1,0 +1,13 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+div.page {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+#canvas-holder {
+  width: 60%;
+  float: right;
+  margin-right: 40px;
+}

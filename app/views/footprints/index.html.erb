@@ -1,15 +1,16 @@
-<h1>Calculate your carbon footprint!</h1>
-<% if current_user %>
-  <h3>Welcome, <%= current_user.first_name %></h3>
-  <% unless current_user.profiles.last %>
-    <h3><%= link_to "Click here to get started", "/footprints/new" %></h3>
+<div class="page">
+  <h1>Calculate your carbon footprint!</h1>
+  <% if current_user %>
+    <h3>Welcome, <%= current_user.first_name %></h3>
+    <% unless current_user.profiles.last %>
+      <h3><%= link_to "Click here to get started", "/footprints/new" %></h3>
+    <% end %>
+    <h3><%= link_to "Your profile", "/footprints/#{current_user.id}" %></h3>
+  <% else %>
+    <h4><a href="/users/sign_up">Sign up</a> to get started!</h4>
   <% end %>
-  <h3><%= link_to "Your profile", "/footprints/#{current_user.id}" %></h3>
-<% else %>
-  <h3><a href="/users/sign_up">Sign up</a></h3>
-  <h3><%= link_to "Sign in", "/users/sign_in" %></h3>
-<% end %>
-<h3><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></h3>
+</div>
+
 
 
 

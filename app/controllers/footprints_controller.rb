@@ -18,13 +18,10 @@ class FootprintsController < ApplicationController
     habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
 
     habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
-    
-    habit.update( value: value )
-    
-    # habit.save_user_input ?!?!?
    
     if current_user.is_done?
       current_user.create_profile
+      flash[:success] = "Your footprint has been successfully calculated!"
       redirect_to "/footprints/#{current_user.id}"
     else
       redirect_to "/footprints/new"
@@ -35,6 +32,12 @@ class FootprintsController < ApplicationController
     @user_habits = current_user.habits
     @user_profile = current_user.profiles.last
     @ordered_profiles = Profile.order(:total_value)
+    
+    @saved_gas = current_user.save_gas
+
+    @travel = current_user.sum_travel
+    @energy = current_user.sum_energy
+    @food = current_user.sum_food
 
   end
 
@@ -46,12 +49,15 @@ class FootprintsController < ApplicationController
   def update
     current_user.update({ state: params[:state]}) if params[:type] == "state"
 
-    habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
+    if @habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
 
-    value = habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
-    
-    habit.update( value: value )
-    current_user.update_profile 
-    redirect_to "/footprints/#{current_user.id}"
+      @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
+
+      current_user.update_profile 
+      flash[:success] = "Your profile has been successfully updated"
+      redirect_to "/footprints/#{current_user.id}"
+    else
+      render :edit
+    end
   end
 end

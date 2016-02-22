@@ -1,8 +1,0 @@
-class HabitsController < ApplicationController
-
- 
-   
-  
-
-end
-

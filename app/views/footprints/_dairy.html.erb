@@ -2,11 +2,10 @@
 <% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
 
   <div>
-    <p><%= label_tag "Dairy:" %>
+    <p><%= label_tag "dairy:" %>
        <%= select_tag(:factor, options) %></p>
   
        <%= hidden_field_tag :type, "dairy"  %>
-       <%= hidden_field_tag :page, 11 %>
-  <div>
+  </div>
 
 

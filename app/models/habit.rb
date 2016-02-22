@@ -3,34 +3,76 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   belongs_to :profile
 
+  validates :input1, presence: true
+  validates :input2, presence: true, if: :has_two_inputs?
+  validates :input3, presence: true, if: :has_three_inputs?
+  
+  validates :value, numericality: true
+  validates :input1, numericality: true 
+  validates :input2, numericality: true, if: :has_two_inputs?
+  validates :input3, numericality: true, if: :has_three_inputs?
+
+  def has_two_inputs?
+    footprint_type == "public_transportation" || footprint_type == "electricity" || footprint_type == "natural_gas" || footprint_type == "heating" || footprint_type == "propane" ? true : false 
+  end
+
+  def has_three_inputs?
+    footprint_type == "vehicle" ? true : false
+  end
+
   def calculate_habit(footprint_type, hash)
     if footprint_type == "vehicle"
-      hash[:miles].to_f / hash[:mileage].to_f * hash[:fuel_type].to_f / 1000
+      value = hash[:miles].to_f / hash[:mileage].to_f * hash[:fuel_type].to_f / 1000
+      input1 = hash[:miles]
+      input2 = hash[:mileage]
+      input3 = hash[:fuel_type]
     elsif footprint_type == "public_transportation"
-      hash[:miles].to_f * hash[:mode].to_f / 1000 / 1000 
+      value = hash[:miles].to_f * hash[:mode].to_f / 1000 / 1000 
+      input1 = hash[:miles]
+      input2 = hash[:mode]
     elsif footprint_type == "air_travel"
-      hash[:miles].to_f * 200 / 1000 / 1000
+      value = hash[:miles].to_f * 200 / 1000 / 1000
+      input1 = hash[:miles]
     elsif footprint_type == "electricity"
-      hash[:input].to_f * 0.000689551 / hash[:input_type].to_f
+      value = hash[:input].to_f * 0.000689551 / hash[:input_type].to_f
+      input1 = hash[:input]
+      input2 = hash[:input_type]
     elsif footprint_type == "natural_gas"
-      hash[:input].to_f * 0.0053 / hash[:input_type].to_f
+      value = hash[:input].to_f * 0.0053 / hash[:input_type].to_f
+      input1 = hash[:input]
+      input2 = hash[:input_type]
     elsif footprint_type == "heating"
-      hash[:input].to_f * 10.16 / hash[:input_type].to_f / 1000
+      value = hash[:input].to_f * 10.16 / hash[:input_type].to_f / 1000
+      input1 = hash[:input]
+      input2 = hash[:input_type]
     elsif footprint_type == "propane"
-      hash[:input].to_f * 5.76 / hash[:input_type].to_f / 1000    
+      value = hash[:input].to_f * 5.76 / hash[:input_type].to_f / 1000   
+      input1 = hash[:input]
+      input2 = hash[:input_type] 
     elsif footprint_type == "home"
-      hash[:sqft].to_f * 0.93 / 1000
+      value = hash[:sqft].to_f * 0.93 / 1000
+      input1 = hash[:sqft]
     elsif footprint_type == "meat"
-      hash[:factor].to_f * 523 * 4.52 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 523 * 4.52 / 1000 / 1000 * 365
+      input1 = hash[:factor]
     elsif footprint_type == "dairy"
-      hash[:factor].to_f * 286 * 4.66 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 286 * 4.66 / 1000 / 1000 * 365
+      input1 = hash[:factor]
     elsif footprint_type == "grains"
-      hash[:factor].to_f * 669 * 1.47 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 669 * 1.47 / 1000 / 1000 * 365
+      input1 = hash[:factor]
     elsif footprint_type == "fruit"
-      hash[:factor].to_f * 271 * 3.03 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 271 * 3.03 / 1000 / 1000 * 365
+      input1 = hash[:factor]
     elsif footprint_type == "other"
-      hash[:factor].to_f * 736 * 3.73 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 736 * 3.73 / 1000 / 1000 * 365
+      input1 = hash[:factor]
     end
+  
+    update({ value: value,
+             input1: input1,
+             input2: input2 || nil , 
+             input3: input3 || nil })
   end
 
 end

@@ -33,11 +33,17 @@ class FootprintsController < ApplicationController
     @user_profile = current_user.profiles.last
     @ordered_profiles = Profile.order(:total_value)
     
-    @saved_gas = current_user.save_gas
+    # @saved_gas = current_user.save_gas
+    gon.saved_gas = current_user.save_gas
 
-    @travel = current_user.sum_travel
-    @energy = current_user.sum_energy
-    @food = current_user.sum_food
+    habits_hash = Hash.new 
+    @user_habits.each do |habit|
+      habits_hash[habit.footprint_type] = habit.value
+    end
+
+    gon.habits = habits_hash
+
+
 
   end
 

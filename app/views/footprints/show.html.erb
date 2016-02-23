@@ -1,21 +1,46 @@
 <div class="page">
   <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
 
- 
+
+
+
+
+  
+  <div id="canvas-holder">
+    <canvas id="myChart" width="350" height="350">
+      <script src="Chart.js"></script>
+    </canvas>
+
+    <div id="js-legend" class="chart-legend"></div>
+  </div>
+
+  <%= include_gon %>
+  <table id="habits">
+    <tr>
+      <th>Type</th>
+      <th>Value</th>
+    </tr>
+    <% @user_habits.each do |habit| %>
+      <tr>
+        <td><%= habit.footprint_type %></td>
+        <td><%= habit.value %></td>
+      </tr>
+    <% end %>
+  </table>
 
   <h3>Overall Footprint: <%= @user_profile.total_value %>
    MT CO2/year</h3>
 
   <h4><%= link_to "Edit your footprint", "/footprints/#{current_user.id}/edit" %></h4>
 
+
   <h3>Here's some ideas on how to reduce your footprint:</h3>
-  <ul>
-    <li>Ride your bike</li>
-    <li>Carpool to work</li>
-    <li>Install PV panels</li>
-    <li>Buy a more fuel efficient vehicle (saves <%= @saved_gas %> MT CO2/year)</li>
-    <li>Eat a vegetarian diet</li>
-  </ul>
+  
+  <form id="form">
+    <input type="checkbox" id="bike"> Ride your bike<br>
+    <input type="checkbox" id="vehicle" onclick="change()"> Buy a more fuel efficient vehicle<br>
+  </form>
+
 
   <h3>Here is how you stack up against other users:</h3>
   <ol>
@@ -28,11 +53,4 @@
     <% end %>
   </ol>
 </div>
-
-
- <div id="canvas-holder">
-    <canvas id="myChart">
-      <script src="Chart.js"></script>
-    </canvas>
-  </div>
 

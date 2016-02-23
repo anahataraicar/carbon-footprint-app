@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'unirest'
 
+gem 'gon'
+
 gem 'bootstrap-sass', '~> 3.3.6'
 
 # Use ActiveModel has_secure_password

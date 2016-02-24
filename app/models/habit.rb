@@ -3,14 +3,14 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   belongs_to :profile
 
-  validates :input1, presence: true
-  validates :input2, presence: true, if: :has_two_inputs?
-  validates :input3, presence: true, if: :has_three_inputs?
+  # validates :input1, presence: true
+  # validates :input2, presence: true, if: :has_two_inputs?
+  # validates :input3, presence: true, if: :has_three_inputs?
   
-  validates :value, numericality: true
-  validates :input1, numericality: true 
-  validates :input2, numericality: true, if: :has_two_inputs?
-  validates :input3, numericality: true, if: :has_three_inputs?
+  # validates :value, numericality: true
+  # validates :input1, numericality: true 
+  # validates :input2, numericality: true, if: :has_two_inputs?
+  # validates :input3, numericality: true, if: :has_three_inputs?
 
   def has_two_inputs?
     footprint_type == "public_transportation" || footprint_type == "electricity" || footprint_type == "natural_gas" || footprint_type == "heating" || footprint_type == "propane" ? true : false 

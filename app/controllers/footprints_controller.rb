@@ -2,6 +2,9 @@ class FootprintsController < ApplicationController
   def index
   end
 
+  def slider
+  end
+
   def new
     @partials = ["state", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "meat", "dairy", "grains", "fruit", "other"]
 
@@ -33,15 +36,22 @@ class FootprintsController < ApplicationController
     @user_profile = current_user.profiles.last
     @ordered_profiles = Profile.order(:total_value)
     
-    # @saved_gas = current_user.save_gas
     gon.saved_gas = current_user.save_gas
 
-    habits_hash = Hash.new 
+    gon.habits = Hash.new
     @user_habits.each do |habit|
-      habits_hash[habit.footprint_type] = habit.value
+      gon.habits[habit.footprint_type] = habit.value.to_f
     end
 
-    gon.habits = habits_hash
+    gon.profiles = Hash.new
+    @ordered_profiles.each do |profile|
+      gon.profiles[profile.user.first_name] = profile.total_value
+    end
+
+    # @profiles = Hash.new
+    # @ordered_profiles.each do |profile|
+    #   @profiles[profile.user.first_name] = profile.total_value
+    # end
 
 
 
@@ -53,17 +63,17 @@ class FootprintsController < ApplicationController
 
 
   def update
-    current_user.update({ state: params[:state]}) if params[:type] == "state"
-
-    if @habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
+    if params[:type] == "state"
+      current_user.update({ state: params[:state]}) 
+    else 
+      @habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
 
       @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
 
       current_user.update_profile 
       flash[:success] = "Your profile has been successfully updated"
-      redirect_to "/footprints/#{current_user.id}"
-    else
-      render :edit
     end
+    redirect_to "/footprints/#{current_user.id}"
+
   end
 end

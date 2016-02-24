@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>CarbonFootprintApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -48,6 +48,7 @@
           <li><a href="/users/sign_up">Sign up</a></li>
           <li><a href="/users/sign_in">Sign in</a></li>
         <% end %>
+        <li><%= link_to "My footprint", "/footprints/#{current_user.id}" %></li>
         <li><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></li>
       </ul>
     </div><!-- /.navbar-collapse -->

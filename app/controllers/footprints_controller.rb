@@ -1,8 +1,6 @@
 class FootprintsController < ApplicationController
+  
   def index
-  end
-
-  def slider
   end
 
   def new
@@ -10,7 +8,10 @@ class FootprintsController < ApplicationController
 
     # creates habits for each partial, but without values (to check if done later)
     @partials.each do |partial|
-      habit = Habit.create({  user_id: current_user.id, value: value, footprint_type: params[:type] })
+      habit = Habit.create({  user_id: current_user.id, 
+                              footprint_type: params[:type]
+                              #value:  what should I set the value??
+                              })
     end
 
   end
@@ -47,17 +48,10 @@ class FootprintsController < ApplicationController
     @ordered_profiles.each do |profile|
       gon.profiles[profile.user.first_name] = profile.total_value
     end
-
-    # @profiles = Hash.new
-    # @ordered_profiles.each do |profile|
-    #   @profiles[profile.user.first_name] = profile.total_value
-    # end
-
-
-
   end
 
   def edit
+    @habit = Habit.new
     @partials = ["state", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "meat", "dairy", "grains", "fruit", "other"]
   end
 
@@ -73,7 +67,8 @@ class FootprintsController < ApplicationController
       current_user.update_profile 
       flash[:success] = "Your profile has been successfully updated"
     end
-    redirect_to "/footprints/#{current_user.id}"
+    # byebug
+    # redirect_to "/footprints/#{current_user.id}"
 
   end
 end

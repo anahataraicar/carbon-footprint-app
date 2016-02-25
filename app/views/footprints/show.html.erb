@@ -1,17 +1,17 @@
 <div class="page">
 
   <%= include_gon %>
-
-  <div id="pie-holder">
-    <canvas id="myPieChart" width="500" height="500">
-      <script src="Chart.js"></script>
-    </canvas>
   
+  <div id="pie-holder">
     <div class="legend">
       <p>Legend</p>
       <div id="js-legend" class="chart-legend"></div>
     </div>
+    <canvas id="myPieChart" width="500" height="500">
+      <script src="Chart.js"></script>
+    </canvas>    
   </div>
+
 
   <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
   <h3>Overall Footprint: <%= @user_profile.total_value %> MT CO2/year</h3>
@@ -21,15 +21,21 @@
   <h3>Here's how you can reduce your footprint:</h3>
   
   <form>
-    <input type="checkbox" id="bike"> Ride your bike<br>
     <input type="checkbox" id="vehicle"> Buy a more fuel efficient vehicle<br>
+    <input type="checkbox" id="bike"> Ride your bike<br>
     <input type="checkbox" id="carpool"> Carpool to work<br>
     <input type="checkbox" id="veg"> Go vegetarian<br>
-    <input type="checkbox" id="solar"> Install PV in your home<br>
+    <input type="checkbox" id="solar"> Install PV panels in your home<br>
   </form> 
 
   <h3>Here's how you stack up against other users:</h3>
   
+  <div id="footprint-tracker">
+    <p>New footprint:</p>
+    <p id="updated-footprint"><%= @user_profile.total_value %></p>
+    <p> MT CO2/year</p>
+  </div>
+
   <div id="bar-holder">
     <div id="y-axis-label">
       <h6>MT CO2/year</h6>
@@ -40,4 +46,5 @@
   </div>
 </div>
 
+  
 

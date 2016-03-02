@@ -1,6 +1,6 @@
 class FootprintsController < ApplicationController
   
-  def index
+  def index        
   end
 
   def new
@@ -33,21 +33,26 @@ class FootprintsController < ApplicationController
   end
 
   def show
-    @user_habits = current_user.habits
     @user_profile = current_user.profiles.last
-    @ordered_profiles = Profile.order(:total_value)
-    
+    user_habits = current_user.habits
     gon.saved_gas = current_user.save_gas
 
     gon.habits = Hash.new
-    @user_habits.each do |habit|
+    user_habits.each do |habit|
       gon.habits[habit.footprint_type] = habit.value.to_f
     end
 
-    gon.profiles = Hash.new
-    @ordered_profiles.each do |profile|
-      gon.profiles[profile.user.first_name] = profile.total_value
+    profiles = Profile.order(:total_value).sample(3).users
+    gon.profiles = []
+    @profiles_hash = {}
+
+    profiles.each do |profile|
+      @profiles_hash["first name"] = profile.first_name
     end
+
+
+    
+    
   end
 
   def edit
@@ -68,7 +73,7 @@ class FootprintsController < ApplicationController
       flash[:success] = "Your profile has been successfully updated"
     end
     # byebug
-    # redirect_to "/footprints/#{current_user.id}"
+    redirect_to "/footprints/#{current_user.id}"
 
   end
 end

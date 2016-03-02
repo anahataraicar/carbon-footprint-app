@@ -1,27 +1,22 @@
 <div class="page">
 
-  <%= include_gon %>
-  
+<%= include_gon %>
+
   <div id="pie-holder">
-    <div class="legend">
-      <p>Legend</p>
-      <div id="js-legend" class="chart-legend"></div>
-    </div>
-    <canvas id="myPieChart" width="500" height="500">
-      <script src="Chart.js"></script>
-    </canvas>    
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <div id="pieChartContainer" style="width: 700px; height: 500px; margin: 0 auto"></div>
   </div>
-
-
+ 
   <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
   <h3>Overall Footprint: <%= @user_profile.total_value %> MT CO2/year</h3>
+  <h1><%= @profiles_hash %></h1>
   
   <h4><%= link_to "Update your footprint", "/footprints/#{current_user.id}/edit" %></h4>
 
   <h3>Here's how you can reduce your footprint:</h3>
   
   <form>
-    <input type="checkbox" id="vehicle"> Buy a more fuel efficient vehicle<br>
+    <input type="checkbox" id="vehicleFunction"> Buy a more fuel efficient vehicle<br>
     <input type="checkbox" id="bike"> Ride your bike<br>
     <input type="checkbox" id="carpool"> Carpool to work<br>
     <input type="checkbox" id="veg"> Go vegetarian<br>
@@ -37,14 +32,12 @@
   </div>
 
   <div id="bar-holder">
-    <div id="y-axis-label">
-      <h6>MT CO2/year</h6>
-    </div>
-    <canvas id="myBarChart" width="400" height="300">
-      <script src="Chart.js"></script>
-    </canvas>
+    <div id="barChartContainer" style="width: 700px; height: 500px;"></div>
   </div>
-</div>
+  ""
+</div> <!-- end of PAGE DIV -->
+
+
 
   
 

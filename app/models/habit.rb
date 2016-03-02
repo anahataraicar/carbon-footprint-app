@@ -12,6 +12,17 @@ class Habit < ActiveRecord::Base
   # validates :input2, numericality: true, if: :has_two_inputs?
   # validates :input3, numericality: true, if: :has_three_inputs?
 
+  def sum_travel
+    
+  end
+
+  def sum_housing
+  end
+
+  def sum_food
+  end
+
+
   def has_two_inputs?
     footprint_type == "public_transportation" || footprint_type == "electricity" || footprint_type == "natural_gas" || footprint_type == "heating" || footprint_type == "propane" ? true : false 
   end

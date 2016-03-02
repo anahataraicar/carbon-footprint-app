@@ -6,8 +6,8 @@
   font-family: Geneva;
 }
 
-div.page {
-  margin-left: 50px;
+.page {
+  margin-left: 20px;
   margin-right: 10px;
 }
 
@@ -15,28 +15,12 @@ div#pie-holder {
   float: right;
   margin-right: 100px;
   width: 700px;
-
-  canvas#myChart {
-    float: left;
-  }
 }
 
 div#bar-holder {
   margin-top: 30px;
-
-  div#y-axis-label {
-    float: left;
-    margin-top: 130px;
-    -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
-    -o-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    transform: rotate(270deg);
-    h6 {
-      color: #787878;
-    }
-  }
 }
+
 
 #nValue {
   width: 200px;
@@ -68,6 +52,30 @@ div.legend {
     display: inline-block;
   }
 }
+
+
+
+
+#edit-body {
+  position: relative;
+}
+
+ul.nav-pills {
+  position: fixed;
+}
+
+.container {
+  margin-left: 10px;
+}
+
+.col-sm-9 {
+  margin-left: 120px;
+}
+
+.form-div {
+  margin-bottom: 100px;
+}
+
 
 
 

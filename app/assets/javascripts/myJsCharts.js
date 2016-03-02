@@ -2,13 +2,13 @@
 
 //   var pie_data = gon.habits;
 
-//   // var bikeCalc = function(){
-//     //some code here
-//   //   return 
-//   // }
+//   var bikeCalc = function(){
+//     // some code here
+//     return ;
+//   }
 
-//   // var carCalc = function(){
-//   // }
+//   var carCalc = function(){
+//   }
   
 //   var PieData = [
 //     {
@@ -48,7 +48,7 @@
 //       label: "Heating" 
 //     },
 //     {
-//       value: (pie_data["meat"] + pie_data["dairy"] + pie_data["grains"] + pie_data["fruit"] + pie_data["other"]).toFixed(2),
+//       value: (pie_data["meat"] + pie_data["dairy"] + pie_data["grains"] + pie_data["fruit"] + pie_data["other"]),
 //       color: "#ff99cc",
 //       highlight: "#ffcce6",
 //       label: "Food" 

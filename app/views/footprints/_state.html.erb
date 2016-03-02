@@ -1,4 +1,4 @@
-<form>
+<form id="stateForm">
 
 <h3>Question 1: What state do you live in?</h3>
 <% options = options_for_select([ [ "Alabama", "AL" ], 
@@ -60,7 +60,7 @@
        <%= hidden_field_tag :type, "state" %>
   </div>
 
-  <button id="state-submit" name="jee">SUBMIT</button>
+  <button id="state-submit">SUBMIT</button>
 
 </form>
   

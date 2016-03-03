@@ -10,6 +10,31 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  def sum_travel
+    sum = 0
+    ["vehicle", "public_transportation", "air_travel"].each do |footprint_type|
+      sum += habits.find_by(footprint_type: footprint_type).value.to_f
+    end
+    sum.round(2)
+  end
+
+  def sum_housing
+    sum = 0;
+    ["electricity", "natural_gas", "heating", "propane", "home"].each do |footprint_type|
+      sum += habits.find_by(footprint_type: footprint_type).value.to_f
+    end
+    sum.round(2)
+  end
+
+  def sum_food
+    sum = 0
+    ["meat", "dairy", "grains", "fruit", "other"].each do |footprint_type|
+      sum += habits.find_by(footprint_type: footprint_type).value.to_f
+    end
+    sum.round(2)
+  end
+
+
   def save_gas
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "vehicle").last
     miles = habit.input1

@@ -1,19 +1,18 @@
 $(document).ready(function(){
   
-  $("form").on('submit', function(e){
+  $(form).on('submit', function(e){
 
-    var Formdata = $('form').serialize();
-    
-    console.log(Formdata);
+    var formData = $('this').serialize();
+     
+    // console.log(formData);
     
     e.preventDefault();
 
-    console.log( $( this ).serialize() );
-
     $.ajax({
+      type: "POST",
       url: "/footprints/1",
-      method: "patch",
-      data: Formdata
+      data: formData,
+      dataType: "JSONP"
       });
 
     console.log("hello");

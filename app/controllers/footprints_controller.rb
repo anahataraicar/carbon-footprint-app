@@ -42,17 +42,20 @@ class FootprintsController < ApplicationController
       gon.habits[habit.footprint_type] = habit.value.to_f
     end
 
-    profiles = Profile.order(:total_value).sample(3).users
-    gon.profiles = []
-    @profiles_hash = {}
+    profiles = Profile.order(:total_value).first(3)
+
+    gon.names = []
+    gon.travel = []
+    gon.housing = []
+    gon.food = []
 
     profiles.each do |profile|
-      @profiles_hash["first name"] = profile.first_name
+      gon.names << profile.user.first_name
+      gon.travel << profile.user.sum_travel
+      gon.housing << profile.user.sum_housing
+      gon.food << profile.user.sum_food
     end
 
-
-    
-    
   end
 
   def edit

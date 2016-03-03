@@ -1,5 +1,6 @@
 <h3>Question 14: Other food</h3>
-<% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
+<form>
+  <% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
 
   <div>
     <p><%= label_tag "Other food (snacks, drinks, etc):" %>
@@ -7,5 +8,6 @@
   
        <%= hidden_field_tag :type, "other"  %>
   </div>
+</form>
 
  

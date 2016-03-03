@@ -1,5 +1,6 @@
 <h3>Question 7: Heating oil</h4>
-<% options = options_for_select([["gal/year", 1 ], ["$/year", 4.02]]) %>
+<form>
+  <% options = options_for_select([["gal/year", 1 ], ["$/year", 4.02]]) %>
 
   <div>
     <p><%= label_tag "Heating oil:" %>
@@ -8,7 +9,7 @@
       
        <%= hidden_field_tag :type, "heating"  %>
   </div>
-
+</form>
 
 
 

@@ -1,20 +1,22 @@
 $(document).ready(function(){
   
-  $(form).on('submit', function(e){
-
-    var formData = $('this').serialize();
-     
-    // console.log(formData);
-    
+  $('form').on('submit', function(e){
     e.preventDefault();
 
+    // var formData = JSON.stringify($(this).serializeArray());
+    var formData = $(this).serializeArray();
+    
+    console.log(formData);
+
     $.ajax({
-      type: "POST",
+      method: "PATCH",
       url: "/footprints/1",
       data: formData,
-      dataType: "JSONP"
-      });
+      dataType: "JSON"
+      }).done(function() {
+        console.log('hi');
+      }
+      );
 
-    console.log("hello");
   });
 });

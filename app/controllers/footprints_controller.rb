@@ -76,7 +76,7 @@ class FootprintsController < ApplicationController
       flash[:success] = "Your profile has been successfully updated"
     end
     # byebug
-    redirect_to "/footprints/#{current_user.id}"
-
+    # redirect_to "/footprints/#{current_user.id}"
+    head :ok
   end
 end

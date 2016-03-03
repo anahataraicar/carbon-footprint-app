@@ -1,7 +1,5 @@
 <h3>Question 10: Meat/fish/eggs</h3>
-
-
-
+<form>
   <p>
     <label for="nValue">
       your value = <span id="text-slider"></span>
@@ -25,7 +23,7 @@
 
   </script> 
 
-<% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
+  <% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
 
   <div>
     <p><%= label_tag "Meat/fish/eggs:" %>
@@ -33,3 +31,4 @@
 
        <%= hidden_field_tag :type, "meat"  %>
   </div>
+</form>

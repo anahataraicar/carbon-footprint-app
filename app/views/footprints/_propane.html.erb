@@ -1,6 +1,7 @@
 <h3>Question 8: Propane</h4>
 <!-- literally made up 4.00 -->
-<% options = options_for_select([["gal/year", 1], ["$/year", 4.00]]) %>
+<form>
+  <% options = options_for_select([["gal/year", 1], ["$/year", 4.00]]) %>
 
   <div>
     <p><%= label_tag "Propane:" %>
@@ -9,6 +10,7 @@
       
        <%= hidden_field_tag :type, "propane"  %>
   </div>
+</form>
 
   
 

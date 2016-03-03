@@ -1,5 +1,7 @@
 <h3>Question 5: Electricity</h4>
-<% options = options_for_select([["kWh/year", 1], ["$/year", 0.1015]]) %>
+<form>
+
+  <% options = options_for_select([["kWh/year", 1], ["$/year", 0.1015]]) %>
 
   <div>
     <p><%= label_tag "Electricity:" %>
@@ -8,6 +10,5 @@
       
        <%= hidden_field_tag :type, "electricity"  %>
   </div>
-
-
+</form>
 

@@ -1,5 +1,6 @@
 <h3>Question 3: Public Transportation</h3>
-<% options = options_for_select([['Bus',300], ['Commuter rail',165],['Transit rail',160], ['Amtrak',191]])%>
+<form>
+  <% options = options_for_select([['Bus',300], ['Commuter rail',165],['Transit rail',160], ['Amtrak',191]])%>
 
   <div>
     <p><%= label_tag "Select a form of public transportation" %>
@@ -10,6 +11,7 @@
  
        <%= hidden_field_tag :type, "public_transportation"  %>
   </div>
+</form>
 
  
 

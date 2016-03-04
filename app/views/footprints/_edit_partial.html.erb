@@ -1,0 +1,96 @@
+<div class="tab-content">
+
+  <div role="tabpanel" class="tab-pane active" id="intro">
+    <div class="question">
+      <form class="editForm">
+        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+          <%= render "#{@partials.first}" %>
+
+          <button class="btn btn-default">Update this question</button>
+        <% end %>
+      </form>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="vehicle">
+    <% @partials[1..2].each do |partial| %>
+      <div class="question">
+        <form class="editForm">
+
+          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+          <%= render "#{partial}" %>
+          <button class="btn btn-default">Update this question</button>
+          <% end %>
+
+        </form>
+      </div>
+    <% end %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="air_travel">
+    <div class="question">
+      <form class="editForm">
+        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+
+        <%= render "#{@partials[3]}" %>
+        <button class="btn btn-default">Update this question</button>
+      
+        <% end %>
+      </form>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="electricity">
+    <% @partials[4..5].each do |partial| %>
+      <div class="question">
+        <form class="editForm">
+          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+
+          <%= render "#{partial}" %>
+          <button class="btn btn-default">Update this question</button>
+          <% end %>
+        </form>
+      </div>
+    <% end %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="heating">
+    <% @partials[6..7].each do |partial| %>
+      <div class="question">
+        <form class="editForm">
+          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+
+          <%= render "#{partial}" %>
+          <button class="btn btn-default">Update this question</button>
+          <% end %>
+        </form>
+      </div>
+    <% end %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="home">
+    <div class="question">
+      <form class="editForm">
+        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+
+        <%= render "#{@partials[8]}" %>
+        <button class="btn btn-default">Update this question</button>
+        <% end %>
+      </form>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="food">
+    <% @partials[9..13].each do |partial| %>
+      <div class="question">
+        <form class="editForm">
+          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %> 
+          <%= render "#{partial}" %>
+          <button class="btn btn-default">Update this question</button>
+          <% end %>
+        </form>
+      </div>
+    <% end %>
+  </div>
+
+</div>

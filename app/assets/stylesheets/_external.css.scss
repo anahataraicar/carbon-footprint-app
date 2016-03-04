@@ -1,20 +1,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$light-green: #9fdf9f;
 
 * {
   font-family: Geneva;
 }
 
 .page {
-  margin-left: 20px;
+  margin-left: 10px;
   margin-right: 10px;
-}
-
-div#pie-holder {
-  float: right;
-  margin-right: 100px;
-  width: 700px;
 }
 
 div#bar-holder {
@@ -36,10 +31,6 @@ div#bar-holder {
   position: relative;
 }
 
-ul.nav-pills {
-  position: fixed;
-}
-
 .container {
   margin-left: 10px;
 }
@@ -48,27 +39,74 @@ ul.nav-pills {
   margin-left: 120px;
 }
 
-.form-div {
-  margin-bottom: 30px;
-  background-color: #c6ebc6;
-  padding: 5px 25px 25px 25px;
-  border-radius: 20px;
+// .form-div {
+//   margin-bottom: 30px;
+//   background-color: $light-green;
+//   padding: 5px 25px 25px 25px;
+//   border-radius: 20px;
+// }
+
+
+
+
+.left-edit {
+
+  ul.nav.nav-pills.nav-stacked {
+    margin-left: 15px;
+    margin-top: 15px;
+    float: left;
+    width: 45px; 
+
+    .active > a {
+      background-color: white;
+    }
+
+    i {
+      color: $light-green;
+      margin-left: -5px;
+    }
+  }
+
+  .questions {
+    float: left;
+
+    .tab-pane {
+      background-color: $light-green;
+      padding: 10px 30px 30px 30px;
+      margin: 20px;
+      width: 600px;
+      border-radius: 15px;
+      height: 500px;
+      // overflow: auto;
+
+      .question {
+      margin-bottom: 60px;
+  
+        h3 {
+          color: white;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
 }
 
-.tab-pane {
-  background-color: #c6ebc6;
-  padding: 10px 30px 30px 30px;
-  margin: 20px;
-  width: 50%;
-  border-radius: 15px;
-  height: 500px;
-  overflow: auto;
+
+div#pie-holder {
+  margin: 10px;
+  padding: 10px;
+  float: right;
+  margin-right: 100px;
 }
 
-.question {
-  margin-bottom: 80px;
 
-}
+
+
+
+
+
+
+
 
 
 

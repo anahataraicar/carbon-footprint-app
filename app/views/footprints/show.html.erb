@@ -7,11 +7,10 @@
     <div id="pieChartContainer" style="width: 700px; height: 500px; margin: 0 auto"></div>
   </div>
  
-  <h1><%= current_user.state %></h1>
   <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
   <h3>Overall Footprint: <%= @user_profile.total_value %> MT CO2/year</h3>
 
-  <h1><%=  %></h1>
+  <h1><%= current_user.state %></h1>
   
   <h4><%= link_to "Update your footprint", "/footprints/#{current_user.id}/edit" %></h4>
 

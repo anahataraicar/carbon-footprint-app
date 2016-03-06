@@ -16,10 +16,10 @@ div#bar-holder {
   margin-top: 30px;
 }
 
-
-#nValue {
-  width: 200px;
-}
+// slider!
+// input.nValue {
+//   width: 200px;
+// }
 
 #footprint-tracker {
   p {
@@ -38,15 +38,6 @@ div#bar-holder {
 .col-sm-9 {
   margin-left: 120px;
 }
-
-// .form-div {
-//   margin-bottom: 30px;
-//   background-color: $light-green;
-//   padding: 5px 25px 25px 25px;
-//   border-radius: 20px;
-// }
-
-
 
 
 .left-edit {
@@ -72,20 +63,19 @@ div#bar-holder {
 
     .tab-pane {
       background-color: $light-green;
-      padding: 10px 30px 30px 30px;
+      padding: 10px 20px 20px 20px;
       margin: 20px;
       width: 600px;
       border-radius: 15px;
       height: 500px;
-      // overflow: auto;
+
+      h3 {
+        color: white;
+        margin-bottom: 10px;
+      }
 
       .question {
-      margin-bottom: 60px;
-  
-        h3 {
-          color: white;
-          margin-bottom: 20px;
-        }
+        margin-bottom: 60px;
       }
     }
   }
@@ -99,6 +89,32 @@ div#pie-holder {
   margin-right: 100px;
 }
 
+.foodForm {
+  color: white;
+  // padding: 15px;
+
+  .food-partial {
+    margin-bottom: -15px;
+  }
+
+}
+
+.btn.btn-default.last {
+  float: right;
+}
+
+button.arrow {
+  // background-color: white;
+  background-color: transparent;
+  box-shadow: none;
+  text-shadow: none;
+  border: none;
+}
+
+.arrow {
+  display: inline;
+
+}
 
 
 

@@ -1,32 +1,31 @@
-<h3>Question 10: Meat/fish/eggs</h3>
-  <p>
-    <label for="nValue">
-      your value = <span id="text-slider"></span>
-    </label>
-    <input type="range" min="0" max="3" step="0.2" id="nValue">
-  </p>
+<!-- <h3>Question 12: Meat, fish, eggs</h3> -->
+<p>
+  <label for="nValueMeat">
+    <h4>Meat:</h4> {{ meat.value }}x average
+  </label>
+  <input type="range" min="0" max="3" step="0.2" id="nValueMeat" style="width: 200px;" ng-model="meat.value">
+</p>
 
   <script src="http://d3js.org/d3.v3.min.js"></script>
-
   <script>
-    d3.select("#nValue").on("input", function () {
-      update(+this.value);
+    d3.select("#nValueMeat").on("input", function () {
+      updateMeat(+this.value);
     });
 
-    update(1);
+    updateMeat(1);
 
-    function update(nValue) {
-      d3.select("#text-slider").text(nValue);
-      d3.select("#nValue").property("value", nValue);
+    function updateMeat(nValueMeat) {
+      d3.select("#text-slider-meat").text(nValueMeat);
+      d3.select("#nValueMeat").property("value", nValueMeat);
     }
+  </script>
 
-  </script> 
 
-  <% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
 
-  <div>
-    <p><%= label_tag "Meat/fish/eggs:" %>
-       <%= select_tag(:factor, options) %></p>
 
-       <%= hidden_field_tag :type, "meat"  %>
-  </div>
+
+
+
+
+
+

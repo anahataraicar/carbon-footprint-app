@@ -1,12 +1,27 @@
-<h3>Question 11: Dairy</h3>
-  <% options = options_for_select([["Less than average", 0.5], ["Average", 1], ["More than average", 1.5]]) %>
+<!-- <h3>Question 11: Dairy</h3> -->
+<p>
+  <label for="nValueDairy">
+    <h4>Dairy:</h4> {{ dairy.value }}x average
+  </label>
+  <input type="range" min="0" max="3" step="0.2" id="nValueDairy" style="width: 200px;" ng-model="dairy.value">
+</p>
 
-  <div>
-    <p><%= label_tag "dairy:" %>
-       <%= select_tag(:factor, options) %></p>
-  
-       <%= hidden_field_tag :type, "dairy"  %>
-  </div>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script>
+    d3.select("#nValueDairy").on("input", function () {
+      updateDairy(+this.value);
+    });
+
+    updateDairy(1);
+
+    function updateDairy(nValueDairy) {
+      d3.select("#text-slider-dairy").text(nValueDairy);
+      d3.select("#nValueDairy").property("value", nValueDairy);
+    }
+  </script>
+
+
+
 
 
 

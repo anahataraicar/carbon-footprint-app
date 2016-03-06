@@ -1,28 +1,37 @@
-<div class="left-edit">
+<div ng-app="app">
+  <div ng-controller="editCtrl">
+    <div class="left-edit">
 
-  <ul class="nav nav-pills nav-stacked">
-    <li role="presentation" class="active"><a href="#intro" data-toggle="tab"><i class="material-icons">person</i></a></li>
+      <ul class="nav nav-pills nav-stacked">
 
-    <li role="presentation"><a href="#vehicle" data-toggle="tab"><i class="material-icons">directions_car</i></a></li>
+        <li role="presentation" class="active"><a href="#1" data-toggle="tab"><i class="material-icons">person</i></a></li>
 
-    <li role="presentation"><a href="#air_travel" data-toggle="tab"><i class="material-icons">flight</i></a></li>
+        <li role="presentation"><a href="#2" data-toggle="tab"><i class="material-icons">directions_car</i></a></li>
 
-    <li role="presentation"><a href="#electricity" data-toggle="tab"><i class="material-icons">lightbulb_outline</i></a></li>
+        <li role="presentation"><a href="#3" data-toggle="tab"><i class="material-icons">flight</i></a></li>
 
-    <li role="presentation"><a href="#heating" data-toggle="tab"><i class="material-icons">whatshot</i></a></li>
+        <li role="presentation"><a href="#4" data-toggle="tab"><i class="material-icons">lightbulb_outline</i></a></li>
 
-    <li role="presentation"><a href="#home" data-toggle="tab"><i class="material-icons">home</i></a></li>
+        <li role="presentation"><a href="#5" data-toggle="tab"><i class="material-icons">whatshot</i></a></li>
 
-    <li role="presentation"><a href="#food" data-toggle="tab"><i class="material-icons">restaurant</i></a></li>
-  </ul>
+        <li role="presentation"><a href="#6" data-toggle="tab"><i class="material-icons">home</i></a></li>
 
-  <div class="questions">
-    <%= render "edit_partial" %>
-  </div>
+        <li role="presentation"><a href="#7" data-toggle="tab"><i class="material-icons">restaurant</i></a></li>
 
-</div>
+      </ul>
 
-<div id="pie-holder">
-  <script src="http://code.highcharts.com/highcharts.js"></script>
-  <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;"></div>
-</div>
+      <div class="questions">
+        <%= render "edit_partial" %>
+      </div>
+
+    </div>
+
+    <div id="pie-holder">
+      <script src="http://code.highcharts.com/highcharts.js"></script>
+      <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;"></div>
+    </div>
+
+
+  
+  </div> <!-- ng controller div -->
+</div> <!-- ng app div -->

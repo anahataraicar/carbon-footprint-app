@@ -3,13 +3,11 @@
   <div role="tabpanel" class="tab-pane active" id="1">
     <div class="question">
       <form id="stateForm">
-        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+     
           <%= render "#{@partials.first}" %>
 
-         
-        <h1 ng-click="submitForm(1, 2, 'stateForm')"><i class="material-icons">navigate_next</i></h1>
+        <h1 class="arrow-next" ng-click="submitForm('stateForm', 1, 2)"><i class="material-icons">navigate_next</i></h1>
    
-        <% end %>
       </form>
     </div>
   </div>
@@ -17,89 +15,90 @@
   <div role="tabpanel" class="tab-pane" id="2">
     <% @partials[1..2].each do |partial| %>
       <div class="question">
-        <!-- <form id="transportForm"> -->
-          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
+         
           <%= render "#{partial}" %>
-          <% end %>
-        <!-- </form> -->
       </div>
     <% end %>
     
-    <div class="arrow">
-      <h1 ng-click="submitForm(2, 1, 'transportForm')"><i class="material-icons">navigate_before</i></h1></div>
-    <div><h1 ng-click="submitForm(2, 2, 'transportForm')"><i class="material-icons">navigate_next</i></h1></div>
+    <h1 class="arrow-before" ng-click="submitTravel(mileage, carMiles, fuelType, miles, publicType, 1)"><i class="material-icons">navigate_before</i></h1>
 
+    <h1 class="arrow-next" ng-click="submitTravel(mileage, carMiles, fuelType, miles, publicType, 2)"><i class="material-icons">navigate_next</i></h1>
   </div>
+
 
   <div role="tabpanel" class="tab-pane" id="3">
     <div class="question">
-      <form id="airForm">
-        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
 
-        <%= render "#{@partials[3]}" %>
-        <button class="btn btn-default">Update this question</button>
+      <%= render "#{@partials[3]}" %>
+
+      <h1 class="arrow-before" ng-click="submitAir(airMiles, 1)"><i class="material-icons">navigate_before</i></h1>
+
+      <h1 class="arrow-next" ng-click="submitAir(airMiles, 2)"><i class="material-icons">navigate_next</i></h1>
       
-        <% end %>
-      </form>
     </div>
   </div>
+
 
   <div role="tabpanel" class="tab-pane" id="4">
     <% @partials[4..5].each do |partial| %>
       <div class="question">
-        <form id="electricityForm">
-          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
-
-          <%= render "#{partial}" %>
-          <button class="btn btn-default">Update this question</button>
-          <% end %>
-        </form>
+        <%= render "#{partial}" %>
       </div>
     <% end %>
+
+      <h1 class="arrow-before" ng-click="submitEnergy(electricityInput, electricityType, naturalInput, naturalType, 1)"><i class="material-icons">navigate_before</i></h1>
+
+      <h1 class="arrow-next" ng-click="submitEnergy(electricityInput, electricityType, naturalInput, naturalType, 2)"><i class="material-icons">navigate_next</i></h1>
   </div>
 
   <div role="tabpanel" class="tab-pane" id="5">
     <% @partials[6..7].each do |partial| %>
       <div class="question">
-        <form id="heatingForm">
-          <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
-
-          <%= render "#{partial}" %>
-          <button class="btn btn-default">Update this question</button>
-          <% end %>
-        </form>
+        <%= render "#{partial}" %>
       </div>
     <% end %>
+
+    <h1 class="arrow-before" ng-click="submitHeat(heatingInput, heatingType, propaneInput, propaneType, 1)"><i class="material-icons">navigate_before</i></h1>
+
+    <h1 class="arrow-next" ng-click="submitHeat(heatingInput, heatingType, propaneInput, propaneType, 2)"><i class="material-icons">navigate_next</i></h1>
   </div>
+
 
   <div role="tabpanel" class="tab-pane" id="6">
     <div class="question">
       <form id="homeForm">
         <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
-
         <%= render "#{@partials[8]}" %>
-        <button class="btn btn-default">Update this question</button>
         <% end %>
       </form>
+    
+      <h1 class="arrow-before" ng-click="submitForm('homeForm', 6, 2)"><i class="material-icons">navigate_before</i></h1>
+
+      <h1 class="arrow-next" ng-click="submitForm('homeForm', 6, 2)"><i class="material-icons">navigate_next</i></h1>
+
     </div>
   </div>
 
   <!-- put fruit and other!!!!! -->
   <div role="tabpanel" class="tab-pane" id="7">
-  <form class="foodForm">
-    <%= form_tag "/footprints/#{current_user.id}", method: :patch do %> 
+    <!-- <div class="question"> -->
+      <form class="foodForm">
+        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %> 
 
-      <% @partials[9..13].each do |partial| %>
-        <div class="food-partial">
-          <%= render "#{partial}" %>
-        </div>
-      <% end %>
+          <% @partials[9..13].each do |partial| %>
+            <div class="food-partial">
+              <%= render "#{partial}" %>
+            </div>
+          <% end %>
 
-      <button class="btn btn-default last" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value)">Done</button>
-        
-    <% end %>
+          <button class="btn btn-default last" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value, 0)">Submit my profile</button>
 
-  </form>
+          <h1 class="arrow-before" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value, 1)"><i class="material-icons">navigate_before</i></h1>
+            
+        <% end %>
+
+      </form>
+    <!-- </div> -->
   </div>
 </div>
 

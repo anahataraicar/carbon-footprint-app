@@ -1,13 +1,16 @@
-<h3>Question 6: Natural Gas</h4>
-  <% options = options_for_select([["Therms/year", 1], ["$/year", 0.0950], ["Cu.Ft/year", 8.9]]) %>
+<form id="naturalGasForm">
+<h3>Question 6: Natural Gas</h3>
 
-  <div>
-    <p><%= label_tag "Natural gas:" %>
-       <%= text_field_tag :input %>
-       <%= select_tag(:input_type, options) %></p>
-  
-       <%= hidden_field_tag :type, "natural_gas"  %>
-  </div>
+
+  <p>
+  Natural gas: <input ng-model="naturalInput"><br>
+  </p>
+
+  <select ng-model="naturalType" ng-options="type.name for type in naturalOptions">
+  <option value="">-- choose one --</option>
+  </select>
+
+</form>
 
 
   

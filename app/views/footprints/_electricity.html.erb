@@ -1,11 +1,13 @@
-<h3>Question 5: Electricity</h4>
-  <% options = options_for_select([["kWh/year", 1], ["$/year", 0.1015]]) %>
+<form id="electricityForm">
 
-  <div>
-    <p><%= label_tag "Electricity:" %>
-       <%= text_field_tag :input %>
-       <%= select_tag(:input_type, options) %></p>
-      
-       <%= hidden_field_tag :type, "electricity"  %>
-  </div>
+<h3>Question 5: Electricity</h3>
 
+  <p>
+  Electricity: <input ng-model="electricityInput"><br>
+  </p>
+
+  <select ng-model="electricityType" ng-options="type.name for type in electricityOptions">
+  <option value="">-- choose one --</option>
+  </select>
+
+</form>

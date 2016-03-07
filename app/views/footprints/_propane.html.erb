@@ -1,15 +1,15 @@
-<h3>Question 8: Propane</h4>
-<!-- literally made up 4.00 -->
-  <% options = options_for_select([["gal/year", 1], ["$/year", 4.00]]) %>
+<form id="propaneForm">
+<h3>Question 8: Propane</h3>
 
-  <div>
-    <p><%= label_tag "Propane:" %>
-       <%= text_field_tag :input %>
-       <%= select_tag(:input_type, options) %></p>
-      
-       <%= hidden_field_tag :type, "propane"  %>
-  </div>
+  <p>
+  Propane: <input ng-model="propaneInput">
+  </p>
 
+  <select ng-model="propaneType" ng-options="type.name for type in propaneOptions">
+    <option value="">-- choose one --</option>
+  </select>
+
+</form>
 
   
 

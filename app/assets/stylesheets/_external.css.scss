@@ -16,10 +16,6 @@ div#bar-holder {
   margin-top: 30px;
 }
 
-// slider!
-// input.nValue {
-//   width: 200px;
-// }
 
 #footprint-tracker {
   p {
@@ -63,7 +59,7 @@ div#bar-holder {
 
     .tab-pane {
       background-color: $light-green;
-      padding: 10px 20px 20px 20px;
+      padding: 5px 20px 20px 20px;
       margin: 20px;
       width: 600px;
       border-radius: 15px;
@@ -94,14 +90,11 @@ div#pie-holder {
   // padding: 15px;
 
   .food-partial {
-    margin-bottom: -15px;
+    margin-bottom: -20px;
   }
 
 }
 
-.btn.btn-default.last {
-  float: right;
-}
 
 button.arrow {
   // background-color: white;
@@ -111,12 +104,33 @@ button.arrow {
   border: none;
 }
 
-.arrow {
+.arrow-before {
   display: inline;
+  float: left;
+  color: white;
 
+  i {
+    font-size: 50px;
+  }
 }
 
+.arrow-next {
+  display: inline-block;
+  float: right;
+  color: white;
+  margin-bottom: 40px;
 
+  i {
+    font-size: 50px;
+  }
+}
+
+.btn.btn-default.last {
+  // display: inline-block;
+  float: right;
+  bottom: 20%;
+  right: 20%;
+}
 
 
 

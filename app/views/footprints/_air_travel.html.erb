@@ -1,10 +1,11 @@
+<form id="airTravelForm">
 <h3>Question 4: Air Travel</h3>  
-<div>
-    <p><%= label_tag "Miles you fly in a year:" %>
-       <%= text_field_tag :miles %></p>
-       
-       <%= hidden_field_tag :type, "air_travel" %>
-  </div>
+
+  <p>
+  Miles you fly in a year: <input ng-model="airMiles">
+  </p>
+
+</form>
 
   
 

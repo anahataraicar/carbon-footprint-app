@@ -1,15 +1,18 @@
+<form id="public_transportation">
+
 <h3>Question 3: Public Transportation</h3>
-  <% options = options_for_select([['Bus',300], ['Commuter rail',165],['Transit rail',160], ['Amtrak',191]])%>
 
-  <div>
-    <p><%= label_tag "Select a form of public transportation" %>
-       <%= select_tag(:mode, options) %></p>
+  <p>
+  Miles per year: <input ng-model="miles" ng-focus="publicFocus=true" ng-blur="publicFocus=false"><br>
+  </p>
 
-    <p><%= label_tag "Miles per year:" %>
-       <%= text_field_tag :miles %></p>
- 
-       <%= hidden_field_tag :type, "public_transportation"  %>
-  </div>
+  <!-- <h3> {{ publicFocus }}</h3> -->
+
+  <select ng-model="publicType" ng-options="public.name for public in publicOptions">
+    <option value="">-- choose a mode of transportation</option>
+  </select>
+
+</form>
 
 
  

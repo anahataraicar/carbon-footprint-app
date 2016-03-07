@@ -1,14 +1,16 @@
-<h3>Question 7: Heating oil</h4>
-  <% options = options_for_select([["gal/year", 1 ], ["$/year", 4.02]]) %>
+<form id="heatingForm">
+<h3>Question 7: Heating oil</h3>
 
-  <div>
-    <p><%= label_tag "Heating oil:" %>
-       <%= text_field_tag :input %>
-       <%= select_tag(:input_type, options) %></p>
-      
-       <%= hidden_field_tag :type, "heating"  %>
-  </div>
+  <p>
+  Heating oil: <input ng-model="heatingInput">
+  </p>
 
+  <select ng-model="heatingType" ng-options="type.name for type in heatingOptions">
+    <option value="">-- choose one --</option>
+  </select>
+
+
+</form>
 
 
 

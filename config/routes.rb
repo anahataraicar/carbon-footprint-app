@@ -8,5 +8,11 @@ Rails.application.routes.draw do
   get '/footprints/:id/edit' => 'footprints#edit'
   patch '/footprints/:id' => 'footprints#update'
 
+  namespace :api do
+    namespace :v1 do
+      get '/footprints' => 'footprints#index'
+    end
+  end
+
 
 end

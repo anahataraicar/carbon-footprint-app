@@ -1,24 +1,35 @@
-<!-- <h3>Question 12: Meat, fish, eggs</h3> -->
-<p>
-  <label for="nValueMeat">
-    <h4>Meat:</h4> {{ meat.value }}x average
-  </label>
-  <input type="range" min="0" max="3" step="0.2" id="nValueMeat" style="width: 200px;" ng-model="meat.value">
-</p>
-
+<h2>Food</h2>
   <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script>
-    d3.select("#nValueMeat").on("input", function () {
-      updateMeat(+this.value);
-    });
 
-    updateMeat(1);
+<table>
+  <tr>
+    <td>Meat</td>
+    <td><p>{{ meat.value }}x average </p><input type="range" min="0" max="3" step="0.2" id="nValueMeat" ng-model="meat.value" style="width: 200px;"></td>
+  </tr>
+  <tr>
+    <td>Dairy</td>
+    <td><p>{{ dairy.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValueDairy" ng-model="dairy.value" style="width: 200px;"></td>
+  </tr>
+  <tr>
+    <td>Grains and baked goods</td>
+    <td><p>{{ grains.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="grains.value" style="width: 200px;"></td>
+  </tr>
+  <tr>
+    <td>Fruits and vegetables</td>
+    <td><p>{{ fruit.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValue" style="width: 200px;" ng-model="fruit.value"></td>
+  </tr>
+  <tr>
+    <td>Other (snacks, drinks, etc)</td>
+    <td><p>{{ other.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="other.value" style="width: 200px;"></td>
+  </tr>
+</table>
 
-    function updateMeat(nValueMeat) {
-      d3.select("#text-slider-meat").text(nValueMeat);
-      d3.select("#nValueMeat").property("value", nValueMeat);
-    }
-  </script>
+
+  
+
+
+
+
 
 
 

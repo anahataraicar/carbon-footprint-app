@@ -6,17 +6,4 @@
   <input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="other.value" style="width: 200px;">
 </p>
 
- <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script>
-    d3.select("#nValueOther").on("input", function () {
-      updateOther(+this.value);
-    });
 
-    updateOther(1);
-
-    function updateOther(nValueOther) {
-      d3.select("#text-slider-Other").text(nValueOther);
-      d3.select("#nValueOther").property("value", nValueOther);
-    }
-  </script>
- 

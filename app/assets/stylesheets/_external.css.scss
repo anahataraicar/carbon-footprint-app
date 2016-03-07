@@ -1,19 +1,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$light-green: #9fdf9f;
 
-* {
-  font-family: Geneva;
+$black: #1d2120;
+$grey: #5a5c51;
+$brown: #ba9077;
+$green: #B5B690;
+
+
+body { 
+  background-color: $black; 
+  padding-bottom: 50px; // footer
 }
+
+* { font-family: Geneva; }
 
 .page {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-div#bar-holder {
-  margin-top: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 
@@ -23,34 +27,21 @@ div#bar-holder {
   }
 }
 
-#edit-body {
-  position: relative;
-}
-
-.container {
-  margin-left: 10px;
-}
-
-.col-sm-9 {
-  margin-left: 120px;
-}
-
 
 .left-edit {
 
   ul.nav.nav-pills.nav-stacked {
-    margin-left: 15px;
-    margin-top: 15px;
+    margin-left: 0.5%;
+    margin-top: 3%;
     float: left;
-    width: 45px; 
+    width: 50px; 
 
     .active > a {
-      background-color: white;
+      background-color: transparent;
     }
 
     i {
-      color: $light-green;
-      margin-left: -5px;
+      color: $green;
     }
   }
 
@@ -58,20 +49,25 @@ div#bar-holder {
     float: left;
 
     .tab-pane {
-      background-color: $light-green;
+      background-color: $green;
       padding: 5px 20px 20px 20px;
       margin: 20px;
       width: 600px;
       border-radius: 15px;
       height: 500px;
 
-      h3 {
-        color: white;
-        margin-bottom: 10px;
+      h2 {
+        color: $black;
+        margin-bottom: 20px;
       }
 
       .question {
         margin-bottom: 60px;
+
+        input {
+          margin-bottom: 10px;
+          margin-left: 5px;
+        }
       }
     }
   }
@@ -85,33 +81,17 @@ div#pie-holder {
   margin-right: 100px;
 }
 
-.foodForm {
-  color: white;
-  // padding: 15px;
-
-  .food-partial {
-    margin-bottom: -20px;
-  }
-
-}
-
-
-button.arrow {
-  // background-color: white;
-  background-color: transparent;
-  box-shadow: none;
-  text-shadow: none;
-  border: none;
-}
+// ARROWS ------------------------------------
 
 .arrow-before {
-  display: inline;
-  float: left;
-  color: white;
+  // display: inline;
+  // float: left;
+  color: blue;
+  clear: bottom;
+  // position: fixed;
+  // margin-bottom: 20px;
 
-  i {
-    font-size: 50px;
-  }
+  i { font-size: 50px; }
 }
 
 .arrow-next {
@@ -128,12 +108,32 @@ button.arrow {
 .btn.btn-default.last {
   // display: inline-block;
   float: right;
-  bottom: 20%;
-  right: 20%;
+  bottom: 20px;
+  right: 20px;
+}
+
+// INDEX ----------------------------------------
+.jumbotron {
+  width: 75%;
+  border-radius: 15px;
+  margin: auto;
+  height: 75%;
+  padding: 10%;
+  background-color: $green;
 }
 
 
 
+// TABLE ----------------------------------------
+
+th, td { padding: 10px; }
+
+// HEADER
+
+.navbar.navbar-default.navbar-fixed-top {
+  background-color: transparent;
+  border: none;
+}
 
 
 

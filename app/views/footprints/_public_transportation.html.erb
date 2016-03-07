@@ -1,15 +1,10 @@
 <form id="public_transportation">
-
-<h3>Question 3: Public Transportation</h3>
-
+  <h4>By public transit:</h4>
   <p>
-  Miles per year: <input ng-model="miles" ng-focus="publicFocus=true" ng-blur="publicFocus=false"><br>
+  <input ng-model="miles"> miles per year<br>
   </p>
 
-  <!-- <h3> {{ publicFocus }}</h3> -->
-
   <select ng-model="publicType" ng-options="public.name for public in publicOptions">
-    <option value="">-- choose a mode of transportation</option>
   </select>
 
 </form>

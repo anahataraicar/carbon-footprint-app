@@ -6,22 +6,7 @@
   <input type="range" min="0" max="3" step="0.2" id="nValue" style="width: 200px;" ng-model="fruit.value">
 </p>
 
-  <script src="http://d3js.org/d3.v3.min.js"></script>
 
-
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-  d3.select("#nValueFruit").on("input", function () {
-    updateFruit(+this.value);
-  });
-
-  updateFruit(1);
-
-  function updateFruit(nValuefruit) {
-    d3.select("#text-slider-fruit").text(nValuefruit);
-    d3.select("#nValueFruit").property("value", nValuefruit);
-  }
-</script>
 
 
 

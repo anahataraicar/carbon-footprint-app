@@ -1,18 +1,17 @@
 <form id="carForm">
-<h3>Question 2: Vehicle</h3>
+  <h2>Transportation</h2>
  
+  <h4>By vehicle:</h4>
   <p>
-  Mileage: <input ng-model="mileage"><br>
-  Miles per year: <input ng-model="carMiles"><br>
+  <input ng-model="mileage"> gallons per mile<br>
+  <input ng-model="carMiles"> miles per year<br>
   </p>
 
   <select ng-model="fuelType" ng-options="vehicle.name for vehicle in vehicleOptions">
-    <option value="">-- choose a type of fuel --</option>
   </select>
-
-  
-
 </form>
+
+
 
 
 

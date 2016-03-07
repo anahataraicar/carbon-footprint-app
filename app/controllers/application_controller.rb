@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :calculate_gon
 
+
   def calculate_gon
     if current_user 
       @user_profile = current_user.profiles.last

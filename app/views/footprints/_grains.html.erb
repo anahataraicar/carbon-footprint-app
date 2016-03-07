@@ -1,23 +1,9 @@
-<!-- <h3>Question 12: Grains</h3> -->
-<p>
-  <label for="nValueFruit">
-    <h4>Grains:</h4> {{ grains.value }}x average
-  </label>
-  <input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="grains.value" style="width: 200px;">
-</p>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-  d3.select("#nValueFruit").on("input", function () {
-    updateGrains(+this.value);
-  });
+<label for="nValueFruit">
+  <h4>Grains:</h4> {{ grains.value }}x average
+</label>
+<input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="grains.value" style="width: 200px;">
 
-  updateGrains(1);
 
-  function updateGrains(nValueGrains) {
-    d3.select("#text-slider-grains").text(nValueGrains);
-    d3.select("#nValueFruit").property("value", nValueGrains);
-  }
-</script>
 
 

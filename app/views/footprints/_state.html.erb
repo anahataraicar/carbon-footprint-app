@@ -1,4 +1,6 @@
-<h3>Question 1: What state do you live in?</h3>
+<h2>Let's get started!</h2>
+<p>Please start off by selecting what state you live in</p> 
+
   <% options = options_for_select([ [ "Alabama", "AL" ], 
                                     [ "Alaska", "AK" ], 
                                     [ "Arizona", "AZ" ], 
@@ -52,11 +54,12 @@
                                     [ "Wyoming", "WY" ] ]) %>
 
   <div>
-    <p><%= label_tag "State:" %>
-       <%= select_tag(:state, options) %></p>
+       <%= select_tag(:state, options) %>
   
        <%= hidden_field_tag :type, "state" %>
   </div>
+
+  <!-- <p>(click on the arrow to your right to continue)</p> -->
 
  
 

@@ -1,13 +1,11 @@
 <form id="electricityForm">
 
-<h3>Question 5: Electricity</h3>
+<h2>Electricity</h2>
 
-  <p>
-  Electricity: <input ng-model="electricityInput"><br>
-  </p>
-
+ 
+  <input ng-model="electricityInput">
   <select ng-model="electricityType" ng-options="type.name for type in electricityOptions">
-  <option value="">-- choose one --</option>
   </select>
+  
 
 </form>

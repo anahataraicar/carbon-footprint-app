@@ -1,21 +1,17 @@
 <div class="tab-content">
 
   <div role="tabpanel" class="tab-pane active" id="1">
-    <div class="question">
-      <form id="stateForm">
-     
-          <%= render "#{@partials.first}" %>
-
-        <h1 class="arrow-next" ng-click="submitForm('stateForm', 1, 2)"><i class="material-icons">navigate_next</i></h1>
-   
-      </form>
-    </div>
+    <form id="stateForm">
+      <div class="question">
+        <%= render "#{@partials.first}" %>
+      </div>
+      <h1 class="arrow-next" ng-click="submitForm('stateForm', 1, 2)"><i class="material-icons">navigate_next</i></h1>
+    </form>
   </div>
 
   <div role="tabpanel" class="tab-pane" id="2">
     <% @partials[1..2].each do |partial| %>
       <div class="question">
-         
           <%= render "#{partial}" %>
       </div>
     <% end %>
@@ -79,27 +75,22 @@
     </div>
   </div>
 
-  <!-- put fruit and other!!!!! -->
   <div role="tabpanel" class="tab-pane" id="7">
-    <!-- <div class="question"> -->
-      <form class="foodForm">
-        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %> 
+    <div class="food-partial">
+      <%= render "#{@partials[9]}" %>
+    </div>
+    
 
-          <% @partials[9..13].each do |partial| %>
-            <div class="food-partial">
-              <%= render "#{partial}" %>
-            </div>
-          <% end %>
+    <button class="btn btn-default last" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value, 2)">Submit my profile</button>
 
-          <button class="btn btn-default last" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value, 0)">Submit my profile</button>
-
-          <h1 class="arrow-before" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value, 1)"><i class="material-icons">navigate_before</i></h1>
-            
-        <% end %>
-
-      </form>
-    <!-- </div> -->
+    <h1 class="arrow-before" ng-click="submitFood(meat.value, dairy.value, grains.value, fruit.value, other.value, 1)"><i class="material-icons">navigate_before</i></h1>
   </div>
+
+  <div role="tabpanel" class="tab-pane" id="8">
+    <%= render "show_partial" %>
+  </div>
+
+
 </div>
 
 

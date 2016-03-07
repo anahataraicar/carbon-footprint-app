@@ -2,11 +2,6 @@
 
 <%= include_gon %>
 
-  <div id="pie-holder">
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <div id="pieChartContainer" style="width: 700px; height: 500px; margin: 0 auto"></div>
-  </div>
- 
   <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
   <h3>Overall Footprint: <%= @user_profile.total_value %> MT CO2/year</h3>
   
@@ -33,7 +28,7 @@
   <div id="bar-holder">
     <div id="barChartContainer" style="width: 700px; height: 500px;"></div>
   </div>
-  ""
+  
 </div> <!-- end of PAGE DIV -->
 
 

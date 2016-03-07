@@ -1,14 +1,9 @@
 <form id="heatingForm">
-<h3>Question 7: Heating oil</h3>
+  <h2>Heating oil</h2>
 
-  <p>
-  Heating oil: <input ng-model="heatingInput">
-  </p>
-
+  <input ng-model="heatingInput">
   <select ng-model="heatingType" ng-options="type.name for type in heatingOptions">
-    <option value="">-- choose one --</option>
   </select>
-
 
 </form>
 

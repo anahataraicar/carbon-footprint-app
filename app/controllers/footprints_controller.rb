@@ -1,6 +1,7 @@
 class FootprintsController < ApplicationController
   
-  def index        
+  def index
+
   end
 
   def new
@@ -17,7 +18,6 @@ class FootprintsController < ApplicationController
   end
 
   def create
-
     current_user.update({ state: params[:state]}) if params[:type] == "state"
     habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
 

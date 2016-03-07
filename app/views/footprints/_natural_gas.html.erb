@@ -1,14 +1,8 @@
 <form id="naturalGasForm">
-<h3>Question 6: Natural Gas</h3>
-
-
-  <p>
-  Natural gas: <input ng-model="naturalInput"><br>
-  </p>
-
-  <select ng-model="naturalType" ng-options="type.name for type in naturalOptions">
-  <option value="">-- choose one --</option>
-  </select>
+  <h2>Natural Gas</h2>
+  
+  <input ng-model="naturalInput">
+  <select ng-model="naturalType" ng-options="type.name for type in naturalOptions"></select>
 
 </form>
 

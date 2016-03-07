@@ -1,15 +1,25 @@
 <div class="page">
-  <h1>Calculate your carbon footprint!</h1>
-  <% if current_user %>
-    <h3>Welcome, <%= current_user.first_name %></h3>
-    <% unless current_user.profiles.last %>
-      <h3><%= link_to "Click here to get started", "/footprints/new" %></h3>
+
+  <div class="jumbotron">
+    <h1>Calculate your carbon footprint!</h1>
+     <% if current_user %>
+      <h3>Welcome, <%= current_user.first_name %></h3>
+      <% unless current_user.profiles.last %>
+        <h3><%= link_to "Click here to get started", "/footprints/new" %></h3>
+      <% end %>
+      <p><a class="btn btn-primary btn-lg" href="/footprints/<%= current_user.id %>" role="button">Your profile</a></p>
+    <% else %>
+      <p><a class="btn btn-primary btn-lg" href="/users/sign_up" role="button">Sign up!</a></p>
     <% end %>
-    <h3><%= link_to "Your profile", "/footprints/#{current_user.id}" %></h3>
-  <% else %>
-    <h4><a href="/users/sign_up">Sign up</a> to get started!</h4>
-  <% end %>
+  </div>
+
 </div>
+
+
+
+ 
+ 
+
 
 
 

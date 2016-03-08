@@ -1,6 +1,6 @@
 <div ng-app="app">
-  <div ng-controller="editCtrl" ng-init="setUp()">
-    
+  <div ng-controller="editCtrl" ng-init="init()">
+
     <div class="left-edit">
 
       <ul class="nav nav-pills nav-stacked">
@@ -29,12 +29,16 @@
 
     </div>
 
-    <div id="pie-holder">
-      <script src="http://code.highcharts.com/highcharts.js"></script>
-      <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;"></div>
+    <div id="chart-holder">
+     
+      <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'pie'"></div>
+
+      <div id="barChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'bar'"></div>
+    
     </div>
 
 
+  
   
   </div> <!-- ng controller div -->
 </div> <!-- ng app div -->

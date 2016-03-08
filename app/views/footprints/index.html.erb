@@ -4,10 +4,11 @@
     <h1>Calculate your carbon footprint!</h1>
      <% if current_user %>
       <h3>Welcome, <%= current_user.first_name %></h3>
-      <% unless current_user.profiles.last %>
-        <h3><%= link_to "Click here to get started", "/footprints/new" %></h3>
+      <% if current_user.profiles.last %>
+        <p><a class="btn btn-primary btn-lg" href="/footprints/<%= current_user.id %>" role="button">Your profile</a></p>
+      <% else %>
+        <h3><%= link_to "Click here to get started", "/footprints", method: :post %></h3>
       <% end %>
-      <p><a class="btn btn-primary btn-lg" href="/footprints/<%= current_user.id %>" role="button">Your profile</a></p>
     <% else %>
       <p><a class="btn btn-primary btn-lg" href="/users/sign_up" role="button">Sign up!</a></p>
     <% end %>

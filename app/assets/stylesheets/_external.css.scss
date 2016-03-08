@@ -9,7 +9,7 @@ $green: #B5B690;
 
 
 body { 
-  background-color: $black; 
+  // background-color: $black; 
   padding-bottom: 50px; // footer
 }
 
@@ -27,6 +27,7 @@ body {
   }
 }
 
+// ------------------  EDIT ---------------------------
 
 .left-edit {
 
@@ -55,6 +56,32 @@ body {
       width: 600px;
       border-radius: 15px;
       height: 500px;
+      position: relative;
+
+      .arrow-before {
+        display: inline-block;
+        position: absolute;
+        bottom: 5%;
+        color: white;
+
+        i { font-size: 50px; }
+      }
+
+      .arrow-next {
+        display: inline-block;
+        right: 5%;
+        color: white;
+        position: absolute;
+        bottom: 5%;
+
+        i { font-size: 50px; }
+      }
+
+      .btn.btn-default.last {
+        position: absolute;
+        bottom: 10%;
+        right: 5%;
+      }
 
       h2 {
         color: $black;
@@ -74,48 +101,32 @@ body {
 }
 
 
-div#pie-holder {
+div#chart-holder {
   margin: 10px;
   padding: 10px;
   float: right;
   margin-right: 100px;
 }
 
-// ARROWS ------------------------------------
-
-.arrow-before {
-  // display: inline;
-  // float: left;
-  color: blue;
-  clear: bottom;
-  // position: fixed;
-  // margin-bottom: 20px;
-
-  i { font-size: 50px; }
+select {
+  padding: 5px;
+  font-size: 14px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 34px;
 }
 
-.arrow-next {
-  display: inline-block;
-  float: right;
-  color: white;
-  margin-bottom: 40px;
 
-  i {
-    font-size: 50px;
-  }
-}
 
-.btn.btn-default.last {
-  // display: inline-block;
-  float: right;
-  bottom: 20px;
-  right: 20px;
-}
 
-// INDEX ----------------------------------------
+
+
+// -------------- INDEX ---------------------------
+
 .jumbotron {
   width: 75%;
-  border-radius: 15px;
+  border-radius: 8px;
   margin: auto;
   height: 75%;
   padding: 10%;
@@ -123,17 +134,52 @@ div#pie-holder {
 }
 
 
-
-// TABLE ----------------------------------------
+//  --------------TABLE ------------------------------
 
 th, td { padding: 10px; }
 
-// HEADER
+// -------------- HEADER ------------------------
 
 .navbar.navbar-default.navbar-fixed-top {
-  background-color: transparent;
+  // background-color: transparent;
   border: none;
 }
+
+
+// -------------- SHOW ----------------------------
+
+.chart-icons {
+  i {
+    font-size: 48px;
+    margin: 100px 30px 30px 30px; 
+    padding: 5px;
+  }
+}
+
+#radio-buttons {
+
+  label > input { /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+  }
+
+  label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
+    border: 2px solid $black;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -3,24 +3,30 @@
 
   angular.module("app").controller("editCtrl", function($scope, $http) {
 
-    $scope.setUp = function() {
-      $scope.people = $http.get('/api/v1/footprints.json').then(function(response) {
+    $scope.setUpCharts = function() {
+      $http.get('/api/v1/footprints/:id.json').then(function(response) {
           var pieData = response.data;
-          $scope.drawChart(pieData);
+          $scope.drawPieChart(pieData);
+      });
+
+      $http.get('/api/v1/footprints.json').then(function(response) {
+          var barData = response.data;
+          $scope.drawBarChart(barData);
       });
     };
 
+    $scope.init = function() {
+        $scope.setUpCharts();
+        $scope.content = "pie";
+    };
 
       
-
-
-// ------------------ CHARTS -------------------------
+// -------------- SET UP CHARTS -------------------------
 // ---------------------------------------------------
 
 
-  
       
-  $scope.drawChart = function(pieData) {
+  $scope.drawPieChart = function(pieData) {
     var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
     var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
     var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
@@ -151,21 +157,101 @@
             }
         }]
     });
-  };
+  };    
 
-// --------- UPDATE CHART ---------------------
+    $scope.drawBarChart = function(barData) {
 
-   $scope.updateChart = function() {
-      $scope.people = $http.get('/api/v1/footprints.json').then(function(response) {
-          
-        var pieChart = $('#pieChartContainer').highcharts();
+        var profile_names = barData[0];
+        var travel_data = barData[1];
+        var housing_data = barData[2];
+        var food_data = barData[3];
+
+        var colors = ["#2b908f", "#4d4dff", "#91e8e1"];
+
+        $('#barChartContainer').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'User footprints'
+            },
+            xAxis: {
+                categories: profile_names
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'MT CO2/year'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    }
+                }
+            },
+            legend: {
+                align: 'right',
+                x: -30,
+                verticalAlign: 'top',
+                y: 25,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<b>{point.x}</b><br/>',
+                pointFormat: '{series.name}: {point.y:.2f}<br/>Total: {point.stackTotal}',
+
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                        style: {
+                            textShadow: '0 0 3px black'
+                        },
+                        formatter: function () {
+                           return Highcharts.numberFormat(this.y,2);
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Travel',
+                data: travel_data,
+                color: colors[0]
+            }, {
+                name: 'Housing',
+                data: housing_data,
+                color: colors[1]
+            }, {
+                name: 'Food',
+                data: food_data,
+                color: colors[2]
+            }]
+        });
+    };
+
+// --------------- UPDATE CHARTS -------------------------------
+// -------------------------------------------------------------
+
+
+    $scope.updatePieChart = function() {
+        $http.get('/api/v1/footprints/:id.json').then(function(response) {
+        
         var pieData = response.data;
+        var pieChart = $('#pieChartContainer').highcharts();
         var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
         var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
         var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
 
         var colors = ["#2b908f", "#4d4dff", "#91e8e1"],
-
         categories = ['Travel', 'Housing', 'Food'],
         data = [{
             y: travel,
@@ -227,129 +313,99 @@
             }
         }
 
-            pieChart.series[0].setData(totalData, true);
-            pieChart.series[1].setData(subData, true);
+        pieChart.series[0].setData(totalData, true);
+        pieChart.series[1].setData(subData, true);
               
-          });
-        };
+      });
+    };
 
-// -------------------- BAR CHART --------------------------
-// ---------------------------------------------------------
+    $scope.updateBarChart = function(){
+        $http.get('/api/v1/footprints.json').then(function(response) {
+
+            var barData = response.data;
+
+            var profile_names = barData[0];
+            var travel_data = barData[1];
+            var housing_data = barData[2];
+            var food_data = barData[3];
+            
 
 
-    
+            var barChart = $('#barChartContainer').highcharts();
+            
+            var colors = ["#2b908f", "#4d4dff", "#91e8e1"];
 
-    // var profile_names = gon.names;
-    // var travel_data = gon.travel;
-    // var housing_data = gon.housing;
-    // var food_data = gon.food; 
+            var barSeries = [{
+                data: travel_data
+            }, {
+                data: housing_data
+            }, {
+                data: food_data
+            }];
+
+            // console.log(barSeries)
+            // barChart.series[0].setData(barSeries, true);
 
 
-    // $('#barChartContainer').highcharts({
-    //     chart: {
-    //         type: 'column'
-    //     },
-    //     title: {
-    //         text: 'User footprints'
-    //     },
-    //     xAxis: {
-    //         categories: profile_names
-    //     },
-    //     yAxis: {
-    //         min: 0,
-    //         title: {
-    //             text: 'MT CO2/year'
-    //         },
-    //         stackLabels: {
-    //             enabled: true,
-    //             style: {
-    //                 fontWeight: 'bold',
-    //                 color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-    //             }
-    //         }
-    //     },
-    //     legend: {
-    //         align: 'right',
-    //         x: -30,
-    //         verticalAlign: 'top',
-    //         y: 25,
-    //         floating: true,
-    //         backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-    //         borderColor: '#CCC',
-    //         borderWidth: 1,
-    //         shadow: false
-    //     },
-    //     tooltip: {
-    //         headerFormat: '<b>{point.x}</b><br/>',
-    //         pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-    //     },
-    //     plotOptions: {
-    //         column: {
-    //             stacking: 'normal',
-    //             dataLabels: {
-    //                 enabled: true,
-    //                 color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-    //                 style: {
-    //                     textShadow: '0 0 3px black'
-    //                 }
-    //             }
-    //         }
-    //     },
-    //     series: [{
-    //         name: 'Travel',
-    //         data: travel_data,
-    //         color: colors[0]
-    //     }, {
-    //         name: 'Housing',
-    //         data: housing_data,
-    //         color: colors[1]
-    //     }, {
-    //         name: 'Food',
-    //         data: food_data,
-    //         color: colors[2]
-    //     }]
-    // });
+        });
+    };
 
 
 
 // ------------------- ONCLICK FUNCTIONS -------------------
 // ---------------------------------------------------------
 
-
-    // var pieChart = $('#pieChartContainer').highcharts();
-    // var barChart = $('#barChartContainer').highcharts();
-    // var newTravel = travel_data[0];
-    // var totalFootprint = food_data[0] + housing_data[0] + travel_data[0];
-
-    // var x = document.getElementById("vehicleFunction")
-    // x.onclick = function checkCar() {
-    //     if (x.checked) {
-    //         pieChart.series[1].data[0].update(pieData["vehicle"] - gon.saved_gas);
-    //         pieChart.series[0].data[0].update(travel - gon.saved_gas);
-            
-    //         barChart.series[0].data[0].update(travel_data[0] - gon.saved_gas);
-    //         document.getElementById("updated-footprint").innerHTML = (totalFootprint - gon.saved_gas).toFixed(2); 
+    $scope.decreaseChart = function() {
+        $http.get('/api/v1/footprints/:id.json').then(function(response) {
+          var pieData = response.data;
+        $http.get('/api/v1/footprints.json').then(function(response) {
+          var barData = response.data;
+        $scope.changeCharts(pieData, barData); 
+        });
+      });
+    };
 
 
-    //     } else if (!x.checked) {
-    //         pieChart.series[1].data[0].update(pieData["vehicle"]);
-    //         pieChart.series[0].data[0].update(travel);
-            
-    //         barChart.series[0].data[0].update(newTravel);
-    //         document.getElementById("updated-footprint").innerHTML = totalFootprint.toFixed(2);
-    //     }
-        
-    // };
-  
-  
+    $scope.changeCharts = function(pieData, barData) {
+    // set charts
+        var pieChart = $('#pieChartContainer').highcharts();
+        var barChart = $('#barChartContainer').highcharts();
+    // get chart data
+        var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
+        var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
+        var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
+        var profile_names = barData[0];
+        var travel_data = barData[1];
+        var housing_data = barData[2];
+        var food_data = barData[3];
+
+    // new calculations
+        var newTravel = travel_data[0];
+        var totalFootprint = food_data[0] + housing_data[0] + travel_data[0];
 
 
+    // change charts
+        var x = document.getElementById("saveGas")
+        if (x.checked) {
+            pieChart.series[1].data[0].update(pieData["vehicle"] - gon.saved_gas);
+            pieChart.series[0].data[0].update(travel - gon.saved_gas);            
+            barChart.series[0].data[0].update(travel_data[0] - gon.saved_gas);
+            // document.getElementById("updated-footprint").innerHTML = (totalFootprint - gon.saved_gas).toFixed(2); 
 
-     
-   
+
+        } else if (!x.checked) {
+            pieChart.series[1].data[0].update(pieData["vehicle"]);
+            pieChart.series[0].data[0].update(travel);
+            barChart.series[0].data[0].update(newTravel);
+            // document.getElementById("updated-footprint").innerHTML = totalFootprint.toFixed(2);
+        };
+    };
+
 
 
 // ----------------- FORMS -------------------------------
+// -------------------------------------------------------
+
 
     $scope.sendForm = function(data) {
       $.ajax({
@@ -359,7 +415,8 @@
         dataType: "JSON"
       });
 
-      $scope.updateChart();
+      $scope.updatePieChart();
+      $scope.updateBarChart();
     };
 
 
@@ -567,11 +624,77 @@
 
 
 
-  // ----------------------------------------------
+  // sliders ----------------------------------------------
 
 
+  // MEAT
+
+    d3.select("#nValueMeat").on("input", function () {
+      updateMeat(+this.value);
+    });
+
+    updateMeat(1);
+
+    function updateMeat(nValueMeat) {
+      d3.select("#text-slider-meat").text(nValueMeat);
+      d3.select("#nValueMeat").property("value", nValueMeat);
+    }
+
+    // DAIRY
+
+    d3.select("#nValueDairy").on("input", function () {
+      updateDairy(+this.value);
+    });
+
+    updateDairy(1);
+
+    function updateDairy(nValueDairy) {
+      d3.select("#text-slider-dairy").text(nValueDairy);
+      d3.select("#nValueDairy").property("value", nValueDairy);
+    }
+
+    // GRAINS
+
+    d3.select("#nValueGrains").on("input", function () {
+      updateGrains(+this.value);
+    });
+
+    updateGrains(1);
+
+    function updateGrains(nValueGrains) {
+      d3.select("#text-slider-grains").text(nValueGrains);
+      d3.select("#nValueGrains").property("value", nValueGrains);
+    }
+
+    // FRUIT
+
+    d3.select("#nValueFruit").on("input", function () {
+      updateFruit(+this.value);
+    });
+
+    updateFruit(1);
+
+    function updateFruit(nValuefruit) {
+      d3.select("#text-slider-fruit").text(nValuefruit);
+      d3.select("#nValueFruit").property("value", nValuefruit);
+    }
 
 
+    // OTHER
+
+    d3.select("#nValueOther").on("input", function () {
+      updateOther(+this.value);
+    });
+
+    updateOther(1);
+
+    function updateOther(nValueOther) {
+      d3.select("#text-slider-Other").text(nValueOther);
+      d3.select("#nValueOther").property("value", nValueOther);
+    }
+
+
+// ------------------------------------------------------
 
 
 

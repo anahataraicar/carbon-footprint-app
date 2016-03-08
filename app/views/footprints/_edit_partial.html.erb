@@ -5,6 +5,7 @@
       <div class="question">
         <%= render "#{@partials.first}" %>
       </div>
+
       <h1 class="arrow-next" ng-click="submitForm('stateForm', 1, 2)"><i class="material-icons">navigate_next</i></h1>
     </form>
   </div>
@@ -15,6 +16,8 @@
           <%= render "#{partial}" %>
       </div>
     <% end %>
+
+    <%= render "errors" %>
     
     <h1 class="arrow-before" ng-click="submitTravel(mileage, carMiles, fuelType, miles, publicType, 1)"><i class="material-icons">navigate_before</i></h1>
 
@@ -26,6 +29,8 @@
     <div class="question">
 
       <%= render "#{@partials[3]}" %>
+
+      <%= render "errors" %>
 
       <h1 class="arrow-before" ng-click="submitAir(airMiles, 1)"><i class="material-icons">navigate_before</i></h1>
 

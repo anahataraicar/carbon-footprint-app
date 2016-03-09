@@ -3,10 +3,10 @@
   <div role="tabpanel" class="tab-pane active" id="1">
     <form id="stateForm">
       <div class="question">
-        <%= render "#{@partials.first}" %>
+        <%= render "intro" %>
       </div>
 
-      <h1 class="arrow-next" ng-click="submitForm('stateForm', 1, 2)"><i class="material-icons">navigate_next</i></h1>
+      <h1 class="arrow-next" ng-click="submitIntro(firstName, lastName, stateInput, 2)"><i class="material-icons">navigate_next</i></h1>
     </form>
   </div>
 
@@ -17,7 +17,7 @@
       </div>
     <% end %>
 
-    <%= render "errors" %>
+      <!-- errors!!!! -->
     
     <h1 class="arrow-before" ng-click="submitTravel(mileage, carMiles, fuelType, miles, publicType, 1)"><i class="material-icons">navigate_before</i></h1>
 
@@ -30,7 +30,8 @@
 
       <%= render "#{@partials[3]}" %>
 
-      <%= render "errors" %>
+
+      <!-- errors!!!! -->
 
       <h1 class="arrow-before" ng-click="submitAir(airMiles, 1)"><i class="material-icons">navigate_before</i></h1>
 
@@ -67,22 +68,20 @@
 
   <div role="tabpanel" class="tab-pane" id="6">
     <div class="question">
-      <form id="homeForm">
-        <%= form_tag "/footprints/#{current_user.id}", method: :patch do %>
-        <%= render "#{@partials[8]}" %>
-        <% end %>
-      </form>
-    
-      <h1 class="arrow-before" ng-click="submitForm('homeForm', 6, 2)"><i class="material-icons">navigate_before</i></h1>
-
-      <h1 class="arrow-next" ng-click="submitForm('homeForm', 6, 2)"><i class="material-icons">navigate_next</i></h1>
+      
+      <%= render "home" %>
 
     </div>
+
+    <h1 class="arrow-before" ng-click="submitHome(homeSqft, 1)"><i class="material-icons">navigate_before</i></h1>
+
+    <h1 class="arrow-next" ng-click="submitHome(homeSqft, 2)"><i class="material-icons">navigate_next</i></h1>
+
   </div>
 
   <div role="tabpanel" class="tab-pane" id="7">
     <div class="food-partial">
-      <%= render "#{@partials[9]}" %>
+      <%= render "food" %>
     </div>
     
 

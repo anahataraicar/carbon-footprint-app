@@ -1,7 +1,15 @@
 class Api::V1::FootprintsController < ApplicationController
 
   def index
-    profiles = Profile.order(:total_value).first(3)
+    profiles = []
+    profiles << Profile.find_by(user_id: current_user.id)
+
+    other_profiles = Profile.last(2)
+
+    other_profiles.each do |profile|
+      profiles << profile
+    end
+
 
     names = []
     travel = []

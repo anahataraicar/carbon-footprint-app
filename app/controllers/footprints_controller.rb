@@ -34,7 +34,7 @@ class FootprintsController < ApplicationController
     # end
 
 
-    @partials = ["state", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "meat", "dairy", "grains", "fruit", "other"]
+    @partials = ["intro", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "food"]
 
     # creates habits for each partial, but without values (to check if done later)
 
@@ -43,6 +43,8 @@ class FootprintsController < ApplicationController
                       footprint_type: partial,
                       value: 0 })
     end
+
+    current_user.create_profile
 
     redirect_to "/footprints/#{current_user.id}/edit"
 
@@ -53,27 +55,35 @@ class FootprintsController < ApplicationController
   end
 
   def edit
+
+    @user_profile = current_user.profiles.last
     @habit = Habit.new
-    @partials = ["state", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "meat", "dairy", "grains", "fruit", "other"]
+    @partials = ["intro", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "food"]
   end
 
 
   def update
-    if params[:type] == "state"
-      current_user.update({ state: params[:state]}) 
-    else 
-      if @habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
+    
 
-        @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
-        current_user.update_profile 
-        flash[:success] = "that worked"
-      else
-        flash[:alert] = "Please enter all fields"
-      end
+    if params[:type] == "intro"
+      current_user.update({ first_name: params[:first_name],
+                            last_name: params[:last_name],
+                            state: params[:state] }) 
+    else
+        @habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
+
+        if @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
+
+          current_user.update_profile 
+        else
+          @habit.errors.messages 
+          
+        end
 
     end
     head :ok
   end
+
 end
 
 

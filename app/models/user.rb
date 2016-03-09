@@ -42,9 +42,9 @@ class User < ActiveRecord::Base
     (((miles/(mileage-5)) - (miles/mileage)) * 8.887 / 1000).round(2)
   end
 
-  def is_done?
-    return true
-    habits.each { |habit| return false if !habit.value}
+  def is_done? ## probably wont need this anymore 
+    return true 
+    habits.each { |habit| return false if habit.value == 0}
   end
 
 

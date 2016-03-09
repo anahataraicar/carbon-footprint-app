@@ -3,6 +3,9 @@
 
   angular.module("app").controller("editCtrl", function($scope, $http) {
 
+    var userId = gon.user_id;
+
+
     $scope.setUpCharts = function() {
       $http.get('/api/v1/footprints/:id.json').then(function(response) {
           var pieData = response.data;
@@ -19,6 +22,9 @@
         $scope.setUpCharts();
         $scope.content = "pie";
     };
+
+
+
 
       
 // -------------- SET UP CHARTS -------------------------
@@ -408,15 +414,19 @@
 
 
     $scope.sendForm = function(data) {
-      $.ajax({
-        method: "PATCH",
-        url: "/footprints/1",
-        data: data,
-        dataType: "JSON"
-      });
 
-      $scope.updatePieChart();
-      $scope.updateBarChart();
+        var urlString = "/footprints/" + userId;
+        // console.log(urlString);
+
+        $.ajax({
+            method: "PATCH",
+            url: urlString,
+            data: data,
+            dataType: "JSON"
+        });
+
+        $scope.updatePieChart();
+        $scope.updateBarChart();
     };
 
 
@@ -434,30 +444,18 @@
 
 
     $scope.vehicleOptions = [
-      {
-        name: "Gasoline",
-        factor: 8.887
-      }, {
-        name: "Diesel",
-        factor: 10.18
-      }];
+      { name: "Gasoline", factor: 8.887 }, 
+      { name: "Diesel", factor: 10.18}
+    ];
 
-    $scope.fuelType = $scope.vehicleOptions[1];
+    $scope.fuelType = $scope.vehicleOptions[0];
 
     $scope.publicOptions = [
-      {
-        name: "Bus",
-        factor: 300
-      }, {
-        name: "Commuter rail",
-        factor: 165
-      }, {
-        name: "Transit Rail",
-        factor: 160
-      }, {
-        name: "Amtrak",
-        factor: 191
-    }];
+      { name: "Bus", factor: 300 }, 
+      { name: "Commuter rail",  factor: 165 }, 
+      { name: "Transit Rail", factor: 160 }, 
+      { name: "Amtrak", factor: 191 }
+    ];
 
     $scope.publicType = $scope.publicOptions[0];
 
@@ -492,29 +490,19 @@
     }
 
     $scope.electricityOptions = [
-      {
-        name: "kWh/year",
-        factor: 1
-      },{
-        name: "$/year",
-        factor: 0.1015
-    }];
+      { name: "kWh/year", factor: 1 },
+      { name: "$/year", factor: 0.1015 }
+    ];
 
-    $scope.electricityType = $scope.electricityOptions[0];
+    $scope.electricityType = $scope.electricityOptions[1];
 
     $scope.naturalOptions = [
-      {
-        name: "Therms/year",
-        factor: 1
-      }, {
-        name: "$/year",
-        factor: 0.0950
-      }, {
-        name: "Cu.Ft/year",
-        factor: 8.9
-    }];
+      { name: "Therms/year", factor: 1 }, 
+      { name: "$/year", factor: 0.0950 }, 
+      { name: "Cu.Ft/year", factor: 8.9 }
+    ];
 
-    $scope.naturalType = $scope.naturalOptions[0];
+    $scope.naturalType = $scope.naturalOptions[1];
 
     $scope.submitEnergy = function(electricityInput, electricityType, naturalInput, naturalType, direction) {
 
@@ -538,24 +526,17 @@
     };
 
     $scope.heatingOptions = [
-      {
-        name: "gal/year",
-        factor: 1
-      }, {
-        name: "$/year",
-        factor: 4.02
-    }];
+      { name: "gal/year", factor: 1 }, 
+      { name: "$/year", factor: 4.02 }
+    ];
 
     $scope.heatingType = $scope.heatingOptions[0];
 
+    // literally made up this value 4.00
     $scope.propaneOptions = [
-      {
-        name: "gal/year",
-        factor: 1
-      }, {
-        name: "$/year",
-        factor: 4.00 // literally made up this value
-    }];
+      { name: "gal/year", factor: 1 }, 
+      {name: "$/year", factor: 4.00 }
+    ];
 
     $scope.propaneType = $scope.propaneOptions[0];
 
@@ -579,45 +560,29 @@
 
     };
 
-    
-    $scope.submitForm = function(form, page, direction) {
+    $scope.submitHome = function(homeSqft, direction) {
+        var formData = { type: "home", sqft: homeSqft };
 
-      var formName = '#' + form + '';
-      // console.log(formName);
-      var formData = $(formName).serializeArray();
-      // console.log(formData);
-
-      $scope.sendForm(formData);
-      $scope.changePage(page, direction);
+        $scope.sendForm(formData);
+        $scope.changePage(6, direction);
     };
-
 
 
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
 
-      $scope.foodData = [];
+        $scope.foodData = [];
       
-      var formData = [
-        {
-          type: "meat",
-          factor: meatValue
-        }, {
-          type: "dairy",
-          factor: dairyValue
-        },{
-          type: "grains",
-          factor: grainsValue
-        }, {
-          type: "fruit",
-          factor: fruitValue
-        }, {
-          type: "other",
-          factor: "otherValue"
-        }];
+        var formData = [
+            { type: "meat", factor: meatValue }, 
+            { type: "dairy", factor: dairyValue },
+            { type: "grains", factor: grainsValue }, 
+            { type: "fruit", factor: fruitValue }, 
+            { type: "other", factor: otherValue }
+        ];
       
-      for (var i = 0; i < formData.length; i++) {
-        $scope.sendForm(formData[i]);
-      };
+        for (var i = 0; i < formData.length; i++) {
+            $scope.sendForm(formData[i]);
+        };
 
       $scope.changePage(7, direction);
     };
@@ -695,6 +660,83 @@
 
 
 // ------------------------------------------------------
+
+    
+
+// ---------- SUBMIT INTRO!!!!!! ------------------------
+
+
+    $scope.stateOptions = [
+        { name: 'ALABAMA', abbreviation: 'AL'},
+        { name: 'ALASKA', abbreviation: 'AK'},
+        { name: 'ARIZONA', abbreviation: 'AZ'},
+        { name: 'ARKANSAS', abbreviation: 'AR'},
+        { name: 'CALIFORNIA', abbreviation: 'CA'},
+        { name: 'COLORADO', abbreviation: 'CO'},
+        { name: 'CONNECTICUT', abbreviation: 'CT'},
+        { name: 'DELAWARE', abbreviation: 'DE'},
+        { name: 'DISTRICT OF COLUMBIA', abbreviation: 'DC'},
+        { name: 'FLORIDA', abbreviation: 'FL'},
+        { name: 'GEORGIA', abbreviation: 'GA'},
+        { name: 'HAWAII', abbreviation: 'HI'},
+        { name: 'IDAHO', abbreviation: 'ID'},
+        { name: 'ILLINOIS', abbreviation: 'IL'},
+        { name: 'INDIANA', abbreviation: 'IN'},
+        { name: 'IOWA', abbreviation: 'IA'},
+        { name: 'KANSAS', abbreviation: 'KS'},
+        { name: 'KENTUCKY', abbreviation: 'KY'},
+        { name: 'LOUISIANA', abbreviation: 'LA'},
+        { name: 'MAINE', abbreviation: 'ME'},
+        { name: 'MARYLAND', abbreviation: 'MD'},
+        { name: 'MASSACHUSETTS', abbreviation: 'MA'},
+        { name: 'MICHIGAN', abbreviation: 'MI'},
+        { name: 'MINNESOTA', abbreviation: 'MN'},
+        { name: 'MISSISSIPPI', abbreviation: 'MS'},
+        { name: 'MISSOURI', abbreviation: 'MO'},
+        { name: 'MONTANA', abbreviation: 'MT'},
+        { name: 'NEBRASKA', abbreviation: 'NE'},
+        { name: 'NEVADA', abbreviation: 'NV'},
+        { name: 'NEW HAMPSHIRE', abbreviation: 'NH'},
+        { name: 'NEW JERSEY', abbreviation: 'NJ'},
+        { name: 'NEW MEXICO', abbreviation: 'NM'},
+        { name: 'NEW YORK', abbreviation: 'NY'},
+        { name: 'NORTH CAROLINA', abbreviation: 'NC'},
+        { name: 'NORTH DAKOTA', abbreviation: 'ND'},
+        { name: 'OHIO', abbreviation: 'OH'},
+        { name: 'OKLAHOMA', abbreviation: 'OK'},
+        { name: 'OREGON', abbreviation: 'OR'},
+        { name: 'PENNSYLVANIA', abbreviation: 'PA'},
+        { name: 'RHODE ISLAND', abbreviation: 'RI'},
+        { name: 'SOUTH CAROLINA', abbreviation: 'SC'},
+        { name: 'SOUTH DAKOTA', abbreviation: 'SD'},
+        { name: 'TENNESSEE', abbreviation: 'TN'},
+        { name: 'TEXAS', abbreviation: 'TX'},
+        { name: 'UTAH', abbreviation: 'UT'},
+        { name: 'VERMONT', abbreviation: 'VT'},
+        { name: 'VIRGINIA', abbreviation: 'VA'},
+        { name: 'WASHINGTON', abbreviation: 'WA'},
+        { name: 'WEST VIRGINIA', abbreviation: 'WV'},
+        { name: 'WISCONSIN', abbreviation: 'WI'},
+        { name: 'WYOMING', abbreviation: 'WY' }
+    ];
+
+
+
+    $scope.submitIntro = function(firstName, lastName, stateInput, direction) {
+        var formData = {
+            type: "intro",
+            first_name: firstName,
+            last_name: lastName,
+            state: stateInput.abbreviation
+        };
+
+        $scope.sendForm(formData);
+        $scope.changePage(1, direction);
+    };
+
+
+
+
 
 
 

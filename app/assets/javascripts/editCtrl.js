@@ -168,6 +168,7 @@
     $scope.drawBarChart = function(barData) {
 
         var profile_names = barData[0];
+        profile_names[0] = "You"
         var travel_data = barData[1];
         var housing_data = barData[2];
         var food_data = barData[3];
@@ -350,7 +351,7 @@
             }];
 
             // console.log(barSeries)
-            // barChart.series[0].setData(barSeries, true);
+            barChart.series[0].setData(barSeries, true);
 
 
         });
@@ -396,14 +397,14 @@
             pieChart.series[1].data[0].update(pieData["vehicle"] - gon.saved_gas);
             pieChart.series[0].data[0].update(travel - gon.saved_gas);            
             barChart.series[0].data[0].update(travel_data[0] - gon.saved_gas);
-            // document.getElementById("updated-footprint").innerHTML = (totalFootprint - gon.saved_gas).toFixed(2); 
+            
 
 
         } else if (!x.checked) {
             pieChart.series[1].data[0].update(pieData["vehicle"]);
             pieChart.series[0].data[0].update(travel);
             barChart.series[0].data[0].update(newTravel);
-            // document.getElementById("updated-footprint").innerHTML = totalFootprint.toFixed(2);
+            
         };
     };
 
@@ -413,20 +414,28 @@
 // -------------------------------------------------------
 
 
-    $scope.sendForm = function(data) {
+            // SEND FORM 
 
-        var urlString = "/footprints/" + userId;
-        // console.log(urlString);
+    $scope.sendForm = function(formData, page, direction) {
 
-        $.ajax({
-            method: "PATCH",
-            url: urlString,
-            data: data,
-            dataType: "JSON"
+        var urlString = "/api/v1/footprints/" + userId;        
+
+        $http.patch(urlString, formData).then(function(response){
+            
+            $scope.updatePieChart();
+            $scope.updateBarChart();
+
+            $scope.changePage(page, direction)
+
+        }, function(response) { 
+
+            $scope.errors = response.data.errors;
+            $scope.clicked = true; 
+
         });
 
-        $scope.updatePieChart();
-        $scope.updateBarChart();
+       
+
     };
 
 
@@ -473,10 +482,8 @@
         }];
 
       for (var i = 0; i < formData.length; i++) {
-        $scope.sendForm(formData[i]);
+        $scope.sendForm(formData[i], 2, direction);
       };
-
-      $scope.changePage(2, direction);
 
     };
 
@@ -485,8 +492,7 @@
         type: "air_travel",
         miles: airMiles
       };
-      $scope.sendForm(formData);
-      $scope.changePage(3, direction)
+      $scope.sendForm(formData, 3, direction);
     }
 
     $scope.electricityOptions = [
@@ -518,10 +524,8 @@
         }];
 
       for (var i = 0; i < formData.length; i++) {
-        $scope.sendForm(formData[i]);
+        $scope.sendForm(formData[i], 4, direction);
       };
-
-      $scope.changePage(4, direction);
 
     };
 
@@ -553,18 +557,15 @@
       }];
 
       for (var i = 0; i < formData.length; i++) {
-        $scope.sendForm(formData[i]);
+        $scope.sendForm(formData[i], 5, direction);
       };
-
-      $scope.changePage(5, direction);
 
     };
 
     $scope.submitHome = function(homeSqft, direction) {
         var formData = { type: "home", sqft: homeSqft };
 
-        $scope.sendForm(formData);
-        $scope.changePage(6, direction);
+        $scope.sendForm(formData,6, direction);
     };
 
 
@@ -581,10 +582,9 @@
         ];
       
         for (var i = 0; i < formData.length; i++) {
-            $scope.sendForm(formData[i]);
+            $scope.sendForm(formData[i], 7, direction);
         };
 
-      $scope.changePage(7, direction);
     };
 
 
@@ -659,7 +659,10 @@
     }
 
 
-// ------------------------------------------------------
+// ------------------- ERRORS --------------------------
+
+
+
 
     
 
@@ -667,60 +670,60 @@
 
 
     $scope.stateOptions = [
-        { name: 'ALABAMA', abbreviation: 'AL'},
-        { name: 'ALASKA', abbreviation: 'AK'},
-        { name: 'ARIZONA', abbreviation: 'AZ'},
-        { name: 'ARKANSAS', abbreviation: 'AR'},
-        { name: 'CALIFORNIA', abbreviation: 'CA'},
-        { name: 'COLORADO', abbreviation: 'CO'},
-        { name: 'CONNECTICUT', abbreviation: 'CT'},
-        { name: 'DELAWARE', abbreviation: 'DE'},
-        { name: 'DISTRICT OF COLUMBIA', abbreviation: 'DC'},
-        { name: 'FLORIDA', abbreviation: 'FL'},
-        { name: 'GEORGIA', abbreviation: 'GA'},
-        { name: 'HAWAII', abbreviation: 'HI'},
-        { name: 'IDAHO', abbreviation: 'ID'},
-        { name: 'ILLINOIS', abbreviation: 'IL'},
-        { name: 'INDIANA', abbreviation: 'IN'},
-        { name: 'IOWA', abbreviation: 'IA'},
-        { name: 'KANSAS', abbreviation: 'KS'},
-        { name: 'KENTUCKY', abbreviation: 'KY'},
-        { name: 'LOUISIANA', abbreviation: 'LA'},
-        { name: 'MAINE', abbreviation: 'ME'},
-        { name: 'MARYLAND', abbreviation: 'MD'},
-        { name: 'MASSACHUSETTS', abbreviation: 'MA'},
-        { name: 'MICHIGAN', abbreviation: 'MI'},
-        { name: 'MINNESOTA', abbreviation: 'MN'},
-        { name: 'MISSISSIPPI', abbreviation: 'MS'},
-        { name: 'MISSOURI', abbreviation: 'MO'},
-        { name: 'MONTANA', abbreviation: 'MT'},
-        { name: 'NEBRASKA', abbreviation: 'NE'},
-        { name: 'NEVADA', abbreviation: 'NV'},
-        { name: 'NEW HAMPSHIRE', abbreviation: 'NH'},
-        { name: 'NEW JERSEY', abbreviation: 'NJ'},
-        { name: 'NEW MEXICO', abbreviation: 'NM'},
-        { name: 'NEW YORK', abbreviation: 'NY'},
-        { name: 'NORTH CAROLINA', abbreviation: 'NC'},
-        { name: 'NORTH DAKOTA', abbreviation: 'ND'},
-        { name: 'OHIO', abbreviation: 'OH'},
-        { name: 'OKLAHOMA', abbreviation: 'OK'},
-        { name: 'OREGON', abbreviation: 'OR'},
-        { name: 'PENNSYLVANIA', abbreviation: 'PA'},
-        { name: 'RHODE ISLAND', abbreviation: 'RI'},
-        { name: 'SOUTH CAROLINA', abbreviation: 'SC'},
-        { name: 'SOUTH DAKOTA', abbreviation: 'SD'},
-        { name: 'TENNESSEE', abbreviation: 'TN'},
-        { name: 'TEXAS', abbreviation: 'TX'},
-        { name: 'UTAH', abbreviation: 'UT'},
-        { name: 'VERMONT', abbreviation: 'VT'},
-        { name: 'VIRGINIA', abbreviation: 'VA'},
-        { name: 'WASHINGTON', abbreviation: 'WA'},
-        { name: 'WEST VIRGINIA', abbreviation: 'WV'},
-        { name: 'WISCONSIN', abbreviation: 'WI'},
-        { name: 'WYOMING', abbreviation: 'WY' }
+        { name: 'Alabama', abbreviation: 'AL'},
+        { name: 'Alaska', abbreviation: 'AK'},
+        { name: 'Arizona', abbreviation: 'AZ'},
+        { name: 'Arkansas', abbreviation: 'AR'},
+        { name: 'California', abbreviation: 'CA'},
+        { name: 'Colorado', abbreviation: 'CO'},
+        { name: 'Connecticut', abbreviation: 'CT'},
+        { name: 'Delaware', abbreviation: 'DE'},
+        { name: 'District of Columbia', abbreviation: 'DC'},
+        { name: 'Florida', abbreviation: 'FL'},
+        { name: 'Georgia', abbreviation: 'GA'},
+        { name: 'Hawaii', abbreviation: 'HI'},
+        { name: 'Idaho', abbreviation: 'ID'},
+        { name: 'Illinois', abbreviation: 'IL'},
+        { name: 'Indiana', abbreviation: 'IN'},
+        { name: 'Iowa', abbreviation: 'IA'},
+        { name: 'Kansas', abbreviation: 'KS'},
+        { name: 'Kentucky', abbreviation: 'KY'},
+        { name: 'Louisiana', abbreviation: 'LA'},
+        { name: 'Maine', abbreviation: 'ME'},
+        { name: 'Maryland', abbreviation: 'MD'},
+        { name: 'Massachusettes', abbreviation: 'MA'},
+        { name: 'Michican', abbreviation: 'MI'},
+        { name: 'Minnesota', abbreviation: 'MN'},
+        { name: 'Mississippi', abbreviation: 'MS'},
+        { name: 'Missouri', abbreviation: 'MO'},
+        { name: 'Montana', abbreviation: 'MT'},
+        { name: 'Nebraska', abbreviation: 'NE'},
+        { name: 'Nevada', abbreviation: 'NV'},
+        { name: 'New Hampshire', abbreviation: 'NH'},
+        { name: 'New Jersey', abbreviation: 'NJ'},
+        { name: 'New Mexico', abbreviation: 'NM'},
+        { name: 'New York', abbreviation: 'NY'},
+        { name: 'North Carolina', abbreviation: 'NC'},
+        { name: 'North Dakota', abbreviation: 'ND'},
+        { name: 'Ohio', abbreviation: 'OH'},
+        { name: 'Oklahoma', abbreviation: 'OK'},
+        { name: 'Oregon', abbreviation: 'OR'},
+        { name: 'Pennsylvania', abbreviation: 'PA'},
+        { name: 'Rhode Island', abbreviation: 'RI'},
+        { name: 'South Carolina', abbreviation: 'SC'},
+        { name: 'South Dakota', abbreviation: 'SD'},
+        { name: 'Tennessee', abbreviation: 'TN'},
+        { name: 'Texas', abbreviation: 'TX'},
+        { name: 'Utah', abbreviation: 'UT'},
+        { name: 'Vermont', abbreviation: 'VT'},
+        { name: 'Virginia', abbreviation: 'VA'},
+        { name: 'Washington', abbreviation: 'WA'},
+        { name: 'West Virginia', abbreviation: 'WV'},
+        { name: 'Wisconsin', abbreviation: 'WI'},
+        { name: 'Wyoming', abbreviation: 'WY' }
     ];
 
-
+    $scope.stateInput = $scope.stateOptions[0];
 
     $scope.submitIntro = function(firstName, lastName, stateInput, direction) {
         var formData = {
@@ -730,11 +733,8 @@
             state: stateInput.abbreviation
         };
 
-        $scope.sendForm(formData);
-        $scope.changePage(1, direction);
+        $scope.sendForm(formData, 1, direction);
     };
-
-
 
 
 

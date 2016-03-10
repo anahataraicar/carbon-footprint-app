@@ -10,14 +10,5 @@ class ApplicationController < ActionController::Base
       gon.user_id = current_user.id
     end
   end
-
-
-  def calculate_gon
-    # if current_user 
-      # @user_profile = current_user.profiles.last
-      # user_habits = current_user.habits
-      # gon.saved_gas = current_user.save_gas
-    # end
-  end
   
 end

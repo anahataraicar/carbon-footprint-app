@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/footprints' => 'footprints#index'
       get '/footprints/:id' => 'footprints#show'
+      patch '/footprints/:id' => 'footprints#update'
     end
   end
+
 
 end

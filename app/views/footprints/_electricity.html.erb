@@ -1,9 +1,9 @@
-<form id="electricityForm">
+<form id="electricityForm" name="electricity">
 
 <h2>Electricity</h2>
 
  
-  <input ng-model="electricityInput">
+  <input ng-model="electricityInput" name="input" ng-class="{changed: electricity.input.$dirty}">
   <select ng-model="electricityType" ng-options="type.name for type in electricityOptions">
   </select>
   

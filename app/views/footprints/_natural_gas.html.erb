@@ -1,7 +1,7 @@
-<form id="naturalGasForm">
+<form id="naturalGasForm" name="ng">
   <h2>Natural Gas</h2>
   
-  <input ng-model="naturalInput">
+  <input ng-model="naturalInput" name="input" ng-class="{changed: ng.input.$dirty}">
   <select ng-model="naturalType" ng-options="type.name for type in naturalOptions"></select>
 
 </form>

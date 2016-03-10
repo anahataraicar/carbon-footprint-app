@@ -1,7 +1,7 @@
-<form id="public_transportation">
+<form id="public_transportation" name="transport">
   <h4>By public transit:</h4>
   <p>
-  <input ng-model="miles"> miles per year<br>
+  <input ng-model="miles" name="miles" ng-class="{changed: transport.miles.$dirty}"> miles per year<br>
   </p>
 
   <select ng-model="publicType" ng-options="public.name for public in publicOptions">

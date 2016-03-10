@@ -1,14 +1,15 @@
-<form id="carForm">
-  <h2>Transportation</h2>
+<form id="carForm" name="car">
+  <h2>Transportation</h2> 
  
   <h4>By vehicle:</h4>
   <p>
-  <input ng-model="mileage"> gallons per mile<br>
-  <input ng-model="carMiles"> miles per year<br>
+  <input ng-model="mileage" name="mileage" ng-class="{changed: car.mileage.$dirty}"> gallons per mile<br>
+  <input ng-model="carMiles" name="miles" ng-class="{changed: car.miles.$dirty}"> miles per year<br>
   </p>
 
   <select ng-model="fuelType" ng-options="vehicle.name for vehicle in vehicleOptions">
   </select>
+
 </form>
 
 

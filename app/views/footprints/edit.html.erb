@@ -1,13 +1,15 @@
 <div ng-app="app">
   <div ng-controller="editCtrl" ng-init="init()">
 
-    <%= render "errors" %>
-    
     <div class="left-edit">
+
+    <div class="errors">
+      <h5 ng-if="errors"> {{ errors }}</h5>
+    </div>
 
       <ul class="nav nav-pills nav-stacked">
 
-        <li role="presentation" class="active"><a href="#1" data-toggle="tab"><i class="material-icons">person</i></a></li>
+        <li role="presentation" class="active" ><a href="#1" data-toggle="tab"><i class="material-icons">person</i></a></li>
 
         <li role="presentation"><a href="#2" data-toggle="tab"><i class="material-icons">directions_car</i></a></li>
 

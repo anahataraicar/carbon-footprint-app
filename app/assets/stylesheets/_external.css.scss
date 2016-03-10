@@ -61,7 +61,7 @@ body {
       .arrow-before {
         display: inline-block;
         position: absolute;
-        bottom: 5%;
+        bottom: 3%;
         color: white;
 
         i { font-size: 50px; }
@@ -72,7 +72,7 @@ body {
         right: 5%;
         color: white;
         position: absolute;
-        bottom: 5%;
+        bottom: 3%;
 
         i { font-size: 50px; }
       }
@@ -167,6 +167,28 @@ th, td { padding: 10px; }
     border: 2px solid $black;
   }
 }
+
+
+input { // need to change for just footprint form
+  background-color: #b3ffb3; // light green
+}
+
+.changed {
+  background-color: white;
+}
+
+.errors .ng-enter {
+  -webkit-animation: shake 1s;
+  -moz-animation: shake 1s;
+  -o-animation: shake 1s;
+  animation: shake 1s;
+}
+
+.errors {
+  margin-left: 20px;
+}
+
+
 
 
 

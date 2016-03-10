@@ -1,7 +1,7 @@
-<form id="heatingForm">
+<form id="heatingForm" name="heat">
   <h2>Heating oil</h2>
 
-  <input ng-model="heatingInput">
+  <input ng-model="heatingInput" name="input" ng-class="{changed: heat.input.$dirty}">
   <select ng-model="heatingType" ng-options="type.name for type in heatingOptions">
   </select>
 

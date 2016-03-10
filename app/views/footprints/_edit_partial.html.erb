@@ -1,14 +1,12 @@
 <div class="tab-content">
 
   <div role="tabpanel" class="tab-pane active" id="1">
-    <form id="stateForm">
       <div class="question">
         <%= render "intro" %>
       </div>
-
       <h1 class="arrow-next" ng-click="submitIntro(firstName, lastName, stateInput, 2)"><i class="material-icons">navigate_next</i></h1>
-    </form>
   </div>
+
 
   <div role="tabpanel" class="tab-pane" id="2">
     <% @partials[1..2].each do |partial| %>
@@ -16,8 +14,6 @@
           <%= render "#{partial}" %>
       </div>
     <% end %>
-
-      <!-- errors!!!! -->
     
     <h1 class="arrow-before" ng-click="submitTravel(mileage, carMiles, fuelType, miles, publicType, 1)"><i class="material-icons">navigate_before</i></h1>
 
@@ -27,11 +23,7 @@
 
   <div role="tabpanel" class="tab-pane" id="3">
     <div class="question">
-
       <%= render "#{@partials[3]}" %>
-
-
-      <!-- errors!!!! -->
 
       <h1 class="arrow-before" ng-click="submitAir(airMiles, 1)"><i class="material-icons">navigate_before</i></h1>
 

@@ -1,7 +1,7 @@
-<form id="propaneForm">
+<form id="propaneForm" name="propane">
   <h2>Propane</h2>
 
-  <input ng-model="propaneInput">
+  <input ng-model="propaneInput" name="input" ng-class="{changed: propane.input.$dirty}">
   <select ng-model="propaneType" ng-options="type.name for type in propaneOptions">
   </select>
 

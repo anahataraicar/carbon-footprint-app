@@ -1,8 +1,8 @@
-<form id="homeForm">
+<form id="homeForm" name="home">
   <h2>Housing</h2>
 
   <p>
-  <input ng-model="homeSqft"> sqft
+  <input ng-model="homeSqft" name="sqft" ng-class="{changed: home.sqft.$dirty}"> sqft
   </p>
 </form>
 

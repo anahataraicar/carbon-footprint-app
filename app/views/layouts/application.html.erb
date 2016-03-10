@@ -32,12 +32,10 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       
         <ul class="nav navbar-nav navbar-right">
-          <% if current_user %>
-            <li><%= link_to "My footprint", "/footprints/#{current_user.id}" %></li>
-          <% else %>
+        
             <li><a href="/users/sign_up">Sign up</a></li>
             <li><a href="/users/sign_in">Sign in</a></li>
-          <% end %>
+          
           <li><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></li>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -47,10 +45,10 @@
 
    
 
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+<!--   <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
     </div>
-  </nav>
+  </nav> -->
 
   
 

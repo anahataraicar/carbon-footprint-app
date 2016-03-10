@@ -1,15 +1,14 @@
-<form id="intro">
+<form id="intro" name="intro">
     <h2>Let's get started!</h2>
     
     <p>Please start off by putting in some basic info</p> 
 
     <p>
-    First name: <input ng-model="firstName"><br>
-    Last name: <input ng-model="lastName">
+    First name: <input ng-model="firstName" name="firstName" ng-class="{ changed: intro.firstName.$dirty}"><br>
+    Last name: <input ng-model="lastName" name="lastName" ng-class="{ changed: intro.lastName.$dirty}">
     </p>
 
    <select ng-model="stateInput" ng-options="state.name for state in stateOptions">
-    <option value="">-- Please select your state --</option>
    </select>
 
   <!-- <p>(click on the arrow to your right to continue)</p> -->

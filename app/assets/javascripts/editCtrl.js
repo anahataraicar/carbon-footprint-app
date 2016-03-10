@@ -439,6 +439,18 @@
     };
 
 
+// -------------- CHANGE ICONS -------------------------
+
+    $scope.pills = [
+        { name: "intro", visible: false }
+    ];
+
+
+
+
+
+
+
     $scope.changePage = function(page, direction) {
       if (direction === 1) {
         var newPage = page - 1;

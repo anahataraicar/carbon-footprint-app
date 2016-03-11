@@ -207,11 +207,8 @@ input { // need to change for just footprint form
   margin-left: 20px;
 }
 
-material-icons.ng-enter {
-  -webkit-animation: fadeIn 2s;
-  -moz-animation: fadeIn 2s;
-  -o-animation: fadeIn 2s;
-  animation: fadeIn 2s;
+.material-icons {
+  color: blue;
 }
 
 

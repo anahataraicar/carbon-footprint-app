@@ -8,6 +8,7 @@ class Habit < ActiveRecord::Base
   validates :input3, presence: true, if: :has_three_inputs?, on: :update
   
   validates :value, numericality: true, on: :update
+  
   validates :input1, numericality: true, on: :update
   validates :input2, numericality: true, if: :has_two_inputs?, on: :update
   validates :input3, numericality: true, if: :has_three_inputs?, on: :update

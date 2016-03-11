@@ -13,6 +13,27 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  after_create :create_user_habits
+
+  attr_reader :done
+
+
+  def create_user_habits
+    @partials = ["vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "meat", "dairy", "grains", "fruit", "other"]
+
+    # creates habits for each partial, but without values (to check if done later)
+
+    @partials[0..13].each do |partial|
+      Habit.create({  user_id: id, 
+                      footprint_type: partial,
+                      value: 0 })
+    end
+
+    create_profile
+    # redirect_to "/footprints/#{current_user.id}/edit"
+
+  end
+  
 
   def sum_travel
     sum = 0
@@ -38,6 +59,24 @@ class User < ActiveRecord::Base
     sum.round(2)
   end
 
+  def is_done? ## probably wont need this anymore 
+    done = "yes"
+
+    habits.each do |habit|
+      if !(habit.value > 0.00)
+        done = "no"
+      end
+    end
+
+    if done == "no"
+      return false
+    else
+      return true
+    end
+    
+  end
+
+
 
   def save_gas
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "vehicle").last
@@ -46,10 +85,6 @@ class User < ActiveRecord::Base
     (((miles/(mileage-5)) - (miles/mileage)) * 8.887 / 1000).round(2)
   end
 
-  def is_done? ## probably wont need this anymore 
-    return true 
-    habits.each { |habit| return false if habit.value == 0}
-  end
 
 
   def create_profile
@@ -61,6 +96,10 @@ class User < ActiveRecord::Base
     total_footprint = habits.sum(:value)
     profile = Profile.find_by(user_id: id)
     profile.update(total_value: total_footprint)
+  end
+
+  def has_a_profile?
+    profiles.last
   end
 
 

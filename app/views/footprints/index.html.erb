@@ -1,31 +1,43 @@
-<div class="page">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Calculate your carbon footprint</h1>
+                    <a class="btn btn-default page-scroll" href="#about">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div>
-    <h1 class="landing-text">Calculate your carbon footprint!</h1>
-     <% if current_user %>
-      <h3>Welcome, <%= current_user.first_name %></h3>
-      <% if current_user.profiles.last %>
-        <p><a class="btn btn-primary btn-lg" href="/footprints/<%= current_user.id %>/edit" role="button">Your profile</a></p>
-      <% else %>
-        <h3><%= link_to "Click here to get started", "/footprints", method: :post %></h3>
-      <% end %>
-    <% else %>
-      <p><a class="btn btn-primary btn-lg" href="/users/sign_up" role="button">Sign up!</a></p>
-    <% end %>
-  </div>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>About Section</h1>
+                    <p>Blablablabla some information about this website</p>
+                    <p>Scroll down for contact info</p>
+                    <% if !current_user %>
+                        <h3><%= link_to "Click here to get started", "/users/sign_up" %></h3>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Contact Section</h1>
+                    <h3>Zoooeeee</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
 
   
-
-
-</div>
-
-
-
-
-
- 
- 
-
-
-
-

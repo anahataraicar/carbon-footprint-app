@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   root 'footprints#index'
   get '/footprints/new' => 'footprints#new' 
   post '/footprints' => 'footprints#create'

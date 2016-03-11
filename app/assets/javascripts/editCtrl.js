@@ -21,12 +21,20 @@
     $scope.init = function() {
         $scope.setUpCharts();
         $scope.content = "pie";
+
+        $scope.pills = [
+            { name: "intro", visible: true },
+            { name: "vehicle", visible: false },
+            { name: "air", visible: false },
+            { name: "electricity", visible: false },
+            { name: "heat", visible: false },
+            { name: "home", visible: false },
+            { name: "food", visible: false },
+            { name: "review", visible: false }
+        ];
     };
 
 
-
-
-      
 // -------------- SET UP CHARTS -------------------------
 // ---------------------------------------------------
 
@@ -38,7 +46,7 @@
     var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
 
 
-    var colors = ["#2b908f", "#4d4dff", "#91e8e1"],
+    var colors = ["#bf967a", "#b52d41", "#f06f5c"],
 
         categories = ['Travel', 'Housing', 'Food'],
         data = [{
@@ -103,19 +111,24 @@
 
     // Create the chart
     $('#pieChartContainer').highcharts({
+        credits: {
+                enabled: false
+        },
         chart: {
-            type: 'pie'
+            type: 'pie',
+            backgroundColor:'transparent'
         },
         title: {
             style: {
-                fontSize: '24px'
+                fontSize: '26px'
             },
-            text: 'Your carbon footprint'
+            text: 'Your carbon footprint',
+            margin: 20
         },
         subtitle: {
-            text: 'Some subtitle text',
+            text: 'Hover over a section for more info',
             style: {
-                fontSize: '15px'
+                fontSize: '14px'
             },
         },
         yAxis: {
@@ -125,12 +138,13 @@
         },
         plotOptions: {
             pie: {
-                shadow: false,
-                center: ['50%', '50%']
-            }
+                center: ['50%', '50%'],
+                // borderWidth: 10,
+                borderColor: 'transparent'
+            },
         },
         tooltip: {
-            valueSuffix: ' MT CO2'
+            pointFormat: '{series.name}: {point.y:.2f} MT CO2<br/>',
         },
 
         series: [{
@@ -141,10 +155,12 @@
                 formatter: function () {
                     return this.y > 5 ? this.point.name : null;
                 },
-                color: '#ffffff',
+                color: 'black',
                 distance: -30,
-                style :{
-                    fontSize: '15px'
+                style: {
+                    fontSize: '15px',
+                    textShadow: false,
+                    
                 }
             }
         }, {
@@ -155,10 +171,12 @@
             dataLabels: {
                 formatter: function () {
                     // display only if larger than 1
-                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
+                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + '%' : null;
                 },
+                color: 'black',
                 style: {
-                    fontSize: '12px'
+                    fontSize: '12px',
+                    textShadow: false
                 }
             }
         }]
@@ -173,11 +191,15 @@
         var housing_data = barData[2];
         var food_data = barData[3];
 
-        var colors = ["#2b908f", "#4d4dff", "#91e8e1"];
+        var colors = ["#bf967a", "#b52d41", "#f06f5c"];
 
         $('#barChartContainer').highcharts({
+            credits: {
+                enabled: false
+            },
             chart: {
-                type: 'column'
+                type: 'column',
+                backgroundColor:'transparent'
             },
             title: {
                 text: 'User footprints'
@@ -194,7 +216,8 @@
                     enabled: true,
                     style: {
                         fontWeight: 'bold',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        textShadow: false,
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
                     }
                 }
             },
@@ -205,7 +228,7 @@
                 y: 25,
                 floating: true,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-                borderColor: '#CCC',
+                borderColor: null,
                 borderWidth: 1,
                 shadow: false
             },
@@ -215,13 +238,17 @@
 
             },
             plotOptions: {
+                series: {
+                    borderColor: null
+                },
                 column: {
                     stacking: 'normal',
                     dataLabels: {
                         enabled: true,
-                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                        shadow: false,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black',
                         style: {
-                            textShadow: '0 0 3px black'
+                            textShadow: false
                         },
                         formatter: function () {
                            return Highcharts.numberFormat(this.y,2);
@@ -253,12 +280,13 @@
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
         
         var pieData = response.data;
+        
         var pieChart = $('#pieChartContainer').highcharts();
         var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
         var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
         var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
 
-        var colors = ["#2b908f", "#4d4dff", "#91e8e1"],
+        var colors = ["#bf967a", "#b52d41", "#f06f5c"],
         categories = ['Travel', 'Housing', 'Food'],
         data = [{
             y: travel,
@@ -335,12 +363,10 @@
             var travel_data = barData[1];
             var housing_data = barData[2];
             var food_data = barData[3];
-            
-
 
             var barChart = $('#barChartContainer').highcharts();
             
-            var colors = ["#2b908f", "#4d4dff", "#91e8e1"];
+            var colors = ["#bf967a", "#b52d41", "#f06f5c"];
 
             var barSeries = [{
                 data: travel_data
@@ -350,7 +376,6 @@
                 data: food_data
             }];
 
-            // console.log(barSeries)
             barChart.series[0].setData(barSeries, true);
 
 
@@ -418,14 +443,15 @@
 
     $scope.sendForm = function(formData, page, direction) {
 
-        var urlString = "/api/v1/footprints/" + userId;        
+        var urlString = "/api/v1/footprints/" + userId;
 
         $http.patch(urlString, formData).then(function(response){
             
             $scope.updatePieChart();
             $scope.updateBarChart();
 
-            $scope.changePage(page, direction)
+            // console.log()
+            $scope.changePage(page, direction);
 
         }, function(response) { 
 
@@ -441,11 +467,14 @@
 
 // -------------- CHANGE ICONS -------------------------
 
-    $scope.pills = [
-        { name: "intro", visible: false }
-    ];
+    
 
+    $scope.changePill = function(page) {
+        
+        $scope.pills[page-1].visible = false;
+        $scope.pills[page].visible = true;
 
+    };
 
 
 
@@ -458,8 +487,12 @@
         var newPage = page + 1;
       };
 
+      console.log("changing pages");
+      console.log(page, direction);
       var pageStr = 'a[href="#' + (newPage) + '"]';
       $(pageStr).tab('show') ;
+
+      $scope.changePill(page);
     };
 
 
@@ -583,7 +616,7 @@
 
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
 
-        $scope.foodData = [];
+        // $scope.foodData = [];
       
         var formData = [
             { type: "meat", factor: meatValue }, 

@@ -10,5 +10,7 @@ class ApplicationController < ActionController::Base
       gon.user_id = current_user.id
     end
   end
+
+ 
   
 end

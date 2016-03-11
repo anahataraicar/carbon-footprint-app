@@ -24,19 +24,21 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        </button>
         <a class="navbar-brand" href="/">Home</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       
         <ul class="nav navbar-nav navbar-right">
-        
+          <% unless current_user %>
             <li><a href="/users/sign_up">Sign up</a></li>
             <li><a href="/users/sign_in">Sign in</a></li>
-          
-          <li><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></li>
+          <% else current_user %>
+            <% if current_user.has_a_profile? %>
+              <li><%= link_to "Your footprint", "/footprints/#{current_user.id}/edit" %></li>
+            <% end %>
+            <li><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></li>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

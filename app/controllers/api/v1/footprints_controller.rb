@@ -4,12 +4,15 @@ class Api::V1::FootprintsController < ApplicationController
 
   def index
     profiles = []
-    profiles << Profile.find_by(user_id: current_user.id)
-    other_profiles = Profile.first(2)
-
-    other_profiles.each do |profile|
-      profiles << profile
+    
+    if current_user.is_done?
+      profiles[0] = Profile.find_by(user_id: current_user.id)
+    else
+      profiles[0] = Profile.first
     end
+ 
+    profiles[1] = Profile.find(2)
+    profiles[2] = Profile.find(3)
 
     names = []
     travel = []
@@ -24,6 +27,7 @@ class Api::V1::FootprintsController < ApplicationController
     end
   
     @profiles = [[names], [travel], [housing], [food]]
+
   end
 
   def show
@@ -46,12 +50,14 @@ class Api::V1::FootprintsController < ApplicationController
 
         if @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
 
-          current_user.update_profile 
+          current_user.update_profile
+
           head :ok
         else
           render json: { errors: "Please fill the highlighted fields"}, status: 422 
         end
     end
+
     
 
   end

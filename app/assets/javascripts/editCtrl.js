@@ -24,13 +24,13 @@
 
         $scope.pills = [
             { name: "intro", visible: true },
-            { name: "vehicle", visible: false },
-            { name: "air", visible: false },
-            { name: "electricity", visible: false },
-            { name: "heat", visible: false },
-            { name: "home", visible: false },
-            { name: "food", visible: false },
-            { name: "review", visible: false }
+            { name: "vehicle", visible: true },
+            { name: "air", visible: true },
+            { name: "electricity", visible: true },
+            { name: "heat", visible: true },
+            { name: "home", visible: true },
+            { name: "food", visible: true },
+            { name: "review", visible: true }
         ];
     };
 

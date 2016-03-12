@@ -1,1 +1,16 @@
-<h2><%= link_to 'Edit your footprint', "/footprints/#{current_user.id}/edit" %></h2>
+<body id="show-body">
+
+  <h2>You produce <span id="total"><%= @total %></span> megatonnes of carbon dioxide per year</h2>
+
+  <h3>That is the equivalent of...</h3>
+
+  <p><span><i class="material-icons">local_gas_station</i></span><%= @gasoline %> gallons of gasoline consumed</p>
+  <p><span><i class="material-icons">whatshot</i></span><%= @coal %> pounds of coal burned</p>
+  <p><span><i class="material-icons">directions_car</i></span><%= @miles %> miles driven by an average passenger vehicle</p>
+  <p><span><i class="material-icons">delete</i></span><%= @waste %> tons of waste sent to landfill</p>
+  <p><span><i class="material-icons">filter_vintage</i></span><%= @trees %> tree seedlings grown for 10 years</p>
+  <p><span><i class="material-icons">nature</i></span><%= @acres %> acres of U.S. forests in one year</p>
+  <p><span><i class="material-icons">toys</i></span><%= @turbine %> wind turbines installed</p>
+  <i class="mdi mdi-bell"></i>
+
+</body>

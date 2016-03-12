@@ -16,7 +16,6 @@ body {
 
 * { font-family: Raleway; }
 
-
 // ------------------  EDIT ---------------------------
 
 body#edit-body {
@@ -163,7 +162,60 @@ th, td { padding: 10px; }
 }
 
 
+
+// ----- ANIMATIONS ---------------------------------
+
+.errors .ng-enter {
+  -webkit-animation: shake 1s;
+  -moz-animation: shake 1s;
+  -o-animation: shake 1s;
+  animation: shake 1s;
+}
+
+.errors {
+  margin-left: 20px;
+}
+
+.material-icons.list.ng-enter {
+  -webkit-animation: fadeIn 2.5s;
+  -moz-animation: fadeIn 2.5s;
+  -o-animation: fadeIn 2.5s;
+  animation: fadeIn 2.5s;
+}
+
+.material-icons.list.ng-leave {
+  -webkit-animation: fade 1s;
+  -moz-animation: fade 1s;
+  -o-animation: fade 1s;
+  animation: fade 1s;
+}
+
 // -------------- SHOW ----------------------------
+// ------------------------------------------------
+
+
+body#show-body {
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: $green;
+  font-family: Raleway;
+  margin: 15px;
+
+  i { 
+    margin-right: 5px;
+    font-size: 30px;
+  }
+
+  h3 { margin-bottom: 15px; }
+
+
+}
+
+span#total {
+  font-size: 40px;
+}
+
+
 
 .chart-icons {
   i {
@@ -186,29 +238,17 @@ th, td { padding: 10px; }
 }
 
 
-input { // need to change for just footprint form
-  background-color: $green; // light green
-}
+form#take-action {
+  font-size: 16px;
 
+  
+  input { // need to change for just footprint form
+    background-color: $green; // light green
+    margin: 5px;
+  }
+}
 .changed {
   background-color: white;
-}
-
-// ----- ANIMATIONS ---------------------------------
-
-.errors .ng-enter {
-  -webkit-animation: shake 1s;
-  -moz-animation: shake 1s;
-  -o-animation: shake 1s;
-  animation: shake 1s;
-}
-
-.errors {
-  margin-left: 20px;
-}
-
-.material-icons {
-  color: blue;
 }
 
 

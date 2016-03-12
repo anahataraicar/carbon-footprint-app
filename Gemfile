@@ -28,6 +28,8 @@ gem 'unirest'
 
 gem 'gon'
 
+gem 'material_icons'
+
 gem 'bootstrap-sass', '~> 3.3.6'
 
 # Use ActiveModel has_secure_password

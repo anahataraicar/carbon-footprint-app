@@ -32,6 +32,9 @@
             { name: "food", visible: true },
             { name: "review", visible: true }
         ];
+
+        $showVisible = false;
+        $actionVisible = false;
     };
 
 
@@ -450,7 +453,6 @@
             $scope.updatePieChart();
             $scope.updateBarChart();
 
-            // console.log()
             $scope.changePage(page, direction);
 
         }, function(response) { 
@@ -459,8 +461,6 @@
             $scope.clicked = true; 
 
         });
-
-       
 
     };
 
@@ -581,10 +581,10 @@
 
     $scope.heatingType = $scope.heatingOptions[0];
 
-    // literally made up this value 4.00
+    // literally made up this value 3.12
     $scope.propaneOptions = [
       { name: "gal/year", factor: 1 }, 
-      {name: "$/year", factor: 4.00 }
+      {name: "$/year", factor: 3.12 }
     ];
 
     $scope.propaneType = $scope.propaneOptions[0];
@@ -617,6 +617,8 @@
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
 
         // $scope.foodData = [];
+
+
       
         var formData = [
             { type: "meat", factor: meatValue }, 

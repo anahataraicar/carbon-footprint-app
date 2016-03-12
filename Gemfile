@@ -28,7 +28,6 @@ gem 'unirest'
 
 gem 'gon'
 
-gem 'material_icons'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 

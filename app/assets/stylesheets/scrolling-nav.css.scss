@@ -5,7 +5,7 @@
  */
 
 body {
-    width: 100%;
+    width: 100%; /* changed from 100% so would fit page */
     height: 100%;
 }
 
@@ -52,7 +52,20 @@ of those sections to manage the look and feel of the site. */
     background: #9fa8a3;
 }
 
+.edit-section {
+    height: 100%;
 
+}
+
+.show-section {
+    height: 100%;
+    background: #c5d5cb;
+}
+
+.new -section {
+    height: 100%;
+    background: #9fa8a3;
+}
 
 
 

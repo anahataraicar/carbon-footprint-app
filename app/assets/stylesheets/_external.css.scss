@@ -10,93 +10,89 @@ $black: #232825;
 
 body { 
   // padding-bottom: 50px; // footer
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 * { font-family: Raleway; }
 
 // ------------------  EDIT ---------------------------
 
-body#edit-body {
-  background-color: $green;
-}
 
 
-.left-edit {
 
-  ul.nav.nav-pills.nav-stacked {
-    margin-left: 10px;
-    margin-top: 10px;
-    float: left;
-    width: 40px; 
+ul.nav.nav-pills.nav-stacked {
+  margin-left: 10px;
+  margin-top: 10px;
+  float: left;
+  width: 40px; 
 
-    table, tr {
+  table#icon-table {
+    tr {
       height: 60px;
     }
-
-    .active > a {
-      background-color: transparent;
-    }
-
-    i {
-      color: $grey;
-    }
+//       table#icon-table {
+//   th, td { padding: 10px; }
+// }
   }
 
-  .tab-content {
-    float: left;
+  .active > a {
+    background-color: transparent;
+  }
 
-    .tab-pane {
-      background-color: rgba(255,255,255,0.4);
-      padding: 5px 20px 20px 20px;
-      margin: 20px;
-      width: 600px;
-      height: 500px;
-      border-radius: 15px;
-      position: relative;
+  i {
+    // color: $grey;
+    color: black;
+  }
+}
 
-      .arrow-before {
-        display: inline-block;
-        position: absolute;
-        bottom: 3%;
-        color: white;
+.tab-content {
+  float: left;
 
-        i { font-size: 50px; }
-      }
+  .tab-pane {
+    background-color: rgba(255,255,255,0.4);
+    padding: 5px 20px 20px 20px;
+    margin: 20px;
+    width: 500px;
+    height: 500px;
+    border-radius: 15px;
+    position: relative;
 
-      .arrow-next {
-        display: inline-block;
-        right: 5%;
-        color: white;
-        position: absolute;
-        bottom: 3%;
+    .arrow-before {
+      display: inline-block;
+      position: absolute;
+      bottom: 3%;
+      color: white;
 
-        i { font-size: 50px; }
-      }
+      i { font-size: 50px; }
+    }
 
-      .btn.btn-default.last {
-        position: absolute;
-        bottom: 10%;
-        right: 5%;
-      }
+    .arrow-next {
+      display: inline-block;
+      right: 5%;
+      color: white;
+      position: absolute;
+      bottom: 3%;
 
-      h2 {
-        color: black;
-        margin-bottom: 20px;
-      }
+      i { font-size: 50px; color: red; }
+    }
 
-      .question {
-        margin-bottom: 60px;
+   
 
-        input {
-          margin-bottom: 10px;
-          margin-left: 5px;
-        }
+    h2 {
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      margin-bottom: 60px;
+
+      input {
+        margin-bottom: 10px;
+        margin-left: 5px;
       }
     }
   }
 }
+
 
 
 div#chart-holder {
@@ -149,7 +145,7 @@ select {
 
 //  --------------TABLE ------------------------------
 
-th, td { padding: 10px; }
+
 
 // -------------- HEADER ------------------------
 
@@ -199,20 +195,34 @@ body#show-body {
   margin-right: 20px;
   background-color: $green;
   font-family: Raleway;
-  margin: 15px;
 
   i { 
-    margin-right: 5px;
-    font-size: 30px;
+    margin-right: 2px;
+    font-size: 15px;
+    display: inline-block;
   }
 
-  h3 { margin-bottom: 15px; }
+  h2 { margin-bottom: 15px; }
 
 
 }
 
+
+#show-table {
+  // th, td { border: 2px solid black; }
+  h4 {
+    font-style: italic;
+    padding: 5px;
+  }
+}
+
+
 span#total {
   font-size: 40px;
+}
+
+span#equivalent {
+  font-size: 24px;
 }
 
 
@@ -250,6 +260,9 @@ form#take-action {
 .changed {
   background-color: white;
 }
+
+
+
 
 
 

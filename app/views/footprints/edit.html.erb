@@ -1,54 +1,46 @@
-<body id="edit-body">
-  <div ng-app="app">
-    <div ng-controller="editCtrl" ng-init="init()">
 
-      <div class="left-edit">
-
-        <div class="errors">
-          <h5 ng-if="errors"> {{ errors }}</h5>
-        </div>
-
-
-        <ul class="nav nav-pills nav-stacked">
-
-        <table>
-          <tr><td><li role="presentation" class="active"><a href="#1" data-toggle="tab"><i class="material-icons list" ng-if="pills[0].visible">person</i></a></li></td></tr>
-
-
-          <tr><td><li role="presentation"><a href="#2" data-toggle="tab"><i class="material-icons list" ng-if="pills[1].visible">directions_car</i></a></li></td></tr>
-
-          <tr><td><li role="presentation"><a href="#3" data-toggle="tab"><i class="material-icons list" ng-if="pills[2].visible">flight</i></a></li></td></tr>
-
-          <tr><td><li role="presentation"><a href="#4" data-toggle="tab"><i class="material-icons list" ng-if="pills[3].visible">lightbulb_outline</i></a></li></td></tr>
-
-          <tr><td><li role="presentation"><a href="#5" data-toggle="tab"><i class="material-icons list" ng-if="pills[4].visible">whatshot</i></a></li></td></tr>
-
-          <tr><td><li role="presentation"><a href="#6" data-toggle="tab"><i class="material-icons list" ng-if="pills[5].visible">home</i></a></li></td></tr>
-
-          <tr><td><li role="presentation"><a href="#7" data-toggle="tab"><i class="material-icons list" ng-if="pills[6].visible">restaurant</i></a></li></td></tr>
-
-          <tr><td><li role="presentation"><a href="#8" data-toggle="tab"><i class="material-icons list" ng-if="pills[7].visible">description</i></a></li></td></tr>
-
-        </table> 
-        </ul>
-
-        <div class="questions">
-          <%= render "edit_partial" %>
-        </div>
-
-      </div>
-
-      <div id="chart-holder">
-       
-        <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'pie'"></div>
-
-        <div id="barChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'bar'"></div>
-      
-      </div>
-
-
+<div ng-app="app">
+  <div ng-controller="editCtrl" ng-init="init()">
     
-    
-    </div> <!-- ng controller div -->
-  </div> <!-- ng app div -->
-</body> <!-- body -->
+    <!-- <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"> -->
+
+    <section id="edit" class="edit-section">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="left-edit">
+              <%= render "icon_table" %>
+              <div class="questions">
+                <%= render "edit_partial" %>
+              </div>
+            </div>
+            <div id="chart-holder">
+              <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'pie'"></div>
+              <div id="barChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'bar'"></div>
+            </div>
+
+            
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="show" class="show-section" ng-if="showVisible">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= render "show" %>
+          
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  <!-- </body> -->
+  
+  </div> <!-- ng controller div -->
+</div> <!-- ng app div -->
+

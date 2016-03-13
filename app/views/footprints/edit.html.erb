@@ -1,8 +1,7 @@
-
+<body id="edit-body">
 <div ng-app="app">
   <div ng-controller="editCtrl" ng-init="init()">
-    
-    <!-- <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"> -->
+
 
     <section id="edit" class="edit-section">
       <div class="container-fluid">
@@ -15,9 +14,9 @@
                 <%= render "edit_partial" %>
               </div>
             </div>
+            
             <div id="chart-holder">
-              <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'pie'"></div>
-              <div id="barChartContainer" style="width: 600px; height: 450px; float: right;" ng-show="content == 'bar'"></div>
+              <div class="pieChartContainer" style="width: 600px; height: 450px; float: right;"></div>
             </div>
 
             
@@ -31,7 +30,12 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
+
+            <a class="btn btn-default page-scroll" href="#action" ng-click="changeAction()">learn more!</a>
+
             <%= render "show" %>
+
+
           
           </div>
         </div>
@@ -39,8 +43,20 @@
     </section>
 
 
-  <!-- </body> -->
+    <section id="action" class="action-section" ng-if="actionVisible">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1>Here's how you can improve your footprint</h1>
+            <%= render "take_action" %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
   
   </div> <!-- ng controller div -->
 </div> <!-- ng app div -->
-
+</body>

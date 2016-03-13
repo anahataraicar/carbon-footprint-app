@@ -22,7 +22,7 @@ class FootprintsController < ApplicationController
     @partials = ["intro", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "food"]
 
     # if current_user.is_done?
-      gon.saved_gas = current_user.save_gas
+      # gon.saved_gas = current_user.save_gas
     # end
 
     if current_user.has_a_profile?

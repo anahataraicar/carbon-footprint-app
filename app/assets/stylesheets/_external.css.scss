@@ -29,9 +29,9 @@ ul.nav.nav-pills.nav-stacked {
     tr {
       height: 60px;
     }
-//       table#icon-table {
-//   th, td { padding: 10px; }
-// }
+    table#icon-table {
+      th, td { padding: 10px; }
+    }
   }
 
   .active > a {
@@ -39,8 +39,7 @@ ul.nav.nav-pills.nav-stacked {
   }
 
   i {
-    // color: $grey;
-    color: black;
+    color: $grey;
   }
 }
 
@@ -51,7 +50,7 @@ ul.nav.nav-pills.nav-stacked {
     background-color: rgba(255,255,255,0.4);
     padding: 5px 20px 20px 20px;
     margin: 20px;
-    width: 500px;
+    width: 600px;
     height: 500px;
     border-radius: 15px;
     position: relative;
@@ -62,7 +61,7 @@ ul.nav.nav-pills.nav-stacked {
       bottom: 3%;
       color: white;
 
-      i { font-size: 50px; }
+      i.material-icons { font-size: 50px; }
     }
 
     .arrow-next {
@@ -72,7 +71,7 @@ ul.nav.nav-pills.nav-stacked {
       position: absolute;
       bottom: 3%;
 
-      i { font-size: 50px; color: red; }
+      i { font-size: 50px; }
     }
 
    
@@ -88,6 +87,7 @@ ul.nav.nav-pills.nav-stacked {
       input {
         margin-bottom: 10px;
         margin-left: 5px;
+        background-color: $green;
       }
     }
   }
@@ -97,7 +97,7 @@ ul.nav.nav-pills.nav-stacked {
 
 div#chart-holder {
   // top - right - bottom - left
-  margin: 30px 60px 10px 10px;
+  margin: 30px 40px 10px 0px;
   padding: 10px;
   float: right;
 
@@ -169,7 +169,10 @@ select {
 }
 
 .errors {
-  margin-left: 20px;
+  position: absolute;
+  margin-left: 270px;
+  margin-top: 420px; 
+  height: 50px;
 }
 
 .material-icons.list.ng-enter {
@@ -197,8 +200,8 @@ body#show-body {
   font-family: Raleway;
 
   i { 
-    margin-right: 2px;
-    font-size: 15px;
+    // margin-right: 2px;
+    // font-size: 15px;
     display: inline-block;
   }
 
@@ -249,14 +252,9 @@ span#equivalent {
 
 
 form#take-action {
-  font-size: 16px;
-
-  
-  input { // need to change for just footprint form
-    background-color: $green; // light green
-    margin: 5px;
-  }
+  font-size: 16px; 
 }
+
 .changed {
   background-color: white;
 }

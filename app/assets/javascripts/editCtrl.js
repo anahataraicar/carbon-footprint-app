@@ -5,6 +5,10 @@
 
     var userId = gon.user_id;
 
+    $scope.openLightboxModal = function(index) {
+        Lightbox.openModal($scope.images, index);
+    };
+
 
     $scope.setUpCharts = function() {
       $http.get('/api/v1/footprints/:id.json').then(function(response) {
@@ -32,9 +36,6 @@
             { name: "food", visible: true },
             { name: "review", visible: true }
         ];
-
-        $scope.showVisible = false;
-        $scope.actionVisible = false;
         
     };
 
@@ -113,7 +114,7 @@
     }
 
     // Create the chart
-    $('.pieChartContainer').highcharts({
+    $('#pieChartContainer').highcharts({
         credits: {
                 enabled: false
         },
@@ -284,7 +285,7 @@
         
         var pieData = response.data;
         
-        var pieChart = $('.pieChartContainer').highcharts();
+        var pieChart = $('#pieChartContainer').highcharts();
         var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
         var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
         var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
@@ -403,7 +404,7 @@
 
     $scope.changeCharts = function(pieData, barData) {
     // set charts
-        var pieChart = $('.pieChartContainer').highcharts();
+        var pieChart = $('#pieChartContainer').highcharts();
         var barChart = $('#barChartContainer').highcharts();
     // get chart data
         var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
@@ -783,13 +784,14 @@
         $scope.sendForm(formData, 1, direction);
     };
 
-    $scope.changeAction = function(){
-        $scope.actionVisible = true;
-
-    }
-
 
     window.scope=$scope;
+
+// ------------ MODAL -----------------------------------
+
+
+
+
 
   });
 }());

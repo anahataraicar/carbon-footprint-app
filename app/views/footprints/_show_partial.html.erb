@@ -1,1 +1,21 @@
-<a class="btn btn-default page-scroll" href="#show" ng-click="showVisible = !showVisible">Submit my profile!</a>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Submit my profile</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">You produced <span id="total"><%= @total %></span> megatonnes of carbon dioxide per year, <span id="equivalent">that is equivalent to...</span></h2>
+      </div>
+      <div class="modal-body">
+        <%= render "show" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

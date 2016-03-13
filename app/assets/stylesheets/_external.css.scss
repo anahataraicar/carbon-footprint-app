@@ -162,10 +162,10 @@ select {
 // ----- ANIMATIONS ---------------------------------
 
 .errors .ng-enter {
-  -webkit-animation: shake 1s;
-  -moz-animation: shake 1s;
-  -o-animation: shake 1s;
-  animation: shake 1s;
+  -webkit-animation: shake 0.5s;
+  -moz-animation: shake 0.5s;
+  -o-animation: shake 0.5s;
+  animation: shake 0.5s;
 }
 
 .errors {
@@ -196,7 +196,6 @@ select {
 body#show-body {
   margin-left: 20px;
   margin-right: 20px;
-  background-color: $green;
   font-family: Raleway;
 
   i { 
@@ -206,8 +205,6 @@ body#show-body {
   }
 
   h2 { margin-bottom: 15px; }
-
-
 }
 
 
@@ -259,7 +256,14 @@ form#take-action {
   background-color: white;
 }
 
+body#edit-body {
+  background-color: $green;
+}
 
+.modal-lg {
+  // background-color: blue;
+  width: 90% !important;
+}
 
 
 

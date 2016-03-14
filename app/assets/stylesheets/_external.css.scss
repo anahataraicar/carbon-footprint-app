@@ -17,11 +17,9 @@ body {
 // ------------------  EDIT ---------------------------
 
 
-
-
 ul.nav.nav-pills.nav-stacked {
-  margin-left: 10px;
-  margin-top: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
   float: left;
   width: 40px; 
 
@@ -46,12 +44,14 @@ ul.nav.nav-pills.nav-stacked {
 .tab-content {
   float: left;
 
+  margin-left: -15px;
+
   .tab-pane {
     background-color: rgba(255,255,255,0.4);
     padding: 5px 20px 20px 20px;
-    margin: 20px;
+    margin: 30px;
     width: 600px;
-    height: 500px;
+    height: 520px;
     border-radius: 15px;
     position: relative;
 
@@ -83,9 +83,11 @@ ul.nav.nav-pills.nav-stacked {
 
     .question {
       margin-bottom: 60px;
+      
+      p { font-size: 18px;}
 
       input {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         margin-left: 5px;
         background-color: $green;
       }
@@ -93,15 +95,6 @@ ul.nav.nav-pills.nav-stacked {
   }
 }
 
-
-
-div#chart-holder {
-  // top - right - bottom - left
-  margin: 30px 40px 10px 0px;
-  padding: 10px;
-  float: right;
-
-}
 
 select {
   padding: 5px;
@@ -112,16 +105,31 @@ select {
   height: 34px;
 }
 
+table#slider-table {
+  tr, td {
+    // border: 1px dotted black;
+    // top - right - bottom - left
+    padding: 3px 10px 10px 3px;
+  }
+}
 
+#nValueMeat {
+  width: 200px;
+}
 
+p.slider-value {
+  text-align: center;
+}
 
-
+.calories {
+  text-align: center;
+}
 
 
 // -------------- INDEX ---------------------------
 
 
-.btn.btn-default.page-scroll {
+.btn.btn-default {
   background-color: transparent;
   font-size: 18px;
   border: 2.5px solid $black;
@@ -129,7 +137,7 @@ select {
   color: $black;
 }
 
-.btn.btn-default.page-scroll:hover {
+.btn.btn-default:hover {
   background-color: $black;
   color: white;
 }
@@ -143,8 +151,6 @@ select {
 }
 
 
-//  --------------TABLE ------------------------------
-
 
 
 // -------------- HEADER ------------------------
@@ -156,8 +162,6 @@ select {
     color: white;
   }
 }
-
-
 
 // ----- ANIMATIONS ---------------------------------
 
@@ -226,6 +230,27 @@ span#equivalent {
 }
 
 
+// ----------- CHARTS ----------------------------
+
+div#chart-holder {
+  // top - right - bottom - left
+  margin: 30px 100px 10px 0px;
+  padding: 10px;
+  float: right;
+
+  #pieChartContainer {
+    width: 600px;
+    height: 450px;
+    float: right;
+  }
+
+  #barChartContainer {
+    width: 600px;
+    height: 450px;
+    float: right;
+  }
+}
+
 
 .chart-icons {
   i {
@@ -235,17 +260,10 @@ span#equivalent {
   }
 }
 
-#radio-buttons {
 
-  label > input { /* HIDE RADIO */
-    visibility: hidden; /* Makes input not-clickable */
-    position: absolute; /* Remove input from document flow */
-  }
 
-  label > input:checked + i{ /* (RADIO CHECKED) IMAGE STYLES */
-    border: 2px solid black;
-  }
-}
+// ------------------------
+
 
 
 form#take-action {
@@ -261,11 +279,20 @@ body#edit-body {
 }
 
 .modal-lg {
-  // background-color: blue;
   width: 90% !important;
 }
 
+#results-div .ng-enter { // ?????
+  -webkit-animation: fade 1.5s;
+  -moz-animation: fade 1.5s;
+  -o-animation: fade 1.5s;
+  animation: fade 1.5s;
+}
 
+
+#modalButton {
+  margin: 200px;
+}
 
 
 

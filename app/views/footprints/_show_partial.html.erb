@@ -1,5 +1,6 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Submit my profile</button>
+<div id="modalButton"
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" ng-if="modalVisible">Submit my profile</button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -13,9 +14,12 @@
         <%= render "show" %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="showCharts()">Learn about how to reduce your footprint</button>
       </div>
     </div>
   </div>
+</div>
+
+<div ng-if="resultsVisible" id="results-div">
+  <%= render "take_action" %>
 </div>

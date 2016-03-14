@@ -1,24 +1,19 @@
 <body id="edit-body">
-<div ng-app="app">
-  <div ng-controller="editCtrl" ng-init="init()">
+  <div ng-app="app">
+    <div ng-controller="editCtrl" ng-init="init()">
 
-
-
-    <div class="left-edit">
-      <%= render "icon_table" %>
-      <div class="questions">
-        <%= render "edit_partial" %>
+      <div class="left-edit">
+        <%= render "icon_table" %>
+        <div class="questions">
+          <%= render "edit_partial" %>
+        </div>
       </div>
-    </div>
+      
+      <div id="chart-holder">
+        <div id="pieChartContainer" ng-show="checkChart('pie')"></div>
+        <div id="barChartContainer" ng-show="checkChart('bar')"></div>
+      </div>
     
-    <div id="chart-holder">
-      <div id="pieChartContainer" style="width: 600px; height: 450px; float: right;"  ng-show="content == 'pie'"></div>
-      <div id="barChartContainer" style="width: 600px; height: 450px;" ng-show="content == 'bar'"></div>
-    </div>
-
-
-
-  
-  </div> <!-- ng controller div -->
-</div> <!-- ng app div -->
+    </div> <!-- ng controller div -->
+  </div> <!-- ng app div -->
 </body>

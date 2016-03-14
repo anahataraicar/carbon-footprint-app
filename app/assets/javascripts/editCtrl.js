@@ -5,11 +5,6 @@
 
     var userId = gon.user_id;
 
-    $scope.openLightboxModal = function(index) {
-        Lightbox.openModal($scope.images, index);
-    };
-
-
     $scope.setUpCharts = function() {
       $http.get('/api/v1/footprints/:id.json').then(function(response) {
           var pieData = response.data;
@@ -25,6 +20,8 @@
     $scope.init = function() {
         $scope.setUpCharts();
         $scope.content = "pie";
+        $scope.resultsVisible = false;
+        $scope.modalVisible = true;
 
         $scope.pills = [
             { name: "intro", visible: true },
@@ -616,10 +613,6 @@
 
 
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
-
-        // $scope.foodData = [];
-
-
       
         var formData = [
             { type: "meat", factor: meatValue }, 
@@ -639,6 +632,19 @@
 
   // sliders ----------------------------------------------
 
+
+    $scope.meat = {value: 1};
+    $scope.dairy = {value: 1};
+    $scope.grains = {value: 1};
+    $scope.fruit = {value: 1};
+    $scope.other = {value: 1};   
+
+    $scope.meatCal = Math.round($scope.meat.value * 543);
+    $scope.dairyCal = Math.round($scope.meat.value * 286);
+    $scope.grainsCal = Math.round($scope.meat.value * 271);
+    $scope.fruitCal = Math.round($scope.meat.value * 669);
+    $scope.otherCal = Math.round($scope.meat.value * 736);
+    $scope.totalCalories = $scope.meatCal + $scope.dairyCal + $scope.grainsCal + $scope.fruitCal + $scope.otherCal;
 
   // MEAT
 
@@ -788,6 +794,19 @@
     window.scope=$scope;
 
 // ------------ MODAL -----------------------------------
+
+    $scope.showCharts = function() {
+        $scope.modalVisible = false;
+        $scope.resultsVisible = true;
+    };
+
+    $scope.changeChart = function(chartType) {
+        $scope.content = chartType;
+    };
+
+    $scope.checkChart = function(chartType) {
+        return $scope.content === chartType;
+    }
 
 
 

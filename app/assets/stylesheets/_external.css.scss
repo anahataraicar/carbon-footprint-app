@@ -87,8 +87,7 @@ ul.nav.nav-pills.nav-stacked {
       p { font-size: 18px;}
 
       input {
-        margin-bottom: 15px;
-        margin-left: 5px;
+        margin: 10px 8px 10px 8px;
         background-color: $green;
       }
     }
@@ -193,6 +192,31 @@ p.slider-value {
   animation: fade 1s;
 }
 
+.modal.fade .modal-dialog {
+  -webkit-transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  top: 300px;
+  opacity: 0;
+  -webkit-transition: all 1.2s;
+  -moz-transition: all 1.2s;
+  transition: all 1.2s;
+}
+
+.modal.fade.in .modal-dialog {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transform: translate3d(0, -300px, 0);
+  transform: translate3d(0, -300px, 0);
+  opacity: 1;
+}
+
+
+
+
 // -------------- SHOW ----------------------------
 // ------------------------------------------------
 
@@ -232,22 +256,26 @@ span#equivalent {
 
 // ----------- CHARTS ----------------------------
 
+
+
 div#chart-holder {
   // top - right - bottom - left
-  margin: 30px 100px 10px 0px;
+  margin: 30px 40px 10px 0px;
   padding: 10px;
   float: right;
 
   #pieChartContainer {
-    width: 600px;
-    height: 450px;
+    // width: 100% !important;
+    // height: 100% !important;
+    width: 650px;
+    height: 550px;
     float: right;
   }
 
   #barChartContainer {
-    width: 600px;
-    height: 450px;
-    float: right;
+    width: 650px;
+    height: 550px;
+    float: right;    
   }
 }
 
@@ -282,17 +310,14 @@ body#edit-body {
   width: 90% !important;
 }
 
-#results-div .ng-enter { // ?????
-  -webkit-animation: fade 1.5s;
-  -moz-animation: fade 1.5s;
-  -o-animation: fade 1.5s;
-  animation: fade 1.5s;
-}
 
 
 #modalButton {
   margin: 200px;
 }
+
+
+
 
 
 

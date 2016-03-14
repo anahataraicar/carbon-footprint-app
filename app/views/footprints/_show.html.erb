@@ -1,4 +1,6 @@
 <body id="show-body">
+
+  <% if current_user.has_a_profile? %>
  <!--  <h2>You produced <span id="total"><%=  %></span> megatonnes of carbon dioxide per year, <span id="equivalent">that is equivalent to...</span></h2>
  -->
   <table id="show-table">
@@ -54,7 +56,5 @@
       <% end %></td>
     </tr>
   </table>
-
-
-  
+  <% end %>
 </body>

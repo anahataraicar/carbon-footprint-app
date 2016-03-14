@@ -8,6 +8,12 @@
   <input type="checkbox"> Install PV panels in your home<br>
 </form> 
 
-<%= render "chart_buttons" %>
+<p>Click on the icons below to change the chart type</p>
+<div class="chart-icons">
+  <i class="material-icons" ng-click="changeChart('pie')">pie_chart</i>
+  <i class="material-icons" ng-click="changeChart('bar')">insert_chart</i>
+</div>
+
+
 
 

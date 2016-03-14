@@ -23,6 +23,11 @@ class FootprintsController < ApplicationController
 
     # if current_user.is_done?
       # gon.saved_gas = current_user.save_gas
+      puts "**************************************"
+      puts "**************************************"
+      puts x = current_user.is_done?
+      puts "**************************************"
+      puts "**************************************"
     # end
 
     if current_user.has_a_profile?

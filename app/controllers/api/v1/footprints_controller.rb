@@ -50,7 +50,9 @@ class Api::V1::FootprintsController < ApplicationController
 
         if @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
 
-          current_user.update_profile
+          if current_user.has_a_profile?
+            current_user.update_profile
+          end
 
           head :ok
         else

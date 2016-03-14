@@ -1,9 +1,9 @@
 <div id="modalButton"
-  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" ng-if="modalVisible">Submit my profile</button>
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" ng-if="modalVisible" ng-click="submitFootprintProfile()">Submit my profile</button>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,6 +20,6 @@
   </div>
 </div>
 
-<div ng-if="resultsVisible" id="results-div">
+<div class="results-div" ng-if="resultsVisible">
   <%= render "take_action" %>
 </div>

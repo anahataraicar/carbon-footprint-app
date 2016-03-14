@@ -20,8 +20,8 @@
     $scope.init = function() {
         $scope.setUpCharts();
         $scope.content = "pie";
-        $scope.resultsVisible = false;
-        $scope.modalVisible = true;
+        $scope.resultsVisible = true;
+        $scope.modalVisible = false;
 
         $scope.pills = [
             { name: "intro", visible: true },
@@ -36,11 +36,17 @@
         
     };
 
-    
-// -------------- SET UP CHARTS -------------------------
+// ---------- SUBMIT FOOTPRINT ---------------------- 
+
+    $scope.submitFootprintProfile = function() {
+        
+    }   
+
+
+// -------------- SET UP CHARTS ----------------------
 // ---------------------------------------------------
 
-      
+
   $scope.drawPieChart = function(pieData) {
     var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
     var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
@@ -55,7 +61,7 @@
             color: colors[0],
             drilldown: {
                 name: 'Travel',
-                categories: ['Vehicle', 'Public transportation', 'Air travel'],
+                categories: ['Vehicle', 'Public<br> transportation', 'Air travel'],
                 data: [pieData["vehicle"], pieData["public_transportation"], pieData["air_travel"]],
                 color: colors[0]
             }
@@ -145,13 +151,19 @@
             },
         },
         tooltip: {
-            pointFormat: '{series.name}: {point.y:.2f} MT CO2<br/>',
+            headerFormat: '{series.name}<br/>',
+            pointFormat: '{point.y:.2f} MT CO2<br/>',
+            useHTML: true,
+            style: {
+                fontSize: '10pt',
+                padding: 10
+            } 
         },
 
         series: [{
             name: 'Total',
             data: totalData,
-            size: '60%',
+            size: '40%',
             dataLabels: {
                 formatter: function () {
                     return this.y > 5 ? this.point.name : null;
@@ -159,15 +171,14 @@
                 color: 'black',
                 distance: -30,
                 style: {
-                    fontSize: '15px',
+                    fontSize: '17px',
                     textShadow: false,
-                    
                 }
             }
         }, {
-            name: 'Sub',
+            name: 'Total',
             data: subData,
-            size: '80%',
+            size: '70%',
             innerSize: '60%',
             dataLabels: {
                 formatter: function () {
@@ -175,8 +186,9 @@
                     return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + '%' : null;
                 },
                 color: 'black',
+                distance: 19,
                 style: {
-                    fontSize: '12px',
+                    fontSize: '13px',
                     textShadow: false
                 }
             }
@@ -200,23 +212,43 @@
             },
             chart: {
                 type: 'column',
-                backgroundColor:'transparent'
+                backgroundColor:'transparent',
+                height: 500
             },
             title: {
                 text: 'User footprints'
             },
             xAxis: {
-                categories: profile_names
+                lineWidth: 0.5,
+                lineColor: '#ffffff',
+                categories: profile_names,
+                labels: {
+                    style: {
+                        fontSize: '16px'
+                    }
+                }
             },
             yAxis: {
                 min: 0,
+                gridLineColor: '#ffffff',
+                gridLineWidth: .75,
+                labels: {
+                    style: {
+                        fontSize: '14px'
+                    }
+                },
                 title: {
-                    text: 'MT CO2/year'
+                    margin: 20,
+                    text: 'MT CO2 / year',
+                    style: {
+                        fontSize: '15px',
+                    }
                 },
                 stackLabels: {
                     enabled: true,
                     style: {
                         fontWeight: 'bold',
+                        fontSize: '14px',
                         textShadow: false,
                         color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
                     }
@@ -231,12 +263,19 @@
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
                 borderColor: null,
                 borderWidth: 1,
-                shadow: false
+                shadow: false,
+                itemStyle: {fontSize: '15px'}
             },
             tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y:.2f}<br/>Total: {point.stackTotal}',
-
+                headerFormat: '{point.x}<br/>',
+                pointFormat: '{series.name}: {point.y:.2f} MT CO2',
+                useHTML: true,
+                style: {
+                    
+                    fontSize: '10pt',
+                    padding: 12
+                },
+               
             },
             plotOptions: {
                 series: {
@@ -249,7 +288,8 @@
                         shadow: false,
                         color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black',
                         style: {
-                            textShadow: false
+                            textShadow: false,
+                            fontSize: '14px'
                         },
                         formatter: function () {
                            return Highcharts.numberFormat(this.y,2);
@@ -355,33 +395,6 @@
       });
     };
 
-    $scope.updateBarChart = function(){
-        $http.get('/api/v1/footprints.json').then(function(response) {
-
-            var barData = response.data;
-
-            var profile_names = barData[0];
-            var travel_data = barData[1];
-            var housing_data = barData[2];
-            var food_data = barData[3];
-
-            var barChart = $('#barChartContainer').highcharts();
-            
-            var colors = ["#bf967a", "#b52d41", "#f06f5c"];
-
-            var barSeries = [{
-                data: travel_data
-            }, {
-                data: housing_data
-            }, {
-                data: food_data
-            }];
-
-            barChart.series[0].setData(barSeries, true);
-
-
-        });
-    };
 
 
 
@@ -449,7 +462,6 @@
         $http.patch(urlString, formData).then(function(response){
             
             $scope.updatePieChart();
-            $scope.updateBarChart();
             $scope.errors = "";
 
             $scope.changePage(page, direction);
@@ -807,9 +819,6 @@
     $scope.checkChart = function(chartType) {
         return $scope.content === chartType;
     }
-
-
-
 
 
   });

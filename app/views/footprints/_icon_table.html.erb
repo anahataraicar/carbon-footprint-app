@@ -1,26 +1,21 @@
  <div class="errors">
-    <h5 ng-if="errors"> {{ errors }}</h5>
+    <h4 ng-if="errors"> {{ errors }}</h4>
   </div>
 
-  <ul class="nav nav-pills nav-stacked">
+  <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li role="presentation" class="active"><a href="#1" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">person</i></a></li>
 
-  <table id="icon-table">
-    <tr><td><li role="presentation" class="active"><a href="#1" data-toggle="tab"><i class="material-icons list" ng-if="pills[0].visible">person</i></a></li></td></tr>
+    <li role="presentation" ><a href="#2" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">directions_car</i></a></li>
 
+    <li role="presentation"><a href="#3" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">flight</i></a></li>
 
-    <tr><td><li role="presentation"><a href="#2" data-toggle="tab"><i class="material-icons list" ng-if="pills[1].visible">directions_car</i></a></li></td></tr>
+    <li role="presentation"><a href="#4" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">lightbulb_outline</i></a></li>
 
-    <tr><td><li role="presentation"><a href="#3" data-toggle="tab"><i class="material-icons list" ng-if="pills[2].visible">flight</i></a></li></td></tr>
+    <li role="presentation"><a href="#5" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">whatshot</i></a></li>
 
-    <tr><td><li role="presentation"><a href="#4" data-toggle="tab"><i class="material-icons list" ng-if="pills[3].visible">lightbulb_outline</i></a></li></td></tr>
+    <li role="presentation"><a href="#6" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">home</i></a></li>
 
-    <tr><td><li role="presentation"><a href="#5" data-toggle="tab"><i class="material-icons list" ng-if="pills[4].visible">whatshot</i></a></li></td></tr>
+    <li role="presentation"><a href="#7" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">restaurant_menu</i></a></li>
 
-    <tr><td><li role="presentation"><a href="#6" data-toggle="tab"><i class="material-icons list" ng-if="pills[5].visible">home</i></a></li></td></tr>
-
-    <tr><td><li role="presentation"><a href="#7" data-toggle="tab"><i class="material-icons list" ng-if="pills[6].visible">restaurant_menu</i></a></li></td></tr>
-
-    <tr><td><li role="presentation"><a href="#8" data-toggle="tab"><i class="material-icons list" ng-if="pills[7].visible">description</i></a></li></td></tr>
-
-  </table> 
+    <li role="presentation"><a href="#8" data-toggle="tab" aria-controls="home" role="tab"><i class="material-icons list">description</i></a></li>
 </ul>

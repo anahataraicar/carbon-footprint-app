@@ -3,8 +3,8 @@
  
   <h4>By vehicle:</h4>
   <p>
-  <input ng-model="mileage" name="mileage" ng-class="{changed: car.mileage.$dirty}"> gallons per mile<br>
-  <input ng-model="carMiles" name="miles" ng-class="{changed: car.miles.$dirty}"> miles per year<br>
+  <input ng-model="mileage" name="mileage" ng-class="{changed: car.mileage.$dirty}" data-toggle="tooltip" data-placement="top" data-html="true" title="<h5>22 mpg</h5>"> miles per gallon<br>
+  <input ng-model="carMiles" name="miles" ng-class="{changed: car.miles.$dirty}" data-toggle="tooltip" data-html="true" data-placement="top" title="<h5>5100 miles</h5>"> miles per year<br>
   </p>
 
   <select ng-model="fuelType" ng-options="vehicle.name for vehicle in vehicleOptions">

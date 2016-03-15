@@ -19,17 +19,20 @@
         $scope.modalVisible = true;
         $scope.totalSaved = 0;
        
-
         $scope.pills = [
             { name: "intro", visible: true },
-            { name: "vehicle", visible: true },
-            { name: "air", visible: true },
-            { name: "electricity", visible: true },
-            { name: "heat", visible: true },
-            { name: "home", visible: true },
-            { name: "food", visible: true },
-            { name: "review", visible: true }
+            { name: "vehicle", visible: false },
+            { name: "air", visible: false },
+            { name: "electricity", visible: false },
+            { name: "heat", visible: false },
+            { name: "home", visible: false },
+            { name: "food", visible: false },
+            { name: "review", visible: false }
         ];
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
     };
 
 // ---------- SUBMIT FOOTPRINT ---------------------- 
@@ -42,7 +45,6 @@
 
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
             var pieData = response.data;
-
 
             var gas = pieData["saved_gas"].toFixed(2);
             var bike = pieData["bike"].toFixed(2);
@@ -188,17 +190,16 @@
             },
         },
         tooltip: {
-            headerFormat: '{series.name}<br/>',
-            pointFormat: '{point.y:.2f} MT CO2<br/>',
-            useHTML: true,
+            headerFormat: '{point.key}: ',
+            pointFormat: '{point.y:.2f} MT CO2',
             style: {
-                fontSize: '10pt',
+                fontSize: '12pt',
                 padding: 13
             } 
         },
 
         series: [{
-            name: 'Total',
+            // name: 'Total',
             data: totalData,
             size: '40%',
             dataLabels: {
@@ -213,14 +214,14 @@
                 }
             }
         }, {
-            name: 'Total',
+            // name: 'Total',
             data: subData,
             size: '70%',
             innerSize: '60%',
             dataLabels: {
                 formatter: function () {
                     // display only if larger than 1
-                    return this.y > 0.5 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + '%' : null;
+                    return this.y > 0.5 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + ' MT' : null;
                 },
                 color: 'black',
                 distance: 19,
@@ -304,12 +305,11 @@
                 itemStyle: {fontSize: '15px'}
             },
             tooltip: {
-                headerFormat: '{point.x}<br/>',
+                // headerFormat: '{point.x}',
                 pointFormat: '{series.name}: {point.y:.2f} MT CO2',
-                useHTML: true,
+                // useHTML: true,
                 style: {
-                    
-                    fontSize: '10pt',
+                    fontSize: '12pt',
                     padding: 12
                 },
                
@@ -563,7 +563,7 @@
         }, function(response) { 
 
             $scope.errors = response.data.errors;
-            $scope.clicked = true; 
+            // $scope.clicked = true; 
 
         });
 
@@ -572,29 +572,28 @@
 
 // -------------- CHANGE ICONS -------------------------
 
-    
 
-    $scope.changePill = function(page) {
+    $scope.changePill = function(page, newPage) {
         $scope.pills[page-1].visible = false;
-        $scope.pills[page].visible = true;
+        $scope.pills[newPage-1].visible = true;
     };
 
 
 
     $scope.changePage = function(page, direction) {
-      if (direction === 1) {
-        var newPage = page - 1;
-      } else if (direction === 2) {
-        var newPage = page + 1;
-      };
+    
+        if (direction === 1) {
+            var newPage = page - 1;
+        } else if (direction === 2) {
+            var newPage = page + 1;
+        };
 
-   
-      var pageStr = 'a[href="#' + (newPage) + '"]';
-      $(pageStr).tab('show') ;
-
-      $scope.changePill(page);
+        var pageStr = 'a[href="#' + (newPage) + '"]';
+        $(pageStr).tab('show');
+        $scope.changePill(page, newPage);
+        console.log(page);
+        console.log(newPage);
     };
-
 
 
     $scope.vehicleOptions = [
@@ -647,13 +646,13 @@
 
     $scope.electricityType = $scope.electricityOptions[1];
 
-    $scope.naturalOptions = [
+    $scope.naturalOptions = [ 
+      { name: "$/year", factor: 1.18 },
       { name: "Therms/year", factor: 1 }, 
-      { name: "$/year", factor: 1.18 }, 
       { name: "Cu.Ft/year", factor: 100 }
     ];
 
-    $scope.naturalType = $scope.naturalOptions[1];
+    $scope.naturalType = $scope.naturalOptions[0];
 
     $scope.submitEnergy = function(electricityInput, electricityType, naturalInput, naturalType, direction) {
 
@@ -675,16 +674,16 @@
     };
 
     $scope.heatingOptions = [
-      { name: "gal/year", factor: 1 }, 
-      { name: "$/year", factor: 4.02 }
+      { name: "$/year", factor: 4.02 },
+      { name: "gal/year", factor: 1 }
     ];
 
     $scope.heatingType = $scope.heatingOptions[0];
 
     // literally made up this value 3.12
     $scope.propaneOptions = [
-      { name: "gal/year", factor: 1 }, 
-      {name: "$/year", factor: 3.12 }
+      {name: "$/year", factor: 3.12 },
+      { name: "gal/year", factor: 1 }
     ];
 
     $scope.propaneType = $scope.propaneOptions[0];
@@ -712,6 +711,13 @@
 
         $scope.sendForm(formData,6, direction);
     };
+
+
+    $scope.meat = { value: 1 }
+    $scope.dairy = { value: 1 }
+    $scope.grains = { value: 1 }
+    $scope.fruit = { value: 1 }
+    $scope.other = { value: 1 }
 
 
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
@@ -883,8 +889,6 @@
     $scope.showCharts = function() {
         $scope.modalVisible = false;
         $scope.resultsVisible = true;
-
-
     };
 
     $scope.changeChart = function(chartType) {

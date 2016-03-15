@@ -4,7 +4,7 @@
     <thead>
       <tr>
         <th>Action</th>
-        <th><button ng-click="sortActions()" class="btn btn-default">MT CO2 saved</button></th>
+        <th ng-click="sortActions()">MT CO2 saved <i class="fa fa-sort"></i></th>
       </tr>
     </thead>
     <tbody>
@@ -19,9 +19,10 @@
   </table>
 
 <div class="chart-icons">
-  <i class="material-icons" ng-click="changeChart('pie')">pie_chart</i>
-  <i class="material-icons" ng-click="changeChart('bar')">insert_chart</i>
+  <i class="fa fa-pie-chart fa-4x" ng-click="changeChart('pie')"></i>
+  <i class="fa fa-bar-chart fa-4x" ng-click="changeChart('bar')"></i>
 </div>
+
 
 
 

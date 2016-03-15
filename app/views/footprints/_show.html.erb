@@ -30,7 +30,7 @@
     <tr>
       <td><p><%= @homes %> homes' energy use for one year</p></td>
       <td><% @homes_counter.times do %>
-            <i class="material-icons">home</i>
+            <i class="fa fa-home fa-lg" style="font-size: 24px;"></i>
           <% end %>
       </td>
     </tr>
@@ -45,14 +45,14 @@
     <tr>
       <td><p><%= @acres %> acres of U.S. forests in one year</p></td>
       <td><% @acres_counter.times do %>
-            <i class="material-icons">nature</i>
+            <i class="fa fa-tree fa-lg" style="font-size: 22px;"> </i>
           <% end %>
       </td>
     </tr>
     <tr>
       <td><p><%= @trees %> tree seedlings grown for 10 years</p></td>
       <td><% @trees_counter.times do %>
-            <i class="material-icons">filter_vintage</i>
+            <i class="fa fa-pagelines fa-lg" style="font-size: 24px; margin-left: 2px; margin-right: 2px"></i>
       <% end %></td>
     </tr>
   </table>

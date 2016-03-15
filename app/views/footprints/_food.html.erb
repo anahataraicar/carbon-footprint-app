@@ -1,11 +1,10 @@
-<h2>Food</h2>
+<h2 id="food-title">Food</h2>
   <script src="http://d3js.org/d3.v3.min.js"></script>
 
  <datalist id="steplist">
     <option>0</option>
     <option>1</option>
     <option>2</option>
-    <option>3</option>
   </datalist>
 
 <table id="slider-table">
@@ -15,32 +14,32 @@
   </tr>
   <tr>
     <td>Meat, fish, eggs</td>
-    <td><p class="slider-value">{{ meat.value }}x average </p><input type="range" min="0" max="3" step="0.2" id="nValueMeat" ng-model="meat.value" class="sliders" list="steplist"></td>
+    <td><p class="slider-value">{{ meat.value }}x average </p><input type="range" min="0" max="2" step="0.2" id="nValueMeat" ng-model="meat.value" class="sliders" list="steplist"></td>
     <td class="calories">{{ (meat.value * 543).toFixed(0) }}</td>
   </tr>
   <tr>
     <td>Dairy</td>
-    <td><p class="slider-value">{{ dairy.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValueDairy" ng-model="dairy.value" class="sliders" list="steplist"></td>
-    <td class="calories">{{ (dairy.value * 543).toFixed(0) }}</td>
+    <td><p class="slider-value">{{ dairy.value }}x average</p><input type="range" min="0" max="2" step="0.2" id="nValueDairy" ng-model="dairy.value" class="sliders" list="steplist"></td>
+    <td class="calories">{{ (dairy.value * 286).toFixed(0) }}</td>
   </tr>
   <tr>
     <td>Grains and baked goods</td>
-    <td><p class="slider-value">{{ grains.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="grains.value" class="sliders" list="steplist"></td>
-    <td class="calories">{{ (grains.value * 543).toFixed(0) }}</td>
+    <td><p class="slider-value">{{ grains.value }}x average</p><input type="range" min="0" max="2" step="0.2" id="nValue" ng-model="grains.value" class="sliders" list="steplist"></td>
+    <td class="calories">{{ (grains.value * 669).toFixed(0) }}</td>
   </tr>
   <tr>
     <td>Fruits and vegetables</td>
-    <td><p class="slider-value">{{ fruit.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="fruit.value" class="sliders" list="steplist"></td>
-    <td class="calories">{{ (fruit.value * 543).toFixed(0) }}</td>
+    <td><p class="slider-value">{{ fruit.value }}x average</p><input type="range" min="0" max="2" step="0.2" id="nValue" ng-model="fruit.value" class="sliders" list="steplist"></td>
+    <td class="calories">{{ (fruit.value * 271).toFixed(0) }}</td>
   </tr>
   <tr>
     <td>Other (snacks, drinks, etc)</td>
-    <td><p class="slider-value">{{ other.value }}x average</p><input type="range" min="0" max="3" step="0.2" id="nValue" ng-model="other.value" class="sliders" list="steplist"></td>
+    <td><p class="slider-value">{{ other.value }}x average</p><input type="range" min="0" max="2" step="0.2" id="nValue" ng-model="other.value" class="sliders" list="steplist"></td>
     <td class="calories">{{ (other.value * 543).toFixed(0) }}</td>
   </tr>
   <tr>
     <td></td><td></td>
-    <td>Total: {{ ((meat.value * 543) + (dairy.value * 543) + (grains.value * 543) + (fruit.value * 543) + (other.value * 543)).toFixed(0) }}</td>
+    <td class="calories"><strong>Total: {{ ((meat.value * 543) + (dairy.value * 286) + (grains.value * 271) + (fruit.value * 669) + (other.value * 736)).toFixed(0) }}</strong></td>
 </table>
 
 

@@ -1,7 +1,25 @@
 class FootprintsController < ApplicationController
   
   def index
+
+    
+
+
   end
+
+
+  def download_pdf
+    pdf = Prawn::Document.new
+    require "open-uri"
+
+    
+    pdf.text "hello world"
+    pdf.image image
+    send_data pdf.render, type: "application/pdf", 
+                          disposition: "inline",
+                          filename: "my_carbon_footprint.pdf"
+  end
+
 
   def new
   end
@@ -38,6 +56,8 @@ class FootprintsController < ApplicationController
       @turbines_counter = @turbines.ceil 
       @trees_counter = (@trees * 0.70 ).ceil
     end
+
+    
 
   
   end

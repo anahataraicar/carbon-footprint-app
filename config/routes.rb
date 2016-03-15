@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   root 'footprints#index'
   get '/footprints/new' => 'footprints#new' 
   post '/footprints' => 'footprints#create'
+
+  get '/footprints/footprint_pdf' => 'footprints#download_pdf', :as => 'download_pdf'
+
   get '/footprints/:id' => 'footprints#show'
   get '/footprints/:id/edit' => 'footprints#edit'
   patch '/footprints/:id' => 'footprints#update'
 
+  
   namespace :api do
     namespace :v1 do
       get '/footprints' => 'footprints#index'

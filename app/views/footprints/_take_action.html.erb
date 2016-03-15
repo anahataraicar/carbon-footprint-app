@@ -1,14 +1,23 @@
 <h3>Here's how you can reduce your footprint:</h3>
 
-<form id="take-action">
-  <input type="checkbox" ng-click="decreaseChart()" id="saveGas"> Buy a more fuel efficient vehicle<br>
-  <input type="checkbox"> Ride your bike<br>
-  <input type="checkbox"> Carpool to work<br>
-  <input type="checkbox"> Go vegetarian<br>
-  <input type="checkbox"> Install PV panels in your home<br>
-</form> 
+  <table id="action-table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th><button ng-click="sortActions()" class="btn btn-default">MT CO2 saved</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="action in actions | orderBy:'value':descending">
+        <td><input type="checkbox" ng-click="decreaseChart()" id="{{action.name}}">{{ action.caption }}</td>
+        <td class="action-value">{{ action.value }}</td>
+      </tr>
+      <tr>
+      <td style="text-align: right;">Total:</td>
+      <td class="action-value">{{ totalSaved.toFixed(2) }}</td>
+    </tbody>
+  </table>
 
-<p>Click on the icons below to change the chart type</p>
 <div class="chart-icons">
   <i class="material-icons" ng-click="changeChart('pie')">pie_chart</i>
   <i class="material-icons" ng-click="changeChart('bar')">insert_chart</i>

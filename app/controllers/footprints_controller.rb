@@ -21,15 +21,6 @@ class FootprintsController < ApplicationController
     
     @partials = ["intro", "vehicle", "public_transportation", "air_travel", "electricity", "natural_gas", "heating", "propane", "home", "food"]
 
-    # if current_user.is_done?
-      # gon.saved_gas = current_user.save_gas
-      puts "**************************************"
-      puts "**************************************"
-      puts x = current_user.is_done?
-      puts "**************************************"
-      puts "**************************************"
-    # end
-
     if current_user.has_a_profile?
       @total = current_user.profiles.last.total_value
       @cars = (@total * 0.211).round(1)
@@ -48,6 +39,7 @@ class FootprintsController < ApplicationController
       @trees_counter = (@trees * 0.70 ).ceil
     end
 
+  
   end
 
 

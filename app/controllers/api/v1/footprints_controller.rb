@@ -4,15 +4,17 @@ class Api::V1::FootprintsController < ApplicationController
 
   def index
     profiles = []
-    
-    if current_user.is_done?
-      profiles[0] = Profile.find_by(user_id: current_user.id)
-    else
-      profiles[0] = Profile.first
+    profiles[0] = Profile.find_by(user_id: current_user.id)
+    counter = 2
+
+    while counter > 0
+      other_profile = Profile.all.sample
+      user = other_profile.user
+      if user.is_done?
+        profiles << other_profile
+        counter = counter - 1
+      end
     end
- 
-    profiles[1] = Profile.find(2)
-    profiles[2] = Profile.find(3)
 
     names = []
     travel = []
@@ -27,11 +29,21 @@ class Api::V1::FootprintsController < ApplicationController
     end
   
     @profiles = [[names], [travel], [housing], [food]]
-
   end
 
   def show
     @habits = Habit.where("user_id = ?", current_user.id)
+    if current_user.is_done?
+      @gas = current_user.calc_save_gas.to_f 
+      @bike = current_user.calc_bike.to_f
+      @lightbulb = current_user.calc_lightbulb.to_f
+      @veg = current_user.calc_veg.to_f
+    else
+      @gas = 0
+      @bike = 0
+      @lightbulb = 0
+      @veg = 0
+    end
   end
 
   

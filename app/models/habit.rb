@@ -39,7 +39,7 @@ class Habit < ActiveRecord::Base
       value = hash[:input].to_f * 0.000689551 / hash[:input_type].to_f
       input1 = hash[:input]
       input2 = hash[:input_type]
-    elsif footprint_type == "natural_gas"
+    elsif footprint_type == "natural_gas" 
       value = hash[:input].to_f * 0.0053 / hash[:input_type].to_f
       input1 = hash[:input]
       input2 = hash[:input_type]

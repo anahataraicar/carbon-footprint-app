@@ -30,8 +30,6 @@ class User < ActiveRecord::Base
     end
 
     create_profile
-    # redirect_to "/footprints/#{current_user.id}/edit"
-
   end
   
 
@@ -72,19 +70,34 @@ class User < ActiveRecord::Base
       return false
     else
       return true
-    end
-    
+    end    
   end
 
 
-
-  def save_gas
+  def calc_save_gas
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "vehicle").last
     miles = habit.input1
     mileage = habit.input2
     (((miles/(mileage-5)) - (miles/mileage)) * 8.887 / 1000).round(2)
   end
 
+  def calc_bike
+    habit = habit = Habit.where("user_id = ? AND footprint_type = ?", id, "vehicle").last
+    mileage = habit.input2
+    fuel_type = habit.input3
+    (1000 / mileage * fuel_type / 1000).round(2)
+  end
+
+  def calc_lightbulb
+    habit = Habit.where("user_id = ? AND footprint_type = ?", id, "electricity").last
+    factor = habit.input2
+    (510.875 * 0.000689551 / factor / 10)
+  end
+
+  def calc_veg
+    habit = Habit.where("user_id = ? AND footprint_type = ?", id, "meat").last
+    habit.value
+  end
 
 
   def create_profile

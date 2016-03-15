@@ -10,18 +10,15 @@
           var pieData = response.data;
           $scope.drawPieChart(pieData);
       });
-
-      $http.get('/api/v1/footprints.json').then(function(response) {
-          var barData = response.data;
-          $scope.drawBarChart(barData);
-      });
     };
 
     $scope.init = function() {
         $scope.setUpCharts();
         $scope.content = "pie";
-        $scope.resultsVisible = true;
-        $scope.modalVisible = false;
+        $scope.resultsVisible = false;
+        $scope.modalVisible = true;
+        $scope.totalSaved = 0;
+       
 
         $scope.pills = [
             { name: "intro", visible: true },
@@ -33,14 +30,53 @@
             { name: "food", visible: true },
             { name: "review", visible: true }
         ];
-        
     };
 
 // ---------- SUBMIT FOOTPRINT ---------------------- 
 
-    $scope.submitFootprintProfile = function() {
-        
-    }   
+    $scope.submitProfile = function() {
+        $http.get('/api/v1/footprints.json').then(function(response) {
+            var barData = response.data;
+            $scope.drawBarChart(barData);
+        });
+
+        $http.get('/api/v1/footprints/:id.json').then(function(response) {
+            var pieData = response.data;
+
+
+            var gas = pieData["saved_gas"].toFixed(2);
+            var bike = pieData["bike"].toFixed(2);
+            var light = pieData["lightbulb"].toFixed(2);
+            var veg = pieData["veg"].toFixed(2);
+
+
+            $scope.actions = [
+                {
+                    name: "gas",
+                    caption: " Buy a more fuel efficient vehicle", 
+                    value: gas 
+                }, {
+                    name: "bike",
+                    caption: " Ride your bike 20 miles a week", 
+                    value: bike
+                }, {
+                    name: "lightbulb",
+                    caption: " Replace 5 lightbulbs with CFS", 
+                    value: light
+                }, {
+                    name: "veg",
+                    caption: " Switch to a vegetarian diet",
+                    value: veg
+                }
+            ];
+        });
+    };
+
+    $scope.sortActions = function() {
+        $scope.descending = !$scope.descending;
+    }
+
+   
 
 
 // -------------- SET UP CHARTS ----------------------
@@ -123,20 +159,21 @@
         },
         chart: {
             type: 'pie',
-            backgroundColor:'transparent'
+            marginTop: 15,
+            backgroundColor: 'transparent',
+            borderColor: 'transparent'
         },
         title: {
             style: {
                 fontSize: '26px'
             },
-            text: 'Your carbon footprint',
-            margin: 20
+            text: 'Your carbon footprint'
         },
         subtitle: {
             text: 'Hover over a section for more info',
             style: {
                 fontSize: '14px'
-            },
+            }
         },
         yAxis: {
             title: {
@@ -146,8 +183,8 @@
         plotOptions: {
             pie: {
                 center: ['50%', '50%'],
-                // borderWidth: 10,
-                borderColor: 'transparent'
+                borderColor: 'transparent',
+                borderWidth: 0
             },
         },
         tooltip: {
@@ -156,7 +193,7 @@
             useHTML: true,
             style: {
                 fontSize: '10pt',
-                padding: 10
+                padding: 13
             } 
         },
 
@@ -166,7 +203,7 @@
             size: '40%',
             dataLabels: {
                 formatter: function () {
-                    return this.y > 5 ? this.point.name : null;
+                    return this.y > 3 ? this.point.name : null;
                 },
                 color: 'black',
                 distance: -30,
@@ -183,7 +220,7 @@
             dataLabels: {
                 formatter: function () {
                     // display only if larger than 1
-                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + '%' : null;
+                    return this.y > 0.5 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + '%' : null;
                 },
                 color: 'black',
                 distance: 19,
@@ -403,13 +440,14 @@
 
     $scope.decreaseChart = function() {
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
-          var pieData = response.data;
+            var pieData = response.data;
         $http.get('/api/v1/footprints.json').then(function(response) {
-          var barData = response.data;
-        $scope.changeCharts(pieData, barData); 
+            var barData = response.data;
+            $scope.changeCharts(pieData, barData);  
         });
       });
     };
+
 
 
     $scope.changeCharts = function(pieData, barData) {
@@ -420,32 +458,88 @@
         var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
         var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
         var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
-        var profile_names = barData[0];
-        var travel_data = barData[1];
-        var housing_data = barData[2];
-        var food_data = barData[3];
+        var travelBar = barData[1];
+        var housingBar = barData[2];
+        var foodBar = barData[3];
 
-    // new calculations
-        var newTravel = travel_data[0];
-        var totalFootprint = food_data[0] + housing_data[0] + travel_data[0];
+        $scope.savedActions = [];
+        $scope.totalSaved = 0;
+    
+        var gas = pieData["saved_gas"];
+        var bike = pieData["bike"];
+        var light = pieData["lightbulb"];
+        var veg = pieData["veg"];
 
+        var gasBox = document.getElementById("gas");
+        var bikeBox = document.getElementById("bike");
+        var lightBox = document.getElementById("lightbulb");
+        var vegBox = document.getElementById("veg");
 
-    // change charts
-        var x = document.getElementById("saveGas")
-        if (x.checked) {
-            pieChart.series[1].data[0].update(pieData["vehicle"] - gon.saved_gas);
-            pieChart.series[0].data[0].update(travel - gon.saved_gas);            
-            barChart.series[0].data[0].update(travel_data[0] - gon.saved_gas);
-            
-
-
-        } else if (!x.checked) {
+        if (gasBox.checked) {
+            pieChart.series[1].data[0].update(pieData["vehicle"] - gas);
+            pieChart.series[0].data[0].update(travel - gas);            
+            barChart.series[0].data[0].update(travelBar[0] - gas);
+                pieData["vehicle"] = pieData["vehicle"] - gas;
+                travel = travel - gas;
+                travelBar[0] = travelBar[0] - gas;
+                $scope.savedActions.push(gas);
+        } else if (!gasBox.checked) {
             pieChart.series[1].data[0].update(pieData["vehicle"]);
             pieChart.series[0].data[0].update(travel);
-            barChart.series[0].data[0].update(newTravel);
-            
+            barChart.series[0].data[0].update(travelBar[0]);  
         };
+    
+
+        if (bikeBox.checked) {
+            pieChart.series[1].data[0].update(pieData["vehicle"] - bike);
+            pieChart.series[0].data[0].update(travel - bike);
+            barChart.series[0].data[0].update(travelBar[0] - bike);
+                travel = travel - bike;
+                travelBar[0] = travelBar[0] - bike;
+                $scope.savedActions.push(bike);
+        } else if (!gasBox.checked) {
+            pieChart.series[1].data[0].update(pieData["vehicle"]);
+            pieChart.series[0].data[0].update(travel);
+            barChart.series[0].data[0].update(travelBar[0]); 
+        };
+
+        if (lightBox.checked) {
+            pieChart.series[1].data[4].update(pieData["electricity"] - light);
+            pieChart.series[0].data[1].update(housing - light);
+            barChart.series[1].data[0].update(housingBar[0] - light);
+                pieData["electricity"] = pieData["electricity"] - light;
+                housing = housing - light;
+                housingBar[0] = housingBar[0] - light;
+                $scope.savedActions.push(light);
+        } else if (!lightBox.checked){
+            pieChart.series[1].data[4].update(pieData["electricity"]);
+            pieChart.series[0].data[1].update(housing);
+            barChart.series[1].data[0].update(housingBar[0]);
+        };
+
+        if (vegBox.checked) {
+            pieChart.series[1].data[8].update(0);
+            pieChart.series[0].data[2].update(food - veg);
+            barChart.series[2].data[0].update(foodBar[0] - veg)
+                pieData["meat"] = pieData["meat"] - veg;
+                food = food - veg;
+                foodBar[0] = foodBar[0] - veg;
+                $scope.savedActions.push(veg);
+        } else if (!vegBox.checked) {
+            pieChart.series[1].data[8].update(pieData["meat"]);
+            pieChart.series[0].data[2].update(food);
+            barChart.series[2].data[0].update(foodBar[0]);
+        };
+
+        var total = 0;
+        for (var i = 0; i < $scope.savedActions.length; i++) {
+           total += $scope.savedActions[i]
+        };
+
+        $scope.totalSaved = parseFloat(total); 
+
     };
+
 
 
 
@@ -481,13 +575,9 @@
     
 
     $scope.changePill = function(page) {
-        
         $scope.pills[page-1].visible = false;
         $scope.pills[page].visible = true;
-
     };
-
-
 
 
 
@@ -552,15 +642,15 @@
 
     $scope.electricityOptions = [
       { name: "kWh/year", factor: 1 },
-      { name: "$/year", factor: 0.1015 }
+      { name: "$/year", factor: 0.0834 }
     ];
 
     $scope.electricityType = $scope.electricityOptions[1];
 
     $scope.naturalOptions = [
       { name: "Therms/year", factor: 1 }, 
-      { name: "$/year", factor: 0.0950 }, 
-      { name: "Cu.Ft/year", factor: 8.9 }
+      { name: "$/year", factor: 1.18 }, 
+      { name: "Cu.Ft/year", factor: 100 }
     ];
 
     $scope.naturalType = $scope.naturalOptions[1];
@@ -642,21 +732,9 @@
 
 
 
-  // sliders ----------------------------------------------
+  // ---------- sliders -------------------------------
 
 
-    $scope.meat = {value: 1};
-    $scope.dairy = {value: 1};
-    $scope.grains = {value: 1};
-    $scope.fruit = {value: 1};
-    $scope.other = {value: 1};   
-
-    $scope.meatCal = Math.round($scope.meat.value * 543);
-    $scope.dairyCal = Math.round($scope.meat.value * 286);
-    $scope.grainsCal = Math.round($scope.meat.value * 271);
-    $scope.fruitCal = Math.round($scope.meat.value * 669);
-    $scope.otherCal = Math.round($scope.meat.value * 736);
-    $scope.totalCalories = $scope.meatCal + $scope.dairyCal + $scope.grainsCal + $scope.fruitCal + $scope.otherCal;
 
   // MEAT
 
@@ -725,12 +803,7 @@
     }
 
 
-// ------------------- ERRORS --------------------------
 
-
-
-
-    
 
 // ---------- SUBMIT INTRO!!!!!! ------------------------
 
@@ -810,6 +883,8 @@
     $scope.showCharts = function() {
         $scope.modalVisible = false;
         $scope.resultsVisible = true;
+
+
     };
 
     $scope.changeChart = function(chartType) {

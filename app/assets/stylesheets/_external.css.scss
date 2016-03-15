@@ -47,7 +47,7 @@ ul.nav.nav-pills.nav-stacked {
   margin-left: -15px;
 
   .tab-pane {
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255,255,255,0.5);
     padding: 5px 20px 20px 20px;
     margin: 30px;
     width: 600px;
@@ -90,6 +90,7 @@ ul.nav.nav-pills.nav-stacked {
         margin: 10px 8px 10px 8px;
         background-color: $green;
       }
+      select { margin: 10px 8px 10px 8px; }
     }
   }
 }
@@ -122,6 +123,19 @@ p.slider-value {
 
 .calories {
   text-align: center;
+}
+
+table#action-table {
+  margin: 10px;
+  font-size: 18px;
+
+  td.action-value {
+    text-align: center;
+  }
+
+  td {
+    padding: 12px;
+  }
 }
 
 
@@ -283,7 +297,7 @@ div#chart-holder {
 .chart-icons {
   i {
     font-size: 48px;
-    margin: 100px 30px 30px 30px; 
+    margin: 30px 30px 30px 30px; 
     padding: 5px;
   }
 }
@@ -294,9 +308,7 @@ div#chart-holder {
 
 
 
-form#take-action {
-  font-size: 16px; 
-}
+
 
 .changed {
   background-color: white;

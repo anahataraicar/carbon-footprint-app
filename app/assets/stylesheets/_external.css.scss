@@ -14,6 +14,8 @@ body {
 
 * { font-family: Raleway; }
 
+
+
 // ------------------  EDIT ---------------------------
 
 
@@ -328,8 +330,26 @@ div#chart-holder {
 }
 
 
+// ------------- DEVISE -----------------------
 
-// ------------------------
+body.devise-body {
+  margin-left: 43%;
+  margin-top: 5%;
+  background-color: #e3e0cf;
+  font-size: 18px;
+
+  .field { margin: 15px; }
+  .actions { margin: 10px; }
+  .devise-header {
+    font-size: 36px;
+    font-family: Raleway;
+  }
+}
+
+
+
+
+
 
 body#edit-body {
   background-color: $green;

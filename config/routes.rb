@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
   
   devise_for :users, controllers: { registrations: "registrations" }
+  
   root 'footprints#index'
   get '/footprints/new' => 'footprints#new' 
   post '/footprints' => 'footprints#create'
-
-  get '/footprints/footprint_pdf' => 'footprints#download_pdf', :as => 'download_pdf'
-
   get '/footprints/:id' => 'footprints#show'
   get '/footprints/:id/edit' => 'footprints#edit'
   patch '/footprints/:id' => 'footprints#update'
-
   
   namespace :api do
     namespace :v1 do
@@ -19,6 +16,5 @@ Rails.application.routes.draw do
       patch '/footprints/:id' => 'footprints#update'
     end
   end
-
 
 end

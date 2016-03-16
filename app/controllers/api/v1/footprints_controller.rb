@@ -33,6 +33,7 @@ class Api::V1::FootprintsController < ApplicationController
 
   def show
     @habits = Habit.where("user_id = ?", current_user.id)
+    @total = Profile.find_by(user_id: current_user.id).total_value.to_f
     
     if current_user.is_done?
       @gas = current_user.calc_save_gas.to_f 
@@ -64,9 +65,9 @@ class Api::V1::FootprintsController < ApplicationController
 
         if @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
 
-          if current_user.has_a_profile?
+          # if current_user.has_a_profile?
             current_user.update_profile
-          end
+          # end
 
           head :ok
         else

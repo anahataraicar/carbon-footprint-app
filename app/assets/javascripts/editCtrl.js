@@ -46,7 +46,9 @@
 
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
             var pieData = response.data;
+
             $scope.drawPdfChart(pieData);
+            $scope.calculateShow(pieData);
 
             var gas = pieData["saved_gas"].toFixed(2);
             var bike = pieData["bike"].toFixed(2);
@@ -76,10 +78,58 @@
         });
     };
 
+
+    $scope.calculateShow = function(pieData) {
+        $scope.total = pieData["total"];
+        $scope.cars = ($scope.total * 0.211).toFixed(1);
+        $scope.waste = ($scope.total * 0.358).toFixed(1);
+        $scope.oil = Math.ceil($scope.total * 2.3);
+        $scope.homes = ($scope.total * 0.091).toFixed(2)
+        $scope.trees = Math.ceil($scope.total * 25.6);
+        $scope.acres = ($scope.total * 0.82).toFixed(2)
+        $scope.turbines = ($scope.total * 0.0003).toFixed(4)
+
+        $scope.cars_counter = Math.ceil($scope.cars);
+        $scope.waste_counter = Math.ceil($scope.waste);
+        $scope.acres_counter = Math.ceil($scope.acres);
+        $scope.homes_counter = Math.ceil($scope.homes);
+        $scope.turbines_counter = Math.ceil($scope.turbines);
+        $scope.trees_counter = Math.ceil($scope.trees * 0.70);
+
+        $scope.carsRange = [];
+        for (var i = 0; i < $scope.cars_counter; i++) {
+            $scope.carsRange.push(i);
+        };
+        $scope.wasteRange = [];
+        for (var i = 0; i < $scope.waste_counter; i++) {
+            $scope.wasteRange.push(i);
+        };
+        $scope.oilRange = [];
+        for (var i =0; i < $scope.oil; i++) {
+            $scope.oilRange.push(i);
+        };
+        $scope.homesRange = [];
+        for (var i = 0; i < $scope.homes_counter; i++) {
+            $scope.homesRange.push(i);
+        };
+        $scope.treesRange = [];
+        for (var i = 0; i < $scope.trees; i++) {
+            $scope.treesRange.push(i);
+        };
+        $scope.acresRange = [];
+        for (var i = 0; i < $scope.acres_counter; i++) {
+            $scope.acresRange.push(i);
+        };
+        $scope.turbinesRange = [];
+        for (var i = 0; i < $scope.turbines_counter; i++){
+            $scope.turbinesRange.push(i);
+        };
+    };
+
+
     $scope.sortActions = function() {
         $scope.descending = !$scope.descending;
     }
-
    
 
 
@@ -91,7 +141,6 @@
     var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
     var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
     var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
-
 
     var colors = ["#bf967a", "#b52d41", "#f06f5c"],
 

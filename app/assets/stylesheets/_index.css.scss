@@ -1,0 +1,131 @@
+
+$green: #bed0c5; // tad bit darker green
+$grey: rgb(159,168,163);
+$black: #232825;
+$brown: #e3e0cf;
+
+.intro-section {
+    height: 100%;
+    text-align: center;
+    background: transparent;
+}
+
+.about-section {
+    height: 50%;
+    padding-top: 150px;
+    text-align: center;
+    background: $green;
+}
+
+.instructions-section {
+    height: 70%;
+    background: white;
+    text-align: center;
+}
+
+.contact-section {
+    height: 12%;
+    padding-top: 10px;
+    text-align: center;
+    background: $brown;
+}
+
+
+// ------------ intro ------------------
+
+.col-lg-12 {
+  
+  div#index-title {
+    height: 400px;
+    width: 900px;
+    margin: auto;
+    padding-top: 50px;
+
+    a { color: black; }
+
+    h1 {
+      color: $black;
+      font-size: 120px;
+      padding: 10px;
+    }
+    h2 { 
+      font-size: 50px; 
+      color: $black;
+    }
+  }
+}
+
+
+// ------------------ ABOUT -----------------------
+
+h3#quote {
+  color: white;
+}
+
+
+// ------------------ INSTRUCTIONS ---------------
+
+
+.row.instructions {
+    margin: 100px 10px 30px 5px;
+    text-align: center;
+
+    i {
+        padding: 30px;
+        color: $green;
+    }
+    p { 
+        color: #666666;
+        font-size: 16px;
+    }
+}
+
+
+#sign-up-button {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    background-color: white;
+    font-size: 20px;
+    color: $black;
+}
+
+#sign-up-button:hover{
+    color: white;
+    background-color: $black;
+}
+
+
+
+// ------------------ CONTACT ----------------------
+.row.contact {
+    text-align: center; 
+
+    i { margin-right: 10px }
+    a { color: $black }
+}
+
+
+// ------------------- HEADER -------------------------
+
+.navbar.navbar-default {
+  padding-top: 10px;
+  background-color: transparent;
+  border: none;
+  a {
+    color: white;
+    font-size: 20px;
+  }
+
+  .navbar-right {
+    a {
+      color: white;
+      font-size: 16px;
+    }
+  }
+}
+
+
+
+
+

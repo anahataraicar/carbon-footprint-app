@@ -52,9 +52,11 @@ class Api::V1::FootprintsController < ApplicationController
   
   def update
     if params[:type] == "intro"
-        if current_user.update({ first_name: params[:first_name],
-                            last_name: params[:last_name],
-                            state: params[:state] }) 
+        first_name = params[:first_name]
+        last_name = params[:last_name]
+        if current_user.update({  first_name: first_name.capitalize,
+                                  last_name: last_name.capitalize,
+                                  state: params[:state] }) 
           head :ok
         else
           render json: { errors: "Please fill the highlighted fields" }, status: 422

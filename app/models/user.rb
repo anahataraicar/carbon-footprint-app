@@ -99,6 +99,7 @@ class User < ActiveRecord::Base
     (habit.value).round(2)
   end
 
+
   def create_profile
     total_footprint = habits.sum(:value)
     Profile.create ({ user_id: id, total_value: total_footprint })
@@ -109,5 +110,10 @@ class User < ActiveRecord::Base
     profile = Profile.find_by(user_id: id)
     profile.update(total_value: total_footprint)
   end
+
+  def has_a_profile?
+    profiles.last
+  end
+
 
 end

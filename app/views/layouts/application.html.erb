@@ -38,7 +38,7 @@
       
         <ul class="nav navbar-nav navbar-right">
           <% unless current_user %>
-            <li><a href="/users/sign_up">Sign up</a></li>
+            <li><a href="/users/sign_up">Sign up</a></a></li>
             <li><a href="/users/sign_in">Sign in</a></li>
           <% else current_user %>
             <% if current_user.has_a_profile? %>
@@ -50,15 +50,6 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
-
-   
-
-<!--   <nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-    </div>
-  </nav> -->
-
   
 
 

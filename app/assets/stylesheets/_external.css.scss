@@ -2,6 +2,7 @@
 @import "bootstrap";
 
 @import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Lobster);
 
 
 $green: #C5D5CB;
@@ -16,8 +17,13 @@ body {
 
 
 
+
 // ------------------  EDIT ---------------------------
 
+
+body#edit-body {
+  background-color: $green;
+}
 
 ul.nav.nav-pills.nav-stacked {
   margin-left: 5px;
@@ -146,42 +152,10 @@ table#action-table {
 }
 
 
-// -------------- INDEX ---------------------------
-
-
-.btn.btn-default {
-  background-color: transparent;
-  font-size: 18px;
-  border: 2.5px solid $black;
-  padding: 5px 10px 5px 10px;
-  color: $black;
-}
-
-.btn.btn-default:hover {
-  background-color: $black;
-  color: white;
-}
-
-// CALCULATE YOUR CARBON FOOTPRINT
-.col-lg-12 {
-  h1 { 
-    font-size: 50px; 
-    color: $black;
-  }
-}
 
 
 
 
-// -------------- HEADER ------------------------
-
-.navbar.navbar-default.navbar-fixed-top {
-  background-color: transparent;
-  border: none;
-  a {
-    color: white;
-  }
-}
 
 // ----- ANIMATIONS ---------------------------------
 
@@ -252,8 +226,7 @@ table#action-table {
 
 
 
-
-// -------------- SHOW ----------------------------
+// -------------- SHOW / MODAL --------------------
 // ------------------------------------------------
 
 
@@ -267,9 +240,7 @@ body#show-body {
   }
 
   h2 { margin-bottom: 15px; }
-
 }
-
 
 #show-table {
   th, td { padding: 5px; }
@@ -282,10 +253,22 @@ body#show-body {
   }
 }
 
-
 span#total { font-size: 40px; }
 
 span#equivalent { font-size: 24px; }
+
+.modal-lg {
+  width: 90% !important;
+}
+
+#modalButton {
+  margin: 200px;
+}
+
+.modal .modal-body {
+  height: 550px;
+  overflow-y: auto;
+}
 
 
 // ----------- CHARTS ----------------------------
@@ -346,22 +329,16 @@ body.devise-body {
   }
 }
 
-
-
-
-
+// ------ INSTRUCTIONS -----------
 
 body#edit-body {
   background-color: $green;
 }
 
-.modal-lg {
-  width: 90% !important;
-}
 
-#modalButton {
-  margin: 200px;
-}
+
+
+
 
 
 

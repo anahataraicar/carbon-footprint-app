@@ -1,0 +1,22 @@
+<div class="row instructions">
+  <div class="col-md-4">
+    <i class="fa fa-question-circle fa-5x"></i>
+    <h2>Fill out the survey</h2>
+    <p>Input information about your daily habits</p>
+  </div>
+  <div class="col-md-4">
+    <i class="fa fa-bar-chart fa-5x"></i>
+    <h2>Get your results</h2>
+    <p>Compare your footprint with other users'</p>
+  </div>
+  <div class="col-md-4">
+    <i class="fa fa-globe fa-5x"></i>
+    <h2>Learn how to do better</h2>
+    <p>See how a few changes can make a big difference</p>
+  </div>
+</div>
+
+
+<% if !current_user %>
+  <a id="sign-up-button" href="/users/sign_up" class="btn">Create my footprint</a>
+<% end %>

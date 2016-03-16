@@ -2,9 +2,6 @@ class FootprintsController < ApplicationController
   
   def index
 
-    
-
-
   end
 
 
@@ -14,7 +11,6 @@ class FootprintsController < ApplicationController
 
     
     pdf.text "hello world"
-    pdf.image image
     send_data pdf.render, type: "application/pdf", 
                           disposition: "inline",
                           filename: "my_carbon_footprint.pdf"

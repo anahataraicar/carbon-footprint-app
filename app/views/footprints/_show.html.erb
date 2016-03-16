@@ -3,17 +3,18 @@
   <% if current_user.has_a_profile? %>
  <!--  <h2>You produced <span id="total"><%=  %></span> megatonnes of carbon dioxide per year, <span id="equivalent">that is equivalent to...</span></h2>
  -->
-  <table id="show-table">
+<table id="show-table">
+  <ul>
     <tr><td colspan="2"><h4>Greenhouse gas emissions from</h4></td></tr>
     <tr>
-      <td width="20%"><p><%= @cars %> passenger vehicles driven for one year</p></td>
+      <td width="25%"><li><p><%= @cars %> passenger vehicles driven for one year</p></li></td>
       <td><% @cars_counter.times do %>
             <i class="material-icons">directions_car</i>
           <% end %>
       </td>
     </tr>
     <tr>
-      <td><p><%= @waste %> tons of waste sent to landfill</p></td>
+      <td><li><p><%= @waste %> tons of waste sent to landfill</p></li></td>
       <td><% @waste_counter.times do %>
             <i class="material-icons">local_shipping</i>
           <% end %>
@@ -21,21 +22,21 @@
     </tr>
     <tr><td colspan="2"><h4>CO2 emissions from</h4></td></tr>
     <tr>
-      <td><p><%= @oil %> barrels of oil consumed</p></td>
+      <td><li><p><%= @oil %> barrels of oil consumed</p></li></td>
       <td><% @oil.times do %>
             <i class="material-icons">local_gas_station</i>
           <% end %>
       </td>
     </tr>
     <tr>
-      <td><p><%= @homes %> homes' energy use for one year</p></td>
+      <td><li><p><%= @homes %> homes' energy use for one year</p></li></td>
       <td><% @homes_counter.times do %>
             <i class="fa fa-home fa-lg" style="font-size: 24px;"></i>
           <% end %>
       </td>
     </tr>
     <tr>
-      <td><p><%= @turbines %> wind turbines installed</p></td>
+      <td><li><p><%= @turbines %> wind turbines installed</p></li></td>
       <td><% @turbines_counter.times do %>
             <i class="material-icons">toys</i>
           <% end %>
@@ -43,18 +44,19 @@
     </tr>
     <tr><td colspan="2"><h4>Carbon sequestered by</h4></td></tr>
     <tr>
-      <td><p><%= @acres %> acres of U.S. forests in one year</p></td>
+      <td><li><p><%= @acres %> acres of U.S. forests in one year</p></li></td>
       <td><% @acres_counter.times do %>
             <i class="fa fa-tree fa-lg" style="font-size: 22px;"> </i>
           <% end %>
       </td>
     </tr>
     <tr>
-      <td><p><%= @trees %> tree seedlings grown for 10 years</p></td>
+      <td><li><p><%= @trees %> tree seedlings grown for 10 years</p></li></td>
       <td><% @trees_counter.times do %>
-            <i class="fa fa-pagelines fa-lg" style="font-size: 24px; margin-left: 2px; margin-right: 2px"></i>
+            <i class="fa fa-pagelines fa-lg" style="font-size: 24px; margin-left: 2px; margin: 2px 2px 0px 0px;"></i>
       <% end %></td>
     </tr>
+    </ul>
   </table>
   <% end %>
 </body>

@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     done = "yes"
 
     habits.each do |habit|
-      if !(habit.value > 0.00)
+      if !(habit.input1)
         done = "no"
       end
     end
@@ -91,12 +91,12 @@ class User < ActiveRecord::Base
   def calc_lightbulb
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "electricity").last
     factor = habit.input2
-    (510.875 * 0.000689551 / factor / 10)
+    (510.875 * 0.000689551 / factor / 10).round(2)
   end
 
   def calc_veg
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "meat").last
-    habit.value
+    (habit.value).round(2)
   end
 
 

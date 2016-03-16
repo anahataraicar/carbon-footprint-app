@@ -33,6 +33,7 @@ class Api::V1::FootprintsController < ApplicationController
 
   def show
     @habits = Habit.where("user_id = ?", current_user.id)
+    
     if current_user.is_done?
       @gas = current_user.calc_save_gas.to_f 
       @bike = current_user.calc_bike.to_f
@@ -44,6 +45,7 @@ class Api::V1::FootprintsController < ApplicationController
       @lightbulb = 0
       @veg = 0
     end
+
   end
 
   

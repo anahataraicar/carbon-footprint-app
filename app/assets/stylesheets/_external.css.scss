@@ -129,8 +129,7 @@ p.slider-value {
 }
 
 table#action-table {
-  padding: 10px;
-  margin: 10px;
+  margin: 30px 20px 0px 20px;
   font-size: 18px;
 
   td.action-value {
@@ -138,8 +137,10 @@ table#action-table {
   }
 
   td {
-    padding: 12px;
+    padding: 10px;
   }
+
+  th { text-decoration: underline; }
 }
 
 
@@ -235,6 +236,18 @@ table#action-table {
   opacity: 1;
 }
 
+.intro-instructions {
+  margin-top: 60px;
+}
+
+
+.intro-instructions.ng-enter {
+  -webkit-animation: fadeIn 2.5s;
+  -moz-animation: fadeIn 2.5s;
+  -o-animation: fadeIn 2.5s;
+  animation: fadeIn 2.5s;
+}
+
 
 
 
@@ -257,7 +270,10 @@ body#show-body {
 
 
 #show-table {
-  // th, td { border: 2px solid black; }
+  th, td { padding: 5px; }
+
+  p { margin-left: 20px; }
+
   h4 {
     font-style: italic;
     padding: 5px;
@@ -265,13 +281,9 @@ body#show-body {
 }
 
 
-span#total {
-  font-size: 40px;
-}
+span#total { font-size: 40px; }
 
-span#equivalent {
-  font-size: 24px;
-}
+span#equivalent { font-size: 24px; }
 
 
 // ----------- CHARTS ----------------------------
@@ -301,27 +313,23 @@ div#chart-holder {
 
 
 .chart-icons {
+  display: inline-block;
   i {
     font-size: 48px;
-    margin: 30px 30px 30px 30px; 
-    padding: 5px;
+    margin: 20px;
   }
+}
+
+.pdf-icons {
+  display: inline-block;
+  margin: 20px 20px 80px 20px;
+
+  i { margin: 20px; }
 }
 
 
 
 // ------------------------
-
-
-.progress {
-  display: inline-block;
-  margin-top: 30px;
-  margin-left: 70px;
-  width: 590px;  
-}
-
-
-
 
 body#edit-body {
   background-color: $green;
@@ -330,8 +338,6 @@ body#edit-body {
 .modal-lg {
   width: 90% !important;
 }
-
-
 
 #modalButton {
   margin: 200px;

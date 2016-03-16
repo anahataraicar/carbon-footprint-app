@@ -13,16 +13,22 @@
         <td class="action-value">{{ action.value }}</td>
       </tr>
       <tr>
-      <td style="text-align: right;">Total:</td>
-      <td class="action-value">{{ totalSaved.toFixed(2) }}</td>
+        <td style="text-align: right;">Total:</td>
+        <td class="action-value">{{ totalSaved.toFixed(2) }}</td>
+      </tr>
     </tbody>
   </table>
 
 <div class="chart-icons">
   <i class="fa fa-pie-chart fa-4x" ng-click="changeChart('pie')"></i>
   <i class="fa fa-bar-chart fa-4x" ng-click="changeChart('bar')"></i>
+  <p>Toggle chart type</p>
 </div>
 
+<div class="pdf-icons">
+  <i class="fa fa-file-text-o fa-4x" ng-click="printPdf()"></i>
+  <p>Download PDF</p>
+</div>
 
 
 

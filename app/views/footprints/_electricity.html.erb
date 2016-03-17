@@ -1,11 +1,7 @@
 <form id="electricityForm" name="electricity">
+  <h3>Electricity</h3>
 
-<h2>Electricity</h2>
-
- 
   <input ng-model="electricityInput" name="input" ng-class="{changed: electricity.input.$dirty}" data-toggle="tooltip" data-placement="top" data-html="true" title="<h5>$320</h5><h5>3837 kW</h5>">
   <select ng-model="electricityType" ng-options="type.name for type in electricityOptions">
   </select>
-  
-
 </form>

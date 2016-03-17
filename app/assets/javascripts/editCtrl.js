@@ -12,13 +12,17 @@
       });
     };
 
+   
+
+
     $scope.init = function() {
         $scope.setUpCharts();
         $scope.content = "pie";
         $scope.resultsVisible = false;
         $scope.modalVisible = true;
         $scope.totalSaved = 0;
-        $scope.introInstructions = true;
+
+        $scope.introInstructions = false;
        
         $scope.pills = [
             { name: "intro", visible: true },
@@ -42,6 +46,8 @@
         $http.get('/api/v1/footprints.json').then(function(response) {
             var barData = response.data;
             $scope.drawBarChart(barData);
+            // console.log(barData);
+            $scope.drawBubbleChart(barData);
         });
 
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
@@ -49,6 +55,22 @@
 
             $scope.drawPdfChart(pieData);
             $scope.calculateShow(pieData);
+            $scope.barChartExist = true;
+
+            var userValue = pieData["total"];
+            var average = pieData["average"];
+            var difference = userValue - average;
+            $scope.percentile = (difference / average * 100).toFixed(1);
+
+
+            if ($scope.percentile > 0) {
+                $scope.string = " worse ";
+                $scope.worseAverage = true;
+            } else {
+                $scope.string = " better ";
+                $scope.betterAverage = true;
+            };
+
 
             var gas = pieData["saved_gas"].toFixed(2);
             var bike = pieData["bike"].toFixed(2);
@@ -142,6 +164,8 @@
     var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
     var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
 
+    $scope.updatingTotal = (travel + housing + food).toFixed(2);
+
     var colors = ["#bf967a", "#b52d41", "#f06f5c"],
 
         categories = ['Travel', 'Housing', 'Food'],
@@ -212,21 +236,15 @@
         },
         chart: {
             type: 'pie',
-            marginTop: 15,
             backgroundColor: 'transparent',
-            borderColor: 'transparent'
+            borderColor: 'transparent',
+            margin: [0,0,0,0]
         },
         title: {
             style: {
-                fontSize: '26px'
+                fontSize: '2px'
             },
-            text: 'Your carbon footprint'
-        },
-        subtitle: {
-            text: 'Hover over a section for more info',
-            style: {
-                fontSize: '14px'
-            }
+            text: 'sdf'
         },
         yAxis: {
             title: {
@@ -271,7 +289,7 @@
         }, {
             // name: 'Total',
             data: subData,
-            size: '70%',
+            size: '60%',
             innerSize: '60%',
             dataLabels: {
                 formatter: function () {
@@ -423,6 +441,8 @@
         var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
         var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
         var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
+
+        scope.updatingTotal = (travel + housing + food).toFixed(2);
 
         var colors = ["#bf967a", "#b52d41", "#f06f5c"],
         categories = ['Travel', 'Housing', 'Food'],
@@ -619,7 +639,10 @@
             $scope.updatePieChart();
             $scope.errors = "";
 
-            $scope.changePage(page, direction);
+            
+            if (formData["type"]=== "public_transportation" || formData["type"] === "natural_gas" || formData["type"] === "propane") {
+                $scope.changePage(page, direction);
+            };
 
         }, function(response) { 
             $scope.errors = response.data.errors;
@@ -647,6 +670,10 @@
         } else if (direction === 2) {
             var newPage = page + 1;
         };
+
+        if (newPage === 3) {
+            $scope.chartInstructions = true;
+        }
 
         var pageStr = 'a[href="#' + (newPage) + '"]';
         $(pageStr).tab('show');
@@ -1121,6 +1148,103 @@
         console.log(pieChart);
         pieChart.print();
     };
+
+
+
+
+// --------------- DRAW BUBBLE CHART -------------------
+// -----------------------------------------------------
+
+
+
+    $scope.drawBubbleChart = function(bubbleData){
+        console.log(bubbleData);
+        var meatData = bubbleData[4];
+        var kwData = bubbleData[5];
+        var totalData = bubbleData[6];
+        var states = bubbleData[7];
+
+
+        var chartData = [];
+        for (var i = 0; i < 10; i++){
+            var obj = {
+                x: meatData[i],
+                y: kwData[i],
+                z: totalData[i],
+                name: states[i]
+            };
+            chartData.push(obj);
+        };
+
+
+        $('#bubbleContainer').highcharts({
+
+        chart: {
+            type: 'bubble',
+            plotBorderWidth: 1,
+            zoomType: 'xy'
+        },
+        credits: {
+            enabled: false
+        },
+        legend: {
+            enabled: false
+        },
+
+        title: {
+            text: ''
+        },
+        xAxis: {
+            gridLineWidth: 1,
+            title: {
+                text: 'MT CO2 from electricity use'
+            },
+            labels: {
+                format: '{value} MT CO2'
+            }
+        },
+
+        yAxis: {
+            startOnTick: false,
+            endOnTick: false,
+            title: {
+                text: 'MT CO2 from meat intake'
+            },
+            labels: {
+                format: '{value} MT CO2'
+            },
+            maxPadding: 0.2
+        },
+
+        tooltip: {
+            useHTML: true,
+            headerFormat: '<table>',
+            pointFormat: 
+                '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
+                '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
+                '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+            footerFormat: '</table>',
+            followPointer: true
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        navigation: {
+            buttonOptions: {
+                 enabled: false
+            }
+        },
+        series: [{
+            data: chartData
+            }]
+        });
+    }
 
 
 

@@ -29,6 +29,33 @@ class Api::V1::FootprintsController < ApplicationController
     end
   
     @profiles = [[names], [travel], [housing], [food]]
+
+    
+    profiles = []
+    counter = 20
+    while counter > 0
+      other_profile = Profile.all.sample
+      user = other_profile.user
+      if user.is_done?
+        profiles << other_profile
+        counter = counter - 1
+      end
+    end
+
+    totals = []
+    state = []
+    kwh = []
+    meat = []
+
+    profiles.each do |profile|
+      state << profile.user.state
+      totals << profile.user.sum_housing.to_f
+      meat << profile.user.habits.find_by(footprint_type: "meat").value.to_f
+      kwh << profile.user.habits.find_by(footprint_type: "electricity").value.to_f
+    end
+
+    @bubble_data = [[meat], [kwh], [totals], [state]]
+
   end
 
   def show
@@ -46,6 +73,11 @@ class Api::V1::FootprintsController < ApplicationController
       @lightbulb = 0
       @veg = 0
     end
+
+    profiles = Profile.all
+    user_count = profiles.count
+    user_total_value = profiles.sum(:total_value)
+    @average = user_total_value / user_count
 
   end
 

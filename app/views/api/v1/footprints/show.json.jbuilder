@@ -7,3 +7,4 @@ json.set! :bike, @bike
 json.set! :lightbulb, @lightbulb
 json.set! :veg, @veg
 json.set! :total, @total
+json.set! :average, @average

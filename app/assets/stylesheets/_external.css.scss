@@ -8,6 +8,8 @@
 $green: #C5D5CB;
 $grey: rgb(159,168,163);
 $black: #232825;
+$brown: #e3e0cf;
+
 
 body { 
   // padding-bottom: 50px; // footer
@@ -16,13 +18,16 @@ body {
 * { font-family: Raleway; }
 
 
+    // $('document').ready(function(){
+    //     $scope.header = true;
+    // })
 
 
 // ------------------  EDIT ---------------------------
 
 
 body#edit-body {
-  background-color: $green;
+  background-color: $green;  
 }
 
 ul.nav.nav-pills.nav-stacked {
@@ -40,43 +45,38 @@ ul.nav.nav-pills.nav-stacked {
   }
 
   i {
-    color: $grey;
+    color: $black;
     font-size: 30px;
     margin-top: 5px;
   }
 }
 
-.tab-content {
-  float: left;
 
-  // margin-left: -15px;
+.tab-content {
+  margin-left: 5%;
+  width: 100%;
+  height: 100%;
 
   .tab-pane {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.7);
     padding: 5px 20px 20px 20px;
-    margin: 20px;
-    width: 600px;
-    height: 520px;
-    border-radius: 15px;
+    margin: 5%;
+    border-radius: 5px;
     position: relative;
 
     .arrow-before {
       display: inline-block;
       position: absolute;
-      bottom: 2%;
-      color: black;
-
-      // i.material-icons { font-size: 60px; }
+      bottom: 3%;
+      color: $black;
     }
 
     .arrow-next {
       display: inline-block;
       right: 5%;
-      color: black;
+      color: $black;
       position: absolute;
-      bottom: 2%;
-
-      // i { font-size: 60px; }
+      bottom: 3%;
     }   
 
     h2 { margin-bottom: 20px; }
@@ -118,7 +118,6 @@ table#slider-table {
   float: top;
 
   tr, td {
-    // border: 1px dotted black;
     // top - right - bottom - left
     padding: 3px 10px 10px 3px;
   }
@@ -140,7 +139,7 @@ table#action-table {
   margin: 30px 20px 0px 20px;
   font-size: 18px;
 
-  td.action-value {
+  td.actionvalue {
     text-align: center;
   }
 
@@ -151,13 +150,24 @@ table#action-table {
   th { text-decoration: underline; }
 }
 
+.panel {
+  margin: 20px;
+  .panel-title { font-size: 20px; }
 
 
-
-
+}
 
 
 // ----- ANIMATIONS ---------------------------------
+
+
+.index-header .ng-enter {
+ -webkit-animation: fadeIn 2.5s;
+  -moz-animation: fadeIn 2.5s;
+  -o-animation: fadeIn 2.5s;
+  animation: fadeIn 2.5s;
+}
+
 
 .errors .ng-enter {
   -webkit-animation: shake 0.5s;
@@ -166,14 +176,19 @@ table#action-table {
   animation: shake 0.5s;
 }
 
+.chart-instructions .ng-enter {
+  -webkit-animation: fadeIn 2s;
+  -moz-animation: fadeIn 2s;
+  -o-animation: fadeIn 2s;
+  animation: fadeIn 2s;
+}
+
 .errors {
   position: absolute;
   margin-left: 350px;
   margin-top: 50px; 
   height: 50px;
-
   h4 { color: #b52d41; }
- 
 }
 
 .material-icons.list.ng-enter {
@@ -213,15 +228,16 @@ table#action-table {
 }
 
 .intro-instructions {
-  margin-top: 60px;
+  margin-top: 195px;
+  margin-left: 210px;
 }
 
 
 .intro-instructions.ng-enter {
-  -webkit-animation: fadeIn 2.5s;
-  -moz-animation: fadeIn 2.5s;
-  -o-animation: fadeIn 2.5s;
-  animation: fadeIn 2.5s;
+  -webkit-animation: fadeIn 2s;
+  -moz-animation: fadeIn 2s;
+  -o-animation: fadeIn 2s;
+  animation: fadeIn 2s;
 }
 
 
@@ -254,7 +270,6 @@ body#show-body {
 }
 
 span#total { font-size: 40px; }
-
 span#equivalent { font-size: 24px; }
 
 .modal-lg {
@@ -274,36 +289,48 @@ span#equivalent { font-size: 24px; }
 // ----------- CHARTS ----------------------------
 
 
+div#footprint-update {
+  position: absolute;
+}
 
-div#chart-holder {
-  // top - right - bottom - left
-  margin: 30px 40px 10px 0px;
-  padding: 10px;
-  float: right;
+.chart-instructions {
+  position: absolute;
+  margin-top: 450px;
+  p { font-size: 16px; }
+}
+
+.panel.panel-default {
+  margin-right: 5%;
 
   #pieChartContainer {
-    // width: 100% !important;
-    // height: 100% !important;
-    width: 650px;
-    height: 550px;
-    float: right;
+    width: 620px;
+    height: 520px;
+    float: right;  
   }
 
   #barChartContainer {
-    width: 650px;
-    height: 550px;
+    width: 620px;
+    height: 520px;
     float: right;    
   }
-}
 
+  #bubbleContainer {
+    width: 620px;
+    height: 520px;
+    float: right;
+  }
 
-.chart-icons {
-  display: inline-block;
-  i {
-    font-size: 48px;
-    margin: 20px;
+  .panel-heading {
+    font-size: 16px;
+  }
+
+  .btn-group {
+    float: right;
+
+    i {padding: 3px;}
   }
 }
+
 
 .pdf-icons {
   display: inline-block;
@@ -333,6 +360,7 @@ body.devise-body {
 
 body#edit-body {
   background-color: $green;
+  padding-bottom: 70px;
 }
 
 

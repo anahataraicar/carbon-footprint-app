@@ -1,7 +1,13 @@
-<form id="electricityForm" name="electricity">
-  <h3>Electricity</h3>
+<h3>Electricity</h3>
 
-  <input ng-model="electricityInput" name="input" ng-class="{changed: electricity.input.$dirty}" data-toggle="tooltip" data-placement="top" data-html="true" title="<h5>$320</h5><h5>3837 kW</h5>">
-  <select ng-model="electricityType" ng-options="type.name for type in electricityOptions">
-  </select>
+<form class="form-inline" role="form">
+  <div class="input-group">
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="??" ng-model="electricityInput" name="input" ng-class="{changed: electricity.input.$dirty}">
+    </div>
+    <div class="form-group">
+      <select class='form-control' ng-model="electricityType" ng-options="type.name for type in electricityOptions">
+      </select>          
+    </div>
+  </div>
 </form>

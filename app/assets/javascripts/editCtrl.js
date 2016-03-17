@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  angular.module("app").controller("editCtrl", function($scope, $http) {
+  angular.module("app").controller("editCtrl", function($scope, $http, $timeout) {
 
     var userId = gon.user_id;
 
@@ -46,7 +46,6 @@
         $http.get('/api/v1/footprints.json').then(function(response) {
             var barData = response.data;
             $scope.drawBarChart(barData);
-            // console.log(barData);
             $scope.drawBubbleChart(barData);
         });
 
@@ -56,6 +55,7 @@
             $scope.drawPdfChart(pieData);
             $scope.calculateShow(pieData);
             $scope.barChartExist = true;
+           
 
             var userValue = pieData["total"];
             var average = pieData["average"];
@@ -69,6 +69,7 @@
             } else {
                 $scope.string = " better ";
                 $scope.betterAverage = true;
+                $scope.percentile = Math.abs($scope.percentile);
             };
 
 
@@ -244,7 +245,7 @@
             style: {
                 fontSize: '2px'
             },
-            text: 'sdf'
+            text: ''
         },
         yAxis: {
             title: {
@@ -327,11 +328,11 @@
                 height: 500
             },
             title: {
-                text: 'User footprints'
+                text: ''
             },
             xAxis: {
                 lineWidth: 0.5,
-                lineColor: '#ffffff',
+                lineColor: '#cccccc', // grey
                 categories: profile_names,
                 labels: {
                     style: {
@@ -341,7 +342,7 @@
             },
             yAxis: {
                 min: 0,
-                gridLineColor: '#ffffff',
+                gridLineColor: '#cccccc', // grey
                 gridLineWidth: .75,
                 labels: {
                     style: {
@@ -370,7 +371,7 @@
                 x: -30,
                 verticalAlign: 'top',
                 y: 25,
-                floating: true,
+                floating: false,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
                 borderColor: null,
                 borderWidth: 1,
@@ -640,9 +641,9 @@
             $scope.errors = "";
 
             
-            if (formData["type"]=== "public_transportation" || formData["type"] === "natural_gas" || formData["type"] === "propane") {
+            // if (formData["type"]=== "public_transportation" || formData["type"] === "natural_gas" || formData["type"] === "propane") {
                 $scope.changePage(page, direction);
-            };
+            // };
 
         }, function(response) { 
             $scope.errors = response.data.errors;
@@ -673,6 +674,10 @@
 
         if (newPage === 3) {
             $scope.chartInstructions = true;
+
+            $timeout(function(){
+                $scope.chartInstructions = false; 
+            }, 5000);
         }
 
         var pageStr = 'a[href="#' + (newPage) + '"]';
@@ -726,11 +731,11 @@
     }
 
     $scope.electricityOptions = [
-      { name: "kWh/year", factor: 1 },
-      { name: "$/year", factor: 0.0834 }
+        { name: "$/year", factor: 0.0834 },
+        { name: "kWh/year", factor: 1 }
     ];
 
-    $scope.electricityType = $scope.electricityOptions[1];
+    $scope.electricityType = $scope.electricityOptions[0];
 
     $scope.naturalOptions = [ 
       { name: "$/year", factor: 1.18 },
@@ -975,10 +980,16 @@
     $scope.showCharts = function() {
         $scope.modalVisible = false;
         $scope.resultsVisible = true;
+         $scope.toggleInstructions = true;
+
+        $timeout(function() {
+            $scope.toggleInstructions = false;
+        }, 5000);
     };
 
     $scope.changeChart = function(chartType) {
         $scope.content = chartType;
+
     };
 
     $scope.checkChart = function(chartType) {
@@ -1166,7 +1177,7 @@
 
 
         var chartData = [];
-        for (var i = 0; i < 10; i++){
+        for (var i = 0; i < 20; i++){
             var obj = {
                 x: meatData[i],
                 y: kwData[i],
@@ -1182,7 +1193,8 @@
         chart: {
             type: 'bubble',
             plotBorderWidth: 1,
-            zoomType: 'xy'
+            zoomType: 'xy',
+            height: 500
         },
         credits: {
             enabled: false
@@ -1197,10 +1209,14 @@
         xAxis: {
             gridLineWidth: 1,
             title: {
-                text: 'MT CO2 from electricity use'
+                text: 'MT CO2 from electricity use',
+                margin: 20, 
+                style: {
+                    fontSize: '16px'
+                },
             },
             labels: {
-                format: '{value} MT CO2'
+                format: '{value} MT'
             }
         },
 
@@ -1208,10 +1224,14 @@
             startOnTick: false,
             endOnTick: false,
             title: {
-                text: 'MT CO2 from meat intake'
+                text: 'MT CO2 from meat intake',
+                margin: 20, 
+                style: {
+                    fontSize: '16px'
+                },
             },
             labels: {
-                format: '{value} MT CO2'
+                format: '{value} MT'
             },
             maxPadding: 0.2
         },
@@ -1220,11 +1240,14 @@
             useHTML: true,
             headerFormat: '<table>',
             pointFormat: 
-                '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
-                '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
-                '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+                '<tr><th>Electricity use:</th><td>{point.x} MT</td></tr>' +
+                '<tr><th>Meat intake:</th><td>{point.y} MT</td></tr>' +
+                '<tr><th>Overall footprint:</th><td>{point.z} MT</td></tr>',
             footerFormat: '</table>',
-            followPointer: true
+            followPointer: true,
+            style: {
+                fontSize: '12pt'
+            }
         },
 
         plotOptions: {
@@ -1241,7 +1264,8 @@
             }
         },
         series: [{
-            data: chartData
+            data: chartData,
+            color: '#b52d41'
             }]
         });
     }

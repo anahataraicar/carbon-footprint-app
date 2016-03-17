@@ -1,6 +1,9 @@
 <body id="edit-body">
   <div ng-app="app">
     <div ng-controller="editCtrl" ng-init="init()">
+
+
+
     
       <div class="row">
       <div class="col-md-6">
@@ -13,39 +16,35 @@
         <div class="panel panel-default">
           <div class="panel-heading">Your Carbon Footprint
             <div class="btn-group" ng-if="barChartExist">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Toggle chart type<span class="caret"></span></button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chart type<span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li ng-click="changeChart('pie')"><i class="fa fa-pie-chart fa-lg"></i>Pie</li>
-                <li ng-click="changeChart('bar')"><i class="fa fa-bar-chart fa-lg"></i>Bar</li>
-                <li ng-click="changeChart('bubble')">Bubble</li>
+                <li ng-click="changeChart('pie')"><i class="fa fa-pie-chart fa-lg"></i> Pie</li>
+                <li ng-click="changeChart('bar')"><i class="fa fa-bar-chart fa-lg"></i> Bar</li>
+                <li ng-click="changeChart('bubble')"><i class="fa fa-circle-thin fa-lg"></i> Bubble</li>
               </ul>
             </div>
           </div>
+
+          
           <div class="panel-body">
             <div id="footprint-update" ng-show="checkChart('pie')">
               <p>Total:</p><h3>{{ updatingTotal }}</h3><p>MT CO2/year</p>
             </div>
-            <div class="chart-instructions" >
-              <p ng-if="chartInstructions">Hover over a slice for more info</p>
-            </div>
+          
+            <p class="chart-instructions" ng-if="chartInstructions">Hover over a slice for more info</p>
+            
+            <p class="toggle-instructions" ng-if="toggleInstructions">Click dropdown to toggle the chart type <i class="fa fa-long-arrow-up fa-lg"></i></p>
+
             <div id="pieChartContainer" ng-show="checkChart('pie')">
             </div>
             <div id="barChartContainer" ng-show="checkChart('bar')"></div>
             <div id="bubbleContainer" ng-show="checkChart('bubble')"></div>
 
-            
           </div> <!-- panel body -->
         </div>
       </div>
     </div>
 
-  
-  
-      <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-          ...
-        </div>
-      </nav>
       <div id="pdfContainer" style="display: none;"></div>
 
     </div> <!-- ng controller div -->

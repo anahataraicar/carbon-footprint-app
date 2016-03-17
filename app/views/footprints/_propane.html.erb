@@ -1,12 +1,16 @@
-<form id="propaneForm" name="propane">
-  <h3>Propane</h3>
+<h3>Propane</h3>
   
-  <input ng-model="propaneInput" name="input" ng-class="{changed: propane.input.$dirty}">
-  <select ng-model="propaneType" ng-options="type.name for type in propaneOptions">
-  </select>
-
+<form class="form-inline" role="form">
+  <div class="input-group">
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="??" ng-model="propaneInput" name="input" ng-class="{changed: propane.input.$dirty}">
+    </div>
+    <div class="form-group">
+      <select class='form-control' ng-model="propaneType" ng-options="type.name for type in propaneOptions">
+      </select>          
+    </div>
+  </div>
 </form>
-
   
 
 

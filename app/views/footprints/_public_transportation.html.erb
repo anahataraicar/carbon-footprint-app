@@ -1,12 +1,23 @@
-<form id="public_transportation" name="transport">
-    <h3>Transportation by public transit:</h3>
-    
-    <p>
-    <span><select ng-model="publicType" ng-options="public.name for public in publicOptions">
-    </select></span><input ng-model="miles" name="miles" ng-class="{changed: transport.miles.$dirty}"> miles per year<br>
-    </p>
- 
+<h3>Transportation by public transit:</h3>
+
+<form class="form-inline" role="form">
+  <div class="input-group">
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="200 miles" ng-model="miles" name="miles" ng-class="{changed: transport.miles.$dirty}">
+    </div>
+    <span class="input-group-addon" id="basic-addon">miles per year</span>
+    <div class="form-group">
+      <select class='form-control' ng-model="publicType" ng-options="public.name for public in publicOptions">
+      </select>          
+    </div>
+  </div>
 </form>
+
+
+
+
+
+
 
 
  

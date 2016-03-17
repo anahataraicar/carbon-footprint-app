@@ -1,15 +1,24 @@
-<form id="carForm" name="car">
-    <h3>Transportation by vehicle</h3>
+<h3>Transportation by vehicle</h3>
  
-    <p>
-    <input ng-model="mileage" name="mileage" ng-class="{changed: car.mileage.$dirty}" data-toggle="tooltip" data-placement="top" data-html="true" title="<h5>22 mpg</h5>"> miles per gallon<br>
-    <input ng-model="carMiles" name="miles" ng-class="{changed: car.miles.$dirty}" data-toggle="tooltip" data-html="true" data-placement="top" title="<h5>5100 miles</h5>"> miles per year<br>
-   
+<div class="input-group">
+  <input type="text" class="form-control" placeholder="22 mpg" ng-model="mileage" name="mileage" ng-class="{changed: car.mileage.$dirty}">
+  <span class="input-group-addon" id="basic-addon">miles per gallon</span>
+</div>
 
-    <select ng-model="fuelType" ng-options="vehicle.name for vehicle in vehicleOptions"></p>
-    </select>
-    
+
+<form class="form-inline" role="form">
+  <div class="input-group">
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="5100 miles" ng-model="carMiles" name="miles" ng-class="{changed: car.miles.$dirty}">
+    </div>
+    <span class="input-group-addon" id="basic-addon">miles per year</span>
+    <div class="form-group">
+      <select class='form-control' ng-model="fuelType" ng-options="vehicle.name for vehicle in vehicleOptions" >
+      </select>           
+    </div>
+  </div>
 </form>
+
 
 
 

@@ -1,18 +1,31 @@
-<form id="intro" name="intro">
-  <h2>Let's get started!</h2>
+<h2>Let's get started!</h2>
 
-  <p>Please start off by putting in some basic info</p> 
+<p>Please start off by putting in some basic info</p> 
 
-  <p>
-  First name: <input ng-model="firstName" name="firstName" ng-class="{ changed: intro.firstName.$dirty}"><br>
-  Last name: <input ng-model="lastName" name="lastName" ng-class="{ changed: intro.lastName.$dirty}" ng-change="introInstructions = true"><br>
-  State of residence: <select ng-model="stateInput" ng-options="state.name for state in stateOptions">
-  </select>
-  </p>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">First name</span>
+  <input type="text" class="form-control" placeholder="Username" ng-model="firstName" name="firstName" ng-class="{ changed: intro.firstName.$dirty}">
+</div>
 
-  <p class="intro-instructions" ng-if="introInstructions">Click on the arrow to continue</p>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Last name</span>
+  <input type="text" class="form-control" placeholder="Username" ng-model="lastName" name="lastName" ng-class="{ changed: intro.lastName.$dirty}" ng-change="introInstructions = true">
+</div>
 
-
-
+  <form class="form-inline" role="form">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">State of residence:</span>
+      <div class="form-group">
+        <select class='form-control' ng-model="stateInput" ng-options="state.name for state in stateOptions">
+        </select>          
+      </div>
+    </div>
 </form>
+
+
+<p class="intro-instructions" ng-if="introInstructions">Click on the arrow to continue</p>
+
+
+
+
 

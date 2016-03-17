@@ -11,23 +11,17 @@ $black: #232825;
 $brown: #e3e0cf;
 
 
-body { 
-  // padding-bottom: 50px; // footer
-}
-
 * { font-family: Raleway; }
-
-
-    // $('document').ready(function(){
-    //     $scope.header = true;
-    // })
 
 
 // ------------------  EDIT ---------------------------
 
+.row {
+  max-width: 100%;
+}
 
 body#edit-body {
-  background-color: $green;  
+  background-color: $green;
 }
 
 ul.nav.nav-pills.nav-stacked {
@@ -54,11 +48,11 @@ ul.nav.nav-pills.nav-stacked {
 
 .tab-content {
   margin-left: 5%;
-  width: 100%;
+  width: 90%;
   height: 100%;
 
   .tab-pane {
-    background-color: rgba(255,255,255,0.7);
+    // background-color: rgba(255,255,255,0.7);
     padding: 5px 20px 20px 20px;
     margin: 5%;
     border-radius: 5px;
@@ -84,34 +78,24 @@ ul.nav.nav-pills.nav-stacked {
 
     .question {
       margin-bottom: 60px;
+      width: 100%;
       
       p { font-size: 18px;}
 
-      input {
-        margin: 10px 8px 10px 8px;
-        background-color: $green;
-      }
       .changed {
         background-color: white;
       }
-      select { margin: 10px 8px 10px 8px; }
     }
   }
 }
 
 
-select {
-  padding: 5px;
-  font-size: 14px;
-  line-height: 1;
-  border: 0;
-  border-radius: 0;
-  height: 34px;
+
+.input-group {
+  width: 60%;
+  margin-bottom: 5%;
 }
 
-  h2#food-title {
-    margin: 20px 20px 0px 0px;
-  }
 
 
 table#slider-table {
@@ -138,23 +122,15 @@ p.slider-value {
 table#action-table {
   margin: 30px 20px 0px 20px;
   font-size: 18px;
-
-  td.actionvalue {
-    text-align: center;
-  }
-
-  td {
-    padding: 10px;
-  }
-
+  
+  td.actionvalue { text-align: center; }
+  td { padding: 10px; }
   th { text-decoration: underline; }
 }
 
 .panel {
   margin: 20px;
   .panel-title { font-size: 20px; }
-
-
 }
 
 
@@ -176,11 +152,18 @@ table#action-table {
   animation: shake 0.5s;
 }
 
-.chart-instructions .ng-enter {
-  -webkit-animation: fadeIn 2s;
-  -moz-animation: fadeIn 2s;
-  -o-animation: fadeIn 2s;
-  animation: fadeIn 2s;
+.chart-instructions.ng-enter {
+  -webkit-animation: fadeInRight 2s;
+  -moz-animation: fadeInRight 2s;
+  -o-animation: fadeInRight 2s;
+  animation: fadeInRight 2s;
+}
+
+.chart-instructions.ng-leave {
+  -webkit-animation: fadeOutRight 2s;
+  -moz-animation: fadeOutRight 2s;
+  -o-animation: fadeOutRight 2s;
+  animation: fadeOutRight 2s;
 }
 
 .errors {
@@ -240,6 +223,21 @@ table#action-table {
   animation: fadeIn 2s;
 }
 
+.toggle-instructions.ng-enter {
+  -webkit-animation: fadeIn 5s;
+  -moz-animation: fadeIn 5s;
+  -o-animation: fadeIn 5s;
+  animation: fadeIn 5s;
+}
+
+.toggle-instructions.ng-leave {
+  -webkit-animation: fadeOut 2s;
+  -moz-animation: fadeOut 2s;
+  -o-animation: fadeOut 2s;
+  animation: fadeOut 2s;
+}
+
+
 
 
 // -------------- SHOW / MODAL --------------------
@@ -254,7 +252,6 @@ body#show-body {
   i.fa.fa-pagelines.fa-lg {
     background-color: red;
   }
-
   h2 { margin-bottom: 15px; }
 }
 
@@ -273,7 +270,7 @@ span#total { font-size: 40px; }
 span#equivalent { font-size: 24px; }
 
 .modal-lg {
-  width: 90% !important;
+  // width: 90% !important;
 }
 
 #modalButton {
@@ -295,15 +292,25 @@ div#footprint-update {
 
 .chart-instructions {
   position: absolute;
-  margin-top: 450px;
+  margin-top: 470px;
   p { font-size: 16px; }
 }
+
+.toggle-instructions {
+  position: absolute;
+  margin-left: 38%;
+  margin-top: 1%;
+  font-size: 16px;
+}
+
+
+
 
 .panel.panel-default {
   margin-right: 5%;
 
   #pieChartContainer {
-    width: 620px;
+    width: 100%;
     height: 520px;
     float: right;  
   }
@@ -356,12 +363,7 @@ body.devise-body {
   }
 }
 
-// ------ INSTRUCTIONS -----------
 
-body#edit-body {
-  background-color: $green;
-  padding-bottom: 70px;
-}
 
 
 

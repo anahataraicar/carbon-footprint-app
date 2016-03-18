@@ -10,6 +10,10 @@ $grey: rgb(159,168,163);
 $black: #232825;
 $brown: #e3e0cf;
 
+$chart-brown: #bf967a; 
+$chart-red: #b52d41;
+$chart-orange: #f06f5c;
+
 
 * { font-family: Raleway; }
 
@@ -21,14 +25,12 @@ $brown: #e3e0cf;
 }
 
 body#edit-body {
-  background-color: $green;
+  background-color: #E1E8E4;
+  padding-bottom: 50px;
+
 }
 
-ul.nav.nav-pills.nav-stacked {
-  margin-left: 5px;
-  margin-top: 25px;
-  float: left;
-  width: 40px; 
+ul.nav.nav-pills {
 
   a:hover {
     background-color: transparent;
@@ -39,45 +41,105 @@ ul.nav.nav-pills.nav-stacked {
   }
 
   i {
-    color: $black;
+    color: #a03f3f;
     font-size: 30px;
-    margin-top: 5px;
+    margin: 1px;
   }
 }
 
 
+.panel.panel-default.main {
+  width: 100%;
+  display: inline-block;
+  margin: 2% 2% 2% 2%;
+  height: 530px;
+  // height: 10%;
+
+  .panel-heading{
+    height: 70px;
+  }
+}
+
+.panel.panel-default.left {
+  margin-top: 5%;
+  margin-left: 7%;
+  width: 100%;
+  height: 150px;
+}
+
+.well.bottom {
+  height: 150px;
+  display: inline-block;
+  background-color: white;
+  width: 100%;
+  padding: 10px;
+
+  .row {
+    
+    max-height: 150px;   
+
+    table#legend {
+      height: 90%;
+      width: 100%;
+      font-size: 14px;
+      td { 
+        padding: 3px;
+      }
+      .fa.fa-circle.travel {color: $chart-brown }
+      .fa.fa-circle.house {color: $chart-red }
+      .fa.fa-circle.food {color: $chart-orange }
+    }
+  }
+}
+
+
+
+.panel.panel-default.progress {
+  width: 100%;
+  height: 230px;
+  margin-left: 7%;
+  .panel-body {
+    height: 200px;
+  }
+}
+
+#gaugeContainer {
+  width: 100%;
+  height: 100%;
+}
+
+
 .tab-content {
-  margin-left: 5%;
-  width: 90%;
   height: 100%;
 
   .tab-pane {
-    // background-color: rgba(255,255,255,0.7);
     padding: 5px 20px 20px 20px;
-    margin: 5%;
     border-radius: 5px;
     position: relative;
+    height: 500px;
+    width: 100%;
 
     .arrow-before {
       display: inline-block;
       position: absolute;
-      bottom: 3%;
-      color: $black;
+      top: 60%;
+      color: #779c80;
     }
 
     .arrow-next {
       display: inline-block;
       right: 5%;
-      color: $black;
+      color: #779c80;
       position: absolute;
-      bottom: 3%;
+      top: 60%;
+      
     }   
 
     h2 { margin-bottom: 20px; }
     h3 { margin-bottom: 15px; }
 
     .question {
-      margin-bottom: 60px;
+      margin-bottom: 7%;
       width: 100%;
       
       p { font-size: 18px;}
@@ -92,7 +154,7 @@ ul.nav.nav-pills.nav-stacked {
 
 
 .input-group {
-  width: 60%;
+  width: 70%;
   margin-bottom: 5%;
 }
 
@@ -103,7 +165,7 @@ table#slider-table {
 
   tr, td {
     // top - right - bottom - left
-    padding: 3px 10px 10px 3px;
+    // padding: 0px 10px 10px 3px;
   }
 }
 
@@ -120,18 +182,14 @@ p.slider-value {
 }
 
 table#action-table {
-  margin: 30px 20px 0px 20px;
-  font-size: 18px;
+  margin: 10px;
+  font-size: 16px;
   
   td.actionvalue { text-align: center; }
   td { padding: 10px; }
   th { text-decoration: underline; }
 }
 
-.panel {
-  margin: 20px;
-  .panel-title { font-size: 20px; }
-}
 
 
 // ----- ANIMATIONS ---------------------------------
@@ -211,8 +269,8 @@ table#action-table {
 }
 
 .intro-instructions {
-  margin-top: 195px;
-  margin-left: 210px;
+  margin-top: 15%;
+  margin-left: 30%;
 }
 
 
@@ -270,7 +328,7 @@ span#total { font-size: 40px; }
 span#equivalent { font-size: 24px; }
 
 .modal-lg {
-  // width: 90% !important;
+  width: 90% !important;
 }
 
 #modalButton {
@@ -286,55 +344,53 @@ span#equivalent { font-size: 24px; }
 // ----------- CHARTS ----------------------------
 
 
-div#footprint-update {
-  position: absolute;
-}
+
+
 
 .chart-instructions {
   position: absolute;
-  margin-top: 470px;
-  p { font-size: 16px; }
+  margin-top: 5%;
+  p { 
+    font-size: 16px; 
+    color: $chart-red;
+  }
 }
 
 .toggle-instructions {
   position: absolute;
-  margin-left: 38%;
-  margin-top: 1%;
+  margin-left: 20%;
+  margin-top: 2%;
   font-size: 16px;
 }
 
+.btn-group {
+  margin-top: 2%;
+  float: right;
+  i {padding: 3px;}
+}
 
 
-
-.panel.panel-default {
+#chart-holder {
   margin-right: 5%;
+  width: 100%;
+  height: 400px;
 
   #pieChartContainer {
     width: 100%;
-    height: 520px;
+    height: 400px;
     float: right;  
   }
 
   #barChartContainer {
-    width: 620px;
-    height: 520px;
+    width: 100%;
+    height: 400px;
     float: right;    
   }
 
   #bubbleContainer {
-    width: 620px;
-    height: 520px;
+    width: 100%;
+    height: 400px;
     float: right;
-  }
-
-  .panel-heading {
-    font-size: 16px;
-  }
-
-  .btn-group {
-    float: right;
-
-    i {padding: 3px;}
   }
 }
 

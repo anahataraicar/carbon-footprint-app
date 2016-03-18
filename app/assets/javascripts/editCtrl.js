@@ -9,6 +9,7 @@
       $http.get('/api/v1/footprints/:id.json').then(function(response) {
           var pieData = response.data;
           $scope.drawPieChart(pieData);
+          $scope.drawGauge();
       });
     };
 
@@ -47,6 +48,7 @@
             var barData = response.data;
             $scope.drawBarChart(barData);
             $scope.drawBubbleChart(barData);
+
         });
 
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
@@ -167,9 +169,15 @@
 
     $scope.updatingTotal = (travel + housing + food).toFixed(2);
 
+    $scope.travelLegend = travel.toFixed(1);
+    $scope.housingLegend = housing.toFixed(1);
+        $scope.foodLegend = food.toFixed(1);
+
+
+
     var colors = ["#bf967a", "#b52d41", "#f06f5c"],
 
-        categories = ['Travel', 'Housing', 'Food'],
+        categories = ['Travel', 'Home Energy', 'Food'],
         data = [{
             y: travel,
             color: colors[0],
@@ -183,7 +191,7 @@
             y: housing,
             color: colors[1],
             drilldown: {
-                name: 'Housing',
+                name: 'Home energy',
                 categories: ['Sqft', 'Electricity', 'Natural gas', 'Heating oil', 'Propane'],
                 data: [pieData["home"], pieData["electricity"], pieData["natural_gas"], pieData["heating"], pieData["propane"]],
                 color: colors[1]
@@ -278,7 +286,7 @@
             size: '40%',
             dataLabels: {
                 formatter: function () {
-                    return this.y > 3 ? this.point.name : null;
+                    return this.y > 0 ? this.point.name : null;
                 },
                 color: 'black',
                 distance: -30,
@@ -290,7 +298,7 @@
         }, {
             // name: 'Total',
             data: subData,
-            size: '60%',
+            size: '70%',
             innerSize: '60%',
             dataLabels: {
                 formatter: function () {
@@ -325,7 +333,7 @@
             chart: {
                 type: 'column',
                 backgroundColor:'transparent',
-                height: 500
+                height: 400
             },
             title: {
                 text: ''
@@ -418,7 +426,7 @@
                 data: travel_data,
                 color: colors[0]
             }, {
-                name: 'Housing',
+                name: 'Home Energy',
                 data: housing_data,
                 color: colors[1]
             }, {
@@ -443,10 +451,14 @@
         var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
         var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
 
+        $scope.travelLegend = travel.toFixed(1);
+        $scope.housingLegend = housing.toFixed(1);
+        $scope.foodLegend = food.toFixed(1);
+
         scope.updatingTotal = (travel + housing + food).toFixed(2);
 
         var colors = ["#bf967a", "#b52d41", "#f06f5c"],
-        categories = ['Travel', 'Housing', 'Food'],
+        categories = ['Travel', 'Home Energy', 'Food'],
         data = [{
             y: travel,
             color: colors[0],
@@ -460,7 +472,7 @@
             y: housing,
             color: colors[1],
             drilldown: {
-                name: 'Housing',
+                name: 'Home Energy',
                 categories: ['Sqft', 'Electricity', 'Natural gas', 'Heating oil', 'Propane'],
                 data: [pieData["home"], pieData["electricity"], pieData["natural_gas"], pieData["heating"], pieData["propane"]],
                 color: colors[1]
@@ -639,11 +651,8 @@
             
             $scope.updatePieChart();
             $scope.errors = "";
-
-            
-            // if (formData["type"]=== "public_transportation" || formData["type"] === "natural_gas" || formData["type"] === "propane") {
-                $scope.changePage(page, direction);
-            // };
+            $scope.changePage(page, direction);
+          
 
         }, function(response) { 
             $scope.errors = response.data.errors;
@@ -670,11 +679,11 @@
             var newPage = page - 1;
         } else if (direction === 2) {
             var newPage = page + 1;
+            $scope.updateGauge(newPage);
         };
 
         if (newPage === 3) {
             $scope.chartInstructions = true;
-
             $timeout(function(){
                 $scope.chartInstructions = false; 
             }, 5000);
@@ -1010,7 +1019,7 @@
 
         var colors = ["#bf967a", "#b52d41", "#f06f5c"], // change colors?
 
-        categories = ['Travel', 'Housing', 'Food'],
+        categories = ['Travel', 'Home Energy', 'Food'],
         data = [{
             y: travel,
             color: colors[0],
@@ -1024,7 +1033,7 @@
             y: housing,
             color: colors[1],
             drilldown: {
-                name: 'Housing',
+                name: 'Home Energy',
                 categories: ['Sqft', 'Electricity', 'Natural gas', 'Heating oil', 'Propane'],
                 data: [pieData["home"], pieData["electricity"], pieData["natural_gas"], pieData["heating"], pieData["propane"]],
                 color: colors[1]
@@ -1194,7 +1203,7 @@
             type: 'bubble',
             plotBorderWidth: 1,
             zoomType: 'xy',
-            height: 500
+            height: 400
         },
         credits: {
             enabled: false
@@ -1268,6 +1277,102 @@
             color: '#b52d41'
             }]
         });
+    };
+
+
+
+
+    $scope.drawGauge = function() {
+        $('#gaugeContainer').highcharts({
+        // Highcharts.chart('#gaugeContainer', {
+            chart: {
+                type: 'solidgauge',
+                marginTop: 10,
+                backgroundColor:'transparent'
+            },
+            credits: {
+                enabled: false
+            }, 
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
+            title: {
+                text: '',
+                style: {
+                    fontSize: '1px'
+                }
+            },
+            tooltip: {
+               enabled: false
+            },
+            pane: {
+                startAngle: 0,
+                endAngle: 360,
+                background: { // Track for Move
+                    outerRadius: '112%',
+                    innerRadius: '88%',
+                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.3).get(),
+                    borderWidth: 0
+                } 
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                lineWidth: 0,
+                tickPositions: []
+            },
+            plotOptions: {
+                solidgauge: {
+                    borderWidth: '12px',
+                    dataLabels: {
+                        enabled: true,
+                        borderWidth: 0,
+                        format: '{y:.0f} %',
+                        y: -18,
+                        style: {
+                            fontSize: '18px'
+                        }
+                    },
+                    linecap: 'round',
+                    stickyTracking: false
+                }
+            },
+            series: [{
+                name: 'Move',
+                borderColor: Highcharts.getOptions().colors[0],
+                data: [{
+                    color: Highcharts.getOptions().colors[0],
+                    radius: '100%',
+                    innerRadius: '100%',
+                    y: 0 // this is the point to update !!
+                }]
+            }]
+        },
+    /* In the chart load callback, add icons on top of the circular shapes */
+        function callback() {
+            // Move icon
+            this.renderer.path(['M', -8, 0, 'L', 8, 0, 'M', 0, -8, 'L', 8, 0, 0, 8])
+                .attr({
+                    'stroke': '#303030',
+                    'stroke-linecap': 'round',
+                    'stroke-linejoin': 'round',
+                    'stroke-width': 2,
+                    'zIndex': 10
+                })
+                .translate(190, 26)
+            
+        });
+
+        var chart = $('#gaugeContainer').highcharts();
+        // console.log(chart.series[0].data[0].y);
+    };
+
+    $scope.updateGauge = function(page) {
+        var y = (page-1) / 8 * 100;
+        var chart = $('#gaugeContainer').highcharts();
+        chart.series[0].data[0].update(y);
     }
 
 

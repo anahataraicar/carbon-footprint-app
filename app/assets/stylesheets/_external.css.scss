@@ -26,8 +26,6 @@ $chart-orange: #f06f5c;
 
 body#edit-body {
   background-color: #E1E8E4;
-  padding-bottom: 50px;
-
 }
 
 ul.nav.nav-pills {
@@ -103,7 +101,7 @@ ul.nav.nav-pills {
 }
 
 .page-header {
-  position: absolute;
+  // position: absolute;
   // width: 75%;
   // margin-bottom: 5%;
 
@@ -447,7 +445,37 @@ body.devise-body {
 }
 
 
+// --------- edit page scrolling ---------
 
+.affix {
+    top: 0;
+    width: 100%;
+}
+
+.affix + .container-fluid {
+ 
+    padding-top: 70px;
+}
+
+.container-fluid.header {
+  background-color: #F44336;
+  color: white;
+  height: 400px;
+   transition: top 1s;
+}
+
+.navbar.navbar-inverse {
+ 
+}
+
+.container-fluid.body {
+  height: 100%;
+  // margin: 20px;
+}
+
+.hidden { /// for angular scroll animate
+  visibility: hidden;
+}
 
 
 

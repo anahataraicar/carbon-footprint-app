@@ -41,7 +41,8 @@ $brown: #e3e0cf;
     height: 400px;
     width: 900px;
     margin: auto;
-    padding-top: 50px;
+    margin-top: 20%;
+    // padding-top: 50px;
 
     a { color: black; }
 
@@ -112,7 +113,7 @@ h3#quote {
 
 .navbar.navbar-default {
     padding-top: 5px;
-    background-color: white;
+    background-color: transparent;
     border: none;
     a {
         color: black;
@@ -131,7 +132,7 @@ h3#quote {
 // -------------------- FOOTER ---------------------
 
 .navbar.navbar-default.navbar-fixed-bottom {
-    background-color: white;
+    // background-color: tra;
 }
 
 

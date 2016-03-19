@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  angular.module("app").controller("editCtrl", function($scope, $http, $timeout) {
+  angular.module("app").controller("editCtrl", function($scope, $http, $timeout, $location, $anchorScroll) {
 
     var userId = gon.user_id;
 
@@ -18,6 +18,7 @@
 
     $scope.init = function() {
         $scope.setUpCharts();
+        $scope.anchorPage();
         $scope.content = "pie";
         $scope.resultsVisible = false;
         $scope.modalVisible = true;
@@ -37,11 +38,33 @@
             { name: "review", visible: true }
         ];
 
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
     };
 
+    $scope.anchorPage = function() {
+
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash('anchorPoint');
+      console.log("lskdjf");
+      // call $anchorScroll()
+      $anchorScroll();
+    };
+
+    $scope.cars = [ 
+    {name: "car1"},
+    {name: "car2"},
+    {name: "car3" }
+    ];
+
+    $scope.animateElementIn = function($el) {
+    $el.removeClass('hidden');
+    $el.addClass('animated fadeInUp'); // this example leverages animate.css classes
+  };
+
+  $scope.animateElementOut = function($el) {
+    $el.addClass('hidden');
+    $el.removeClass('animated fadeInUp'); // this example leverages animate.css classes
+  };
 // ---------- SUBMIT FOOTPRINT ---------------------- 
 
     $scope.submitProfile = function() {

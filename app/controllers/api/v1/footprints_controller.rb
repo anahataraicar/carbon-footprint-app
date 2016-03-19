@@ -79,6 +79,13 @@ class Api::V1::FootprintsController < ApplicationController
     user_total_value = profiles.sum(:total_value)
     @average = user_total_value / user_count
 
+    habits = Habit.where("footprint_type = ? OR footprint_type = ? OR footprint_type = ?", "vehicle", "public_transportation", "air_travel")
+    @travel = habits.sum(:value).to_f
+    habits = Habit.where("footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ?", "electricity", "natural_gas", "heating", "propane")
+    @home = habits.sum(:value).to_f
+    habits = Habit.where("footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ?", "meat", "dairy", "grains", "fruit", "other")
+    @food = habits.sum(:value).to_f
+
   end
 
   

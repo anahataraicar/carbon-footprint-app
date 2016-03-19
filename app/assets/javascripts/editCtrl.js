@@ -10,6 +10,7 @@
           var pieData = response.data;
           $scope.drawPieChart(pieData);
           $scope.drawGauge();
+          $scope.drawSmallPieChart(pieData);
       });
     };
 
@@ -181,7 +182,7 @@
 
     $scope.travelLegend = travel.toFixed(1);
     $scope.housingLegend = housing.toFixed(1);
-        $scope.foodLegend = food.toFixed(1);
+    $scope.foodLegend = food.toFixed(1);
 
 
 
@@ -274,7 +275,8 @@
             pie: {
                 center: ['50%', '50%'],
                 borderColor: 'transparent',
-                borderWidth: 0
+                borderWidth: 0,
+                allowPointSelect: true
             },
         },
         tooltip: {
@@ -1394,7 +1396,71 @@
         var y = (page-1) / 8 * 100;
         var chart = $('#gaugeContainer').highcharts();
         chart.series[0].data[0].update(y);
-    }
+    };
+
+
+/// --------- SMALL PIE CHART -------------------------
+
+    $scope.drawSmallPieChart = function(pieData) {
+        var travel = pieData["travel"];
+        var housing = pieData["housing"];
+        var food = pieData["food"];
+        var colors = ["#bf967a", "#b52d41", "#f06f5c"];
+        $scope.travelTot = travel;
+        $scope.housingTot = housing;
+        $scope.foodTot = food;
+
+        Highcharts.setOptions({ colors: ["#bf967a", "#b52d41", "#f06f5c"]});
+
+        $('#smallPieContainer').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                backgroundColor: 'transparent'
+            },
+            legend: {
+                align: 'right',
+                verticalAlign: 'top',
+                layout: 'vertical',
+                margin: 10,
+                itemMarginBottom: 8
+            },
+            title: {
+                text: '',
+                fontSize: '2px'
+            },
+            credits: { enabled: false },
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: { enabled: false },
+                    // showInLegend: true,
+                    size: 100
+                }
+            },
+            series: [{
+                name: 'Total',
+                colorByPoint: true,
+                data: [
+                  { name: 'Travel', y: travel }, 
+                  { name: 'Home Electricity', y: housing }, 
+                  { name: 'Food', y: food }
+                ]
+            }]
+        });
+    };
+
 
 
 

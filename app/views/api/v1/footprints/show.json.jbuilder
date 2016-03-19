@@ -8,3 +8,6 @@ json.set! :lightbulb, @lightbulb
 json.set! :veg, @veg
 json.set! :total, @total
 json.set! :average, @average
+json.set! :travel, @travel
+json.set! :housing, @home
+json.set! :food, @food

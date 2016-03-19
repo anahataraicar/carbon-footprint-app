@@ -1,0 +1,33 @@
+ <div class="well bottom">
+  <div class="row">
+    <div class="col-md-6">
+      <h5>Your emissions</h5>
+      <table id="legend">
+        <tr>
+          <td><i class="fa fa-circle travel"></i></td>
+          <td>Travel:</td><td>{{ travelLegend }} MT</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-circle house"></i></td>
+          <td>Home Energy:</td><td>{{ housingLegend }} MT</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-circle food"></i></td>
+          <td>Food:</td><td>{{ foodLegend }} MT</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-6">
+
+      <div ng-if="barChartExist">
+        <h4>You are {{ percentile }}% {{ string }} than the average user <span> <i class="fa fa-thumbs-o-up" ng-if="betterAverage"></i><i class="fa fa-thumbs-o-down" ng-if="worseAverage"></i></span></h4>
+      </div>
+
+      <div ng-if="!barChartExist">
+        <div id="smallPieContainer"></div>
+      </div>
+    </div>
+ 
+     
+  </div> <!--  well row -->
+</div> <!--  well -->

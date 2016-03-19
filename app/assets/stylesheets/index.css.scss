@@ -24,7 +24,7 @@ $brown: #e3e0cf;
 }
 
 .contact-section {
-    height: 10%;
+    height: 40%;
     padding-top: 10px;
     text-align: center;
     background: $brown;
@@ -101,11 +101,28 @@ h3#quote {
 
 
 // ------------------ CONTACT ----------------------
+
+
 .row.contact {
     text-align: center;
-    h4 { color: red; }
-    i { margin-right: 10px }
-    a { color: $black }
+    margin: 2%;
+}
+
+.img-circle {
+    height: 50%;
+    width: 50%;
+}
+
+.row.contact-info {
+    margin-left: 20%;
+    margin-right: 20%;
+    
+    .col-md-6.list {
+        text-align: left;
+        h4 { margin: 5% }
+        i { margin-right: 10px }
+        a { color: $black }
+    }
 }
 
 
@@ -131,9 +148,21 @@ h3#quote {
 
 // -------------------- FOOTER ---------------------
 
-.navbar.navbar-default.navbar-fixed-bottom {
-    // background-color: tra;
+.footer {
+    bottom: 0;
+    width: 100%;
+    margin-top: 10px;
+    height: 50px;
+    float: bottom;
+    background-color: #F0F4F1;
+    border: 1px solid #DFDFDF;
+    color: #B4BAB6;
+    h5 { 
+        margin-left: 20px;
+        margin-top: 15px;
+    }
 }
+
 
 
 

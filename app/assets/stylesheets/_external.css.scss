@@ -28,7 +28,7 @@ body#edit-body {
   background-color: #E1E8E4;
 }
 
-ul.nav.nav-pills {
+ul.nav.nav-pills { // icons
   
   li {
   width: 12%;
@@ -40,11 +40,11 @@ ul.nav.nav-pills {
 
   .active > a {
     background-color: transparent;
-    i { color: $chart-orange }
+    i { color: $green }
   }
 
   i {
-    color: #a03f3f;
+    color: white;
     font-size: 35px;
   }
 }
@@ -100,11 +100,13 @@ ul.nav.nav-pills {
   height: 100%;
 }
 
-.page-header {
-  // position: absolute;
-  // width: 75%;
-  // margin-bottom: 5%;
+.page-header.charts {
+  text-align: center;
+  margin-top: 5%;
+}
 
+.panel.panel-default > .panel-heading {
+  background-color: #B9CDBD;
 }
 
 
@@ -385,7 +387,6 @@ span#equivalent { font-size: 24px; }
 }
 
 #chart-dropdown {
-  position: absolute; 
   margin-left: 70%; 
   margin-top: 2%;
   .btn-group {

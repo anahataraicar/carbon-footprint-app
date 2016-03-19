@@ -13,8 +13,6 @@
       });
     };
 
-   
-
 
     $scope.init = function() {
         $scope.setUpCharts();
@@ -41,30 +39,18 @@
     };
 
     $scope.anchorPage = function() {
-
-      // set the location.hash to the id of
-      // the element you wish to scroll to.
-      $location.hash('anchorPoint');
-      console.log("lskdjf");
-      // call $anchorScroll()
-      $anchorScroll();
+       var point = document.getElementById("point");
+        $('html, body').stop().animate({
+            scrollTop: $(point).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
     };
 
-    $scope.cars = [ 
-    {name: "car1"},
-    {name: "car2"},
-    {name: "car3" }
-    ];
 
-    $scope.animateElementIn = function($el) {
-    $el.removeClass('hidden');
-    $el.addClass('animated fadeInUp'); // this example leverages animate.css classes
-  };
 
-  $scope.animateElementOut = function($el) {
-    $el.addClass('hidden');
-    $el.removeClass('animated fadeInUp'); // this example leverages animate.css classes
-  };
+
+
+
 // ---------- SUBMIT FOOTPRINT ---------------------- 
 
     $scope.submitProfile = function() {

@@ -5,7 +5,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lobster);
 
 
-$green: #C5D5CB;
+$green: #779c80;
 $grey: rgb(159,168,163);
 $black: #232825;
 $brown: #e3e0cf;
@@ -31,6 +31,10 @@ body#edit-body {
 }
 
 ul.nav.nav-pills {
+  
+  li {
+  width: 12%;
+  }
 
   a:hover {
     background-color: transparent;
@@ -38,12 +42,12 @@ ul.nav.nav-pills {
 
   .active > a {
     background-color: transparent;
+    i { color: $chart-orange }
   }
 
   i {
     color: #a03f3f;
-    font-size: 30px;
-    margin: 1px;
+    font-size: 35px;
   }
 }
 
@@ -51,55 +55,45 @@ ul.nav.nav-pills {
 .panel.panel-default.main {
   width: 100%;
   display: inline-block;
-  margin: 2% 2% 2% 2%;
+  margin: 2%;
   height: 530px;
   // height: 10%;
 
   .panel-heading{
     height: 70px;
   }
+
+  .panel-body {
+    padding: 4%;
+
+  }
 }
 
-.panel.panel-default.left {
+.well.left {
   margin-top: 5%;
   margin-left: 7%;
   width: 100%;
-  height: 150px;
 }
 
 .well.bottom {
-  height: 150px;
+  // height: 90%;
   display: inline-block;
   background-color: white;
   width: 100%;
   padding: 10px;
+  h5 { font-size: 16px;}
 
   .row {
-    
-    max-height: 150px;   
-
     table#legend {
       height: 90%;
       width: 100%;
       font-size: 14px;
-      td { 
-        padding: 3px;
-      }
+      td { padding: 3px; }
+
       .fa.fa-circle.travel {color: $chart-brown }
       .fa.fa-circle.house {color: $chart-red }
       .fa.fa-circle.food {color: $chart-orange }
     }
-  }
-}
-
-
-
-.panel.panel-default.progress {
-  width: 100%;
-  height: 230px;
-  margin-left: 7%;
-  .panel-body {
-    height: 200px;
   }
 }
 
@@ -108,13 +102,33 @@ ul.nav.nav-pills {
   height: 100%;
 }
 
+.page-header {
+  position: absolute;
+  // width: 75%;
+  // margin-bottom: 5%;
+
+}
+
+
+.panel.panel-default.progress {
+  width: 100%;
+  height: 230px;
+  margin-left: 7%;
+  .panel-body {
+    height: 200px;
+    padding: 5%;
+  }
+}
+
+.panel.panel-default.left {
+  margin-left: 7%;
+  width: 100%;
+}
 
 .tab-content {
   height: 100%;
 
   .tab-pane {
-    padding: 5px 20px 20px 20px;
-    border-radius: 5px;
     position: relative;
     height: 500px;
     width: 100%;
@@ -122,34 +136,41 @@ ul.nav.nav-pills {
     .arrow-before {
       display: inline-block;
       position: absolute;
-      top: 60%;
-      color: #779c80;
+      top: 70%;
+      color: $green;
     }
 
     .arrow-next {
       display: inline-block;
       right: 5%;
-      color: #779c80;
+      color: $green;
       position: absolute;
-      top: 60%;
+      top: 70%;
       
-    }   
-
-    h2 { margin-bottom: 20px; }
-    h3 { margin-bottom: 15px; }
+    }  
 
     .question {
-      margin-bottom: 7%;
-      width: 100%;
+
+      h3 { 
+        margin-bottom: 3%;
+        margin-top: 0px;
+      }
+      #food-title { 
+        margin-bottom: 0; 
+        position: relative;
+      }
       
       p { font-size: 18px;}
 
+      // input { background-color: rgba(119,156,128,0.3) }
+     
       .changed {
         background-color: white;
       }
     }
   }
 }
+
 
 
 
@@ -161,24 +182,28 @@ ul.nav.nav-pills {
 
 
 table#slider-table {
-  float: top;
+  position: absolute;
+  border: 1px solid black;
+  top: 0;
 
   tr, td {
     // top - right - bottom - left
     // padding: 0px 10px 10px 3px;
   }
-}
 
-#nValueMeat {
-  width: 200px;
-}
+  #nValueMeat {
+    width: 200px;
+  }
 
-p.slider-value {
-  text-align: center;
-}
+  p.slider-value {
+    text-align: center;
+    font-size: 12px;
+  }
 
-.calories {
-  text-align: center;
+  .calories {
+    text-align: center;
+  }
+
 }
 
 table#action-table {
@@ -204,10 +229,10 @@ table#action-table {
 
 
 .errors .ng-enter {
-  -webkit-animation: shake 0.5s;
-  -moz-animation: shake 0.5s;
-  -o-animation: shake 0.5s;
-  animation: shake 0.5s;
+  -webkit-animation: bounceIn 0.5s;
+  -moz-animation: bounceIn 0.5s;
+  -o-animation: bounceIn 0.5s;
+  animation: bounceIn 0.5s;
 }
 
 .chart-instructions.ng-enter {
@@ -226,9 +251,9 @@ table#action-table {
 
 .errors {
   position: absolute;
-  margin-left: 350px;
-  margin-top: 50px; 
-  height: 50px;
+  top: 84%;
+  left: 30%;
+  text-align: center;
   h4 { color: #b52d41; }
 }
 
@@ -271,6 +296,7 @@ table#action-table {
 .intro-instructions {
   margin-top: 15%;
   margin-left: 30%;
+  color: $chart-red;
 }
 
 
@@ -307,9 +333,6 @@ body#show-body {
   margin-right: 20px;
   font-family: Raleway;
 
-  i.fa.fa-pagelines.fa-lg {
-    background-color: red;
-  }
   h2 { margin-bottom: 15px; }
 }
 
@@ -351,7 +374,7 @@ span#equivalent { font-size: 24px; }
   position: absolute;
   margin-top: 5%;
   p { 
-    font-size: 16px; 
+    font-size: 18px; 
     color: $chart-red;
   }
 }
@@ -363,11 +386,15 @@ span#equivalent { font-size: 24px; }
   font-size: 16px;
 }
 
-.btn-group {
+#chart-dropdown {
+  position: absolute; 
+  margin-left: 70%; 
   margin-top: 2%;
-  float: right;
-  i {padding: 3px;}
+  .btn-group {
+    i {padding: 3px;}
+  }
 }
+
 
 
 #chart-holder {
@@ -397,9 +424,9 @@ span#equivalent { font-size: 24px; }
 
 .pdf-icons {
   display: inline-block;
-  margin: 20px 20px 80px 20px;
+  margin: 10px 10px 10x 10px;
 
-  i { margin: 20px; }
+  i { margin: 10px; }
 }
 
 

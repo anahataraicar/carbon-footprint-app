@@ -22,6 +22,7 @@
         $scope.resultsVisible = false;
         $scope.modalVisible = true;
         $scope.totalSaved = 0;
+        $scope.previousComplete = true;
 
         $scope.introInstructions = false;
        
@@ -646,20 +647,30 @@
     $scope.sendForm = function(formData, page, direction) {
 
         var urlString = "/api/v1/footprints/" + userId;
-
         $http.patch(urlString, formData).then(function(response){
             
-            $scope.updatePieChart();
-            $scope.errors = "";
-            $scope.changePage(page, direction);
-          
+            var type = formData["type"];
+            if (type === "vehicle" || type === "heating" || type === "electricity") {
+                 $scope.previousComplete = true; 
+            };
+
+            if (type !== "vehicle" && type !== "heating" && type !== "electricity" && $scope.previousComplete === true ) {
+                $scope.updatePieChart();
+                $scope.changePage(page, direction);  
+                $scope.errors = "";         
+            } else if (type !== "vehicle" && type !== "heating" && type !== "electricity" && $scope.previousComplete === false ) {
+                $scope.errors = response.data.errors;
+            };
 
         }, function(response) { 
             $scope.errors = response.data.errors;
-            // $scope.clicked = true; 
-
+            console.log($scope.errors);
+            console.log("error");
+            var type = formData["type"];
+            if (type === "vehicle" || type === "heating" || type === "electricity") {
+                 $scope.previousComplete = false;
+            };
         });
-
     };
 
 
@@ -1203,7 +1214,8 @@
             type: 'bubble',
             plotBorderWidth: 1,
             zoomType: 'xy',
-            height: 400
+            height: 400,
+            backgroundColor: 'transparent'
         },
         credits: {
             enabled: false

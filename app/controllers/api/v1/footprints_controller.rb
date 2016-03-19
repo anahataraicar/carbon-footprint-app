@@ -86,7 +86,8 @@ class Api::V1::FootprintsController < ApplicationController
     if params[:type] == "intro"
         first_name = params[:first_name]
         last_name = params[:last_name]
-        if current_user.update({  first_name: first_name.capitalize,
+        if first_name && last_name
+          current_user.update({  first_name: first_name.capitalize,
                                   last_name: last_name.capitalize,
                                   state: params[:state] }) 
           head :ok
@@ -98,19 +99,14 @@ class Api::V1::FootprintsController < ApplicationController
         @habit = Habit.where("user_id = ? AND footprint_type = ?", current_user.id, params[:type]).last
 
         if @habit.calculate_habit( params[:type], {miles: params[:miles], mileage: params[:mileage], fuel_type: params[:fuel_type], mode: params[:mode], input_type: params[:input_type], input: params[:input], sqft: params[:sqft], factor: params[:factor]}.reject { |key, value| !value }) 
-
           # if current_user.has_a_profile?
             current_user.update_profile
           # end
-
           head :ok
         else
           render json: { errors: "Please fill the highlighted fields"}, status: 422 
         end
     end
-
-    
-
   end
 
 

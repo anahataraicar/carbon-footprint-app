@@ -19,11 +19,11 @@
     </div>
     <div class="col-md-6">
 
-      <div ng-if="barChartExist">
-        <h4>You are {{ percentile }}% {{ string }} than the average user <span> <i class="fa fa-thumbs-o-up" ng-if="betterAverage"></i><i class="fa fa-thumbs-o-down" ng-if="worseAverage"></i></span></h4>
+      <div ng-if="resultsVisible" id="percentile">
+        <h3>You are {{ percentile }}% {{ string }} than the average user <span> <i class="fa fa-thumbs-o-up" ng-if="betterAverage"></i><i class="fa fa-thumbs-o-down" ng-if="worseAverage"></i></span></h3>
       </div>
 
-      <div ng-if="!barChartExist">
+      <div ng-if="!resultsVisible">
         <div id="smallPieContainer"></div>
       </div>
     </div>

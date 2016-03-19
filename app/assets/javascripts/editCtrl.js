@@ -1011,14 +1011,14 @@
     $scope.showCharts = function() {
         $scope.modalVisible = false;
         $scope.resultsVisible = true;
-         $scope.toggleInstructions = true;
+        $scope.toggleInstructions = true;
 
         $timeout(function() {
             $scope.toggleInstructions = false;
         }, 5000);
     };
 
-    $scope.changeChart = function(chartType) {
+    $scope.switchChart = function(chartType) {
         $scope.content = chartType;
 
     };
@@ -1026,6 +1026,13 @@
     $scope.checkChart = function(chartType) {
         return $scope.content === chartType;
     };
+
+
+    $scope.charts = [
+        { caption: "Your carbon footprint" },
+        { caption: "Here's how you stack up against other users" },
+        { caption: "Electricity use and meat intake vs. overall footprint"}
+    ];
 
 
 // -------------- PRINT CHART -------------------------

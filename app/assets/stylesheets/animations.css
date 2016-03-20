@@ -50,14 +50,8 @@
   opacity: 1;
 }
 
-.intro-instructions.ng-enter {
-  -webkit-animation: fadeIn 2s;
-  -moz-animation: fadeIn 2s;
-  -o-animation: fadeIn 2s;
-  animation: fadeIn 2s;
-}
 
-.toggle-instructions.ng-enter {
+/*.toggle-instructions.ng-enter {
   -webkit-animation: fadeIn 5s;
   -moz-animation: fadeIn 5s;
   -o-animation: fadeIn 5s;
@@ -69,6 +63,13 @@
   -moz-animation: fadeOut 2s;
   -o-animation: fadeOut 2s;
   animation: fadeOut 2s;
+}*/
+
+.fade {
+    opacity:0;
+    -webkit-transition: opacity 1.3s linear;
+    -o-transition: opacity 1.3s linear;
+    transition: opacity 1.3s linear;
 }
 
 

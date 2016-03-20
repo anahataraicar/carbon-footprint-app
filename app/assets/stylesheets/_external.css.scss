@@ -91,6 +91,10 @@ ul.nav.nav-pills { // icons
   }
 
   .row {
+
+    .panel {
+      margin: auto;
+    }
     table#legend {
       height: 90%;
       width: 100%;
@@ -99,6 +103,8 @@ ul.nav.nav-pills { // icons
     }
   }
 }
+
+
 
 .fa.fa-circle.travel {color: $chart-brown }
 .fa.fa-circle.house {color: $chart-red }
@@ -170,11 +176,7 @@ ul.nav.nav-pills { // icons
       
       p { font-size: 18px;}
 
-      input { background-color: rgba(119,156,128,0.3) }
-     
-      .changed {
-        background-color: white;
-      }
+      .error { background-color: red; }
     }
   }
 }
@@ -187,7 +189,7 @@ ul.nav.nav-pills { // icons
 
 
 .input-group {
-  width: 70%;
+  width: 60%;
   margin-bottom: 5%;
 }
 
@@ -237,18 +239,18 @@ table#action-table {
   h4 { color: #b52d41 }
 }
 
-.intro-instructions {
-  margin-top: 17%;
-  margin-left: 30%;
-  color: $chart-red;
-}
-
 .page-header.title {
   margin-left: 3%;
   h2 {
     font-family: 'Merriweather', serif;
     font-size: 40px;
   }
+}
+
+
+.tooltip > .tooltip-inner { 
+  font-size: 16px;
+  padding: 10px;
 }
 
 
@@ -323,13 +325,7 @@ span#equivalent { font-size: 24px; }
 }
 
 
-.toggle-instructions {
-  position: absolute;
-  margin-left: 20%;
-  margin-top: 82%;
-  font-size: 16px;
-  color: $chart-red;
-}
+
 
 
 
@@ -340,6 +336,7 @@ span#equivalent { font-size: 24px; }
 
 .charts-titles {
   h3 {text-align: center;}
+  width: 100%;
   display: inline-block;
   padding-top: 6%;
   font-family: 'Merriweather', serif;
@@ -349,6 +346,11 @@ span#equivalent { font-size: 24px; }
 .btn-group {
   display: inline-block;
   margin-bottom: 5px;
+}
+
+.btn.btn-default.dropdown-toggle {
+  background-color: white;
+  border-width: 0;
 }
 
 .col-md-5.right {
@@ -438,6 +440,7 @@ span#equivalent { font-size: 24px; }
 
 .navbar.navbar-inverse{
   border: 0 !important;
+  z-index: 1000;
 }
 
 .container-fluid.body {
@@ -446,10 +449,15 @@ span#equivalent { font-size: 24px; }
   padding-right: 0;
 }
 
-.hidden { /// for angular scroll animate
-  visibility: hidden;
-}
+#text-wrapper {
+  opacity: 0;
+  -webkit-transition: opacity 1s linear;
+  transition: opacity 1s linear; 
 
+  &.active {
+      opacity: 1;
+  }
+}
 
 
 

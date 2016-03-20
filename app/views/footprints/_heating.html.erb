@@ -3,7 +3,7 @@
 <form class="form-inline" role="form">
   <div class="input-group">
     <div class="form-group">
-      <input class="form-control" type="text" placeholder="{{ heatingType.placeholder }}" ng-model="heatingInput" name="input" ng-class="{changed: heat.input.$dirty}">
+      <input class="form-control" type="text" placeholder="{{ heatingType.placeholder }}" ng-model="heatingInput">
     </div>
     <div class="form-group">
       <select class='form-control' ng-model="heatingType" ng-options="type.name for type in heatingOptions">

@@ -1,29 +1,27 @@
 <h3>Let's get started!</h3>
-<p>Please start off by putting in some basic info</p> 
+<p>Please start off by filling out some basic info</p> 
 
 <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">First name</span>
-  <input type="text" class="form-control" placeholder="First name" ng-model="firstName" name="firstName" ng-class="{ changed: intro.firstName.$dirty}">
+  <input type="text" class="form-control" placeholder="First name" ng-model="firstName">
 </div>
 
 <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">Last name</span>
-  <input type="text" class="form-control" placeholder="Last name" ng-model="lastName" name="lastName" ng-class="{ changed: intro.lastName.$dirty}" ng-change="introInstructions = true">
+  <input type="text" class="form-control" placeholder="Last name" ng-model="lastName">
 </div>
 
   <form class="form-inline" role="form">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">State of residence:</span>
       <div class="form-group">
-        <select class='form-control' ng-model="stateInput" ng-options="state.name for state in stateOptions">
+        <select class='form-control' ng-model="stateInput" ng-options="state.name for state in stateOptions" ng-click="introTooltip()">
         </select>          
       </div>
     </div>
 </form>
 
 
-
-<p class="intro-instructions" ng-if="introInstructions">Click on the arrow to continue!</p>
 
 
 

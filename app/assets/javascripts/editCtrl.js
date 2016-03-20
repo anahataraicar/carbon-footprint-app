@@ -15,6 +15,7 @@
     };
 
 
+
     $scope.init = function() {
         $scope.setUpCharts();
         $scope.anchorPage();
@@ -23,34 +24,35 @@
         $scope.modalVisible = true;
         $scope.totalSaved = 0;
         $scope.previousComplete = true;
-        // $scope.userName = "new user";
-
         $scope.introInstructions = false;
-       
-        $scope.pills = [
-            { name: "intro", visible: true },
-            { name: "vehicle", visible: true },
-            { name: "air", visible: true },
-            { name: "electricity", visible: true },
-            { name: "heat", visible: true },
-            { name: "home", visible: true },
-            { name: "food", visible: true },
-            { name: "review", visible: true }
-        ];
 
+        $('[data-toggle="tooltip"]').tooltip();    
     };
 
     $scope.anchorPage = function() {
        var point = document.getElementById("point");
         $('html, body').stop().animate({
             scrollTop: $(point).offset().top
-        }, 1500, 'easeInOutExpo');
+        }, 1500, 'easeInOutExpo', function() {
+            bindScrollListener();
+        });
         event.preventDefault();
     };
 
+    function bindScrollListener() {
+        $(window).on('scroll', function(){
+            var point = document.getElementById("fade-point");
+            var wrapper = document.getElementById("text-wrapper")
+            var rect = point.getBoundingClientRect();
 
-
-
+            if (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)) {
+                console.log("on");
+                $(wrapper).addClass("active");
+            } else {
+                $(wrapper).removeClass("active");
+            }
+        });
+    }
 
 
 // ---------- SUBMIT FOOTPRINT ---------------------- 
@@ -65,17 +67,13 @@
 
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
             var pieData = response.data;
-
-            
             $scope.calculateShow(pieData);
             $scope.barChartExist = true;
-           
 
             var userValue = pieData["total"];
             var average = pieData["average"];
             var difference = userValue - average;
             $scope.percentile = (difference / average * 100).toFixed(1);
-
 
             if ($scope.percentile > 0) {
                 $scope.string = " worse ";
@@ -86,14 +84,12 @@
                 $scope.percentile = Math.abs($scope.percentile);
             };
 
-
             var gas = pieData["saved_gas"].toFixed(2);
             var bike = pieData["bike"].toFixed(2);
             var light = pieData["lightbulb"].toFixed(2);
             var veg = pieData["veg"].toFixed(2);
             var heatDown = pieData["thermostat_down"];
             var heatUp = pieData["thermostat_up"];
-
 
             $scope.actions = [
                 {
@@ -189,13 +185,13 @@
     var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
     var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
 
+    // get rid of this?
     $scope.updatingTotal = (travel + housing + food).toFixed(2);
-
-    $scope.travelLegend = travel.toFixed(1);
-    $scope.housingLegend = housing.toFixed(1);
-    $scope.foodLegend = food.toFixed(1);
-
-
+    
+    $scope.travelLegend = parseFloat(travel.toFixed(1));
+    $scope.housingLegend = parseFloat(housing.toFixed(1));
+    $scope.foodLegend = parseFloat(food.toFixed(1));
+    $scope.totalLegend = $scope.travelLegend + $scope.housingLegend + $scope.foodLegend
 
     var colors = ["#bf967a", "#b52d41", "#f06f5c"],
 
@@ -708,7 +704,7 @@
 // -------------------------------------------------------
 
 
-            // SEND FORM 
+            // SEND FORM  -------------
 
     $scope.sendForm = function(formData, page, direction) {
 
@@ -716,27 +712,24 @@
         $http.patch(urlString, formData).then(function(response){
             
             var type = formData["type"];
+
             if (type === "vehicle" || type === "heating" || type === "electricity") {
-                 $scope.previousComplete = true; 
+                $scope.previousComplete = true;
+                $scope.errors = ""; 
             };
 
             if (type !== "vehicle" && type !== "heating" && type !== "electricity" && $scope.previousComplete === true ) {
                 $scope.updatePieChart();
                 $scope.changePage(page, direction);  
                 $scope.errors = "";         
+
             } else if (type !== "vehicle" && type !== "heating" && type !== "electricity" && $scope.previousComplete === false ) {
                 $scope.errors = response.data.errors;
             };
 
-            // if (type === "intro") {
-            //     console.log("intro");
-            //     $scope.firstName = "hi";
-            // }
-
         }, function(response) { 
             $scope.errors = response.data.errors;
-            console.log($scope.errors);
-            console.log("error");
+
             var type = formData["type"];
             if (type === "vehicle" || type === "heating" || type === "electricity") {
                  $scope.previousComplete = false;
@@ -746,14 +739,6 @@
 
 
 // -------------- CHANGE ICONS -------------------------
-
-
-    $scope.changePill = function(page, newPage) {
-        $scope.pills[page-1].visible = false;
-        $scope.pills[newPage-1].visible = true;
-    };
-
-
 
     $scope.changePage = function(page, direction) {
     
@@ -774,10 +759,8 @@
         var pageStr = 'a[href="#' + (newPage) + '"]';
         $(pageStr).tab('show');
         
-        // $scope.changePill(page, newPage);
     };
 
-    // $scope.thePlaceHolder = "hey";
 
     $scope.vehicleOptions = [
       { name: "Gasoline", factor: 8.887 }, 
@@ -824,7 +807,7 @@
 
     $scope.electricityOptions = [
         { name: "$/year", factor: 0.0834, placeholder: "$1,020" },
-        { name: "kWh/year", factor: 1, placeholder: "10,737 kWh" }
+        { name: "kWh/year", factor: 1, placeholder: "10737 kWh" }
     ];
 
     $scope.electricityType = $scope.electricityOptions[0];
@@ -832,7 +815,7 @@
     $scope.naturalOptions = [ 
       { name: "$/year", factor: 1.18, placeholder: "$550" },
       { name: "Therms/year", factor: 1, placeholder: "443 Therms"}, 
-      { name: "Cu.Ft/year", factor: 100, placeholder: "43,300 Cu.Ft" }
+      { name: "Cu.Ft/year", factor: 100, placeholder: "43300 Cu.Ft" }
     ];
 
     $scope.naturalType = $scope.naturalOptions[0];
@@ -1063,6 +1046,9 @@
         $scope.sendForm(formData, 1, direction);
     };
 
+    $scope.introTooltip = function() {
+        $('#intro-arrow').tooltip('show');
+    };
 
     window.scope=$scope;
 
@@ -1071,11 +1057,6 @@
     $scope.showCharts = function() {
         $scope.modalVisible = false;
         $scope.resultsVisible = true;
-        $scope.toggleInstructions = true;
-
-        $timeout(function() {
-            $scope.toggleInstructions = false;
-        }, 5000);
     };
 
     $scope.switchChart = function(chartType) {
@@ -1132,7 +1113,6 @@
         legend: {
             enabled: false
         },
-
         title: {
             text: ''
         },
@@ -1150,7 +1130,6 @@
                 format: '{value} MT'
             }
         },
-
         yAxis: {
             startOnTick: false,
             endOnTick: false,
@@ -1181,7 +1160,6 @@
                 fontSize: '12pt'
             }
         },
-
         plotOptions: {
             series: {
                 dataLabels: {
@@ -1360,8 +1338,6 @@
             }]
         });
     };
-
-
 
 
   });

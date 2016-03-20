@@ -48,7 +48,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: carbon-footprint-app_production
-  username: carbon-footprint-app
-  password: <%= ENV['CARBON-FOOTPRINT-APP_DATABASE_PASSWORD'] %>
+    database: carbon-footprint-app-production
+    adapter: postgresql
+    encoding: unicode
+    pool: 5-

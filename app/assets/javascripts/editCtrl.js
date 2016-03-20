@@ -23,6 +23,7 @@
         $scope.modalVisible = true;
         $scope.totalSaved = 0;
         $scope.previousComplete = true;
+        // $scope.userName = "new user";
 
         $scope.introInstructions = false;
        
@@ -65,7 +66,7 @@
         $http.get('/api/v1/footprints/:id.json').then(function(response) {
             var pieData = response.data;
 
-            $scope.drawPdfChart(pieData);
+            
             $scope.calculateShow(pieData);
             $scope.barChartExist = true;
            
@@ -90,6 +91,8 @@
             var bike = pieData["bike"].toFixed(2);
             var light = pieData["lightbulb"].toFixed(2);
             var veg = pieData["veg"].toFixed(2);
+            var heatDown = pieData["thermostat_down"];
+            var heatUp = pieData["thermostat_up"];
 
 
             $scope.actions = [
@@ -109,6 +112,14 @@
                     name: "veg",
                     caption: " Switch to a vegetarian diet",
                     value: veg
+                }, {
+                    name: "heatDown", 
+                    caption: " Turn down the thermostat in winter",
+                    value: heatDown
+                }, {
+                    name: "heatUp",
+                    caption: " Turn up the thermostat in summer",
+                    value: heatUp
                 }
             ];
         });
@@ -574,14 +585,18 @@
         var bike = pieData["bike"];
         var light = pieData["lightbulb"];
         var veg = pieData["veg"];
+        var heatDown = pieData["thermostat_down"];
+        var heatUp = pieData["thermostat_up"];
+
+
 
         var gasBox = document.getElementById("gas");
         var bikeBox = document.getElementById("bike");
         var lightBox = document.getElementById("lightbulb");
         var vegBox = document.getElementById("veg");
+        var heatDownBox = document.getElementById("heatUp");
+        var heatUpBox = document.getElementById("heatDown");
 
-        
-        console.log(pieData);
         if (gasBox.checked) {
             pieChart.series[1].data[0].update(pieData["vehicle"] - gas);
             pieChart.series[0].data[0].update(travel - gas);            
@@ -638,13 +653,53 @@
             barChart.series[2].data[0].update(foodBar[0]);
         };
 
+        if (heatDownBox.checked){
+            pieChart.series[1].data[3].update(pieData["natural_gas"] - heatDown);
+            pieChart.series[0].data[1].update(housing - heatDown);
+            barChart.series[1].data[0].update(housingBar[0] - heatDown);
+                pieData["natural_gas"] = pieData["natural_gas"] - heatDown;
+                housing = housing - heatDown;
+                housingBar[0] = housingBar[0] - heatDown;
+                $scope.savedActions.push(heatDown);
+        } else if (!heatDownBox.checked){
+            pieChart.series[1].data[3].update(pieData["natural_gas"]);
+            pieChart.series[0].data[1].update(housing);
+            barChart.series[1].data[0].update(housingBar[0]);
+        };
+
+
+
+        if (heatUpBox.checked){
+            pieChart.series[1].data[4].update(pieData["electricity"] - heatDown);
+            pieChart.series[0].data[1].update(housing - heatDown);
+            barChart.series[1].data[0].update(housingBar[0] - heatown);
+                pieData["electricity"] = pieData["electricity"] - heatDown;
+                housing = housing - heatDown;
+                housingBar[0] = housingBar[0] - heatDown;
+                $scope.savedActions.push(heatDown);
+        } else if (!heatUpBox.checked) {
+            pieChart.series[1].data[4].update(pieData["electricity"]);
+                pieChart.series[0].data[1].update(housing);
+                barChart.series[1].data[0].update(housingBar[0]);
+        };
+
+
+
+
+
+
         var total = 0;
         for (var i = 0; i < $scope.savedActions.length; i++) {
            total += $scope.savedActions[i]
         };
 
         $scope.totalSaved = parseFloat(total); 
+
+
+        
     };
+
+
 
 
 
@@ -672,6 +727,11 @@
             } else if (type !== "vehicle" && type !== "heating" && type !== "electricity" && $scope.previousComplete === false ) {
                 $scope.errors = response.data.errors;
             };
+
+            // if (type === "intro") {
+            //     console.log("intro");
+            //     $scope.firstName = "hi";
+            // }
 
         }, function(response) { 
             $scope.errors = response.data.errors;
@@ -717,6 +777,7 @@
         // $scope.changePill(page, newPage);
     };
 
+    // $scope.thePlaceHolder = "hey";
 
     $scope.vehicleOptions = [
       { name: "Gasoline", factor: 8.887 }, 
@@ -726,10 +787,10 @@
     $scope.fuelType = $scope.vehicleOptions[0];
 
     $scope.publicOptions = [
-      { name: "Bus", factor: 300 }, 
-      { name: "Commuter rail",  factor: 165 }, 
-      { name: "Transit Rail", factor: 160 }, 
-      { name: "Amtrak", factor: 191 }
+      { name: "Bus", factor: 300, placeholder: "165 miles"  }, 
+      { name: "Commuter rail",  factor: 165, placeholder: "124 miles" }, 
+      { name: "Transit Rail", factor: 160, placeholder: "83 miles" }, 
+      { name: "Amtrak", factor: 191, placeholder: "41 miles" }
     ];
 
     $scope.publicType = $scope.publicOptions[0];
@@ -762,16 +823,16 @@
     }
 
     $scope.electricityOptions = [
-        { name: "$/year", factor: 0.0834 },
-        { name: "kWh/year", factor: 1 }
+        { name: "$/year", factor: 0.0834, placeholder: "$1,020" },
+        { name: "kWh/year", factor: 1, placeholder: "10,737 kWh" }
     ];
 
     $scope.electricityType = $scope.electricityOptions[0];
 
     $scope.naturalOptions = [ 
-      { name: "$/year", factor: 1.18 },
-      { name: "Therms/year", factor: 1 }, 
-      { name: "Cu.Ft/year", factor: 100 }
+      { name: "$/year", factor: 1.18, placeholder: "$550" },
+      { name: "Therms/year", factor: 1, placeholder: "443 Therms"}, 
+      { name: "Cu.Ft/year", factor: 100, placeholder: "43,300 Cu.Ft" }
     ];
 
     $scope.naturalType = $scope.naturalOptions[0];
@@ -796,16 +857,15 @@
     };
 
     $scope.heatingOptions = [
-      { name: "$/year", factor: 4.02 },
-      { name: "gal/year", factor: 1 }
+      { name: "$/year", factor: 4.02, placeholder: "$862" },
+      { name: "gallons/year", factor: 1, placeholder: "214 gallons" }
     ];
 
     $scope.heatingType = $scope.heatingOptions[0];
 
-    // literally made up this value 3.12
     $scope.propaneOptions = [
-      {name: "$/year", factor: 3.12 },
-      { name: "gal/year", factor: 1 }
+      {name: "$/year", factor: 2.47, placeholder: "$380" },
+      { name: "gal/year", factor: 1, placeholder: "150 gallons" }
     ];
 
     $scope.propaneType = $scope.propaneOptions[0];
@@ -1035,179 +1095,7 @@
     ];
 
 
-// -------------- PRINT CHART -------------------------
-
-
-    
-    $scope.drawPdfChart = function(pieData){
-        
-        var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
-        var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
-        var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
-
-
-        var colors = ["#bf967a", "#b52d41", "#f06f5c"], // change colors?
-
-        categories = ['Travel', 'Home Energy', 'Food'],
-        data = [{
-            y: travel,
-            color: colors[0],
-            drilldown: {
-                name: 'Travel',
-                categories: ['Vehicle', 'Public<br> transportation', 'Air travel'],
-                data: [pieData["vehicle"], pieData["public_transportation"], pieData["air_travel"]],
-                color: colors[0]
-            }
-        }, {
-            y: housing,
-            color: colors[1],
-            drilldown: {
-                name: 'Home Energy',
-                categories: ['Sqft', 'Electricity', 'Natural gas', 'Heating oil', 'Propane'],
-                data: [pieData["home"], pieData["electricity"], pieData["natural_gas"], pieData["heating"], pieData["propane"]],
-                color: colors[1]
-            }
-        }, {
-            y: food,
-            color: colors[2],
-            drilldown: {
-                name: 'Food',
-                categories: ['Meat', 'Dairy', 'Grains', 'Fruit', 'Other'],
-                data: [pieData["meat"], pieData["dairy"], pieData["grains"], pieData["fruit"], pieData["other"]],
-                color: colors[2]
-            }
-        }],
-
-        totalData = [], // ??
-        subData = [], // ??
-        i,
-        j,
-        dataLen = data.length,
-        drillDataLen,
-        brightness;
-
-
-        // Build the data arrays
-        for (i = 0; i < dataLen; i += 1) {
-
-            // add browser data
-            totalData.push({
-                name: categories[i],
-                y: data[i].y,
-                color: data[i].color
-            });
-
-            // add version data
-            drillDataLen = data[i].drilldown.data.length;
-            for (j = 0; j < drillDataLen; j += 1) {
-                brightness = 0.2 - (j / drillDataLen) / 5;
-                subData.push({
-                    name: data[i].drilldown.categories[j],
-                    y: data[i].drilldown.data[j],
-                    color: Highcharts.Color(data[i].color).brighten(brightness).get()
-                });
-            }
-        }
-
-        // Create the chart
-        $('#pdfContainer').highcharts({
-            credits: {
-                    enabled: false
-            },
-            chart: {
-                type: 'pie',
-                // marginTop: 50,
-                marginLeft: 100,
-                // borderColor: '#000000',
-                // borderWidth: 5,
-                backgroundColor: 'transparent',
-                borderColor: 'transparent',
-                width: 600,
-                height: 800
-            },
-            title: {
-                x: 100,
-                margin: 10,
-                style: {
-                    fontSize: '26px'
-                },
-                text: 'My Carbon Footprint'
-            },
-            yAxis: {
-                title: {
-                    text: 'MT CO2/year'
-                }
-            },
-            plotOptions: {
-                pie: {
-                    center: ['50%', '50%'],
-                    borderColor: 'transparent',
-                    borderWidth: 0
-                    // showInLegend: true
-                },
-            },
-            navigation: {
-                buttonOptions: {
-                    enabled: false
-                }
-            },   
-            legend: {
-                align: 'right',
-                verticalAlign: 'bottom',
-                y: 50,
-                layout: 'vertical',
-                labelFormatter: function () {
-                    return this.name + ': ' + this.percentage.toFixed(1) + '%';
-                }
-            },
-
-            series: [{
-                // name: 'Total',
-                data: totalData,
-                size: '40%',
-                dataLabels: {
-                    formatter: function () {
-                        return this.y > 3 ? this.point.name : null;
-                    },
-                    color: 'black',
-                    distance: -30,
-                    style: {
-                        fontSize: '17px',
-                        textShadow: false,
-                    }
-                }
-            }, {
-                // name: 'Total',
-                data: subData,
-                size: '40%',
-                innerSize: '40%',
-                dataLabels: {
-                    formatter: function () {
-                        // display only if larger than 1
-                        return this.y > 0.5 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + ' MT' : null;
-                    },
-                    color: 'black',
-                    distance: 19,
-                    style: {
-                        fontSize: '13px',
-                        textShadow: false
-                    }
-                }
-            }]
-        });
-    };
-
-    $scope.printPdf = function(){
-        var pieChart = $('#pdfContainer').highcharts();
-        console.log(pieChart);
-        pieChart.print();
-    };
-
-
-
-
-// --------------- DRAW BUBBLE CHART -------------------
-// -----------------------------------------------------
+// -------------- BUBBLE CHART ------------------------
 
 
 
@@ -1217,7 +1105,6 @@
         var kwData = bubbleData[5];
         var totalData = bubbleData[6];
         var states = bubbleData[7];
-
 
         var chartData = [];
         for (var i = 0; i < 20; i++){
@@ -1229,7 +1116,6 @@
             };
             chartData.push(obj);
         };
-
 
         $('#bubbleContainer').highcharts({
 
@@ -1252,6 +1138,7 @@
         },
         xAxis: {
             gridLineWidth: 1,
+            gridLineColor: '#cccccc',
             title: {
                 text: 'MT CO2 from electricity use',
                 margin: 20, 
@@ -1277,9 +1164,10 @@
             labels: {
                 format: '{value} MT'
             },
-            maxPadding: 0.2
+            maxPadding: 0.2,
+            gridLineWidth: 1,
+            gridLineColor: '#cccccc'
         },
-
         tooltip: {
             useHTML: true,
             headerFormat: '<table>',

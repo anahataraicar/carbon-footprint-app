@@ -3,7 +3,7 @@
 <form class="form-inline" role="form">
   <div class="input-group">
     <div class="form-group">
-      <input class="form-control" type="text" placeholder="??" ng-model="electricityInput" name="input" ng-class="{changed: electricity.input.$dirty}">
+      <input class="form-control" type="text" placeholder="{{ electricityType.placeholder }}" ng-model="electricityInput" name="input" ng-class="{changed: electricity.input.$dirty}">
     </div>
     <div class="form-group">
       <select class='form-control' ng-model="electricityType" ng-options="type.name for type in electricityOptions">

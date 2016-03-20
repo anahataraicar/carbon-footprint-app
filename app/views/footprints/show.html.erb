@@ -35,16 +35,12 @@
         <div class="row left">
           <div class="col-md-7" style="padding-right: 0">
             <div class="page-header title">
-              <h2>Calculate my carboon footprint <small>Subtext for header</small></h2>
+              <h2>YOUR CARBON DASHBOARD<small> Subtext for header</small></h2>
             </div>
             <div class="row">
               <div class="col-md-3">
                 <div class="well left">
-                <% if current_user.first_name %>
-                  <p>Welcome <% current_user.first_name %>!</p>
-                <% else %>
-                  <p>Welcome new user!</p>
-                <% end %>
+                  <p>Welcome {{ firstName }} {{ lastName }}!</p>
                 </div>
                 <div class="panel panel-default progress">
                   <div class="panel-heading">Your progress</div>
@@ -72,7 +68,7 @@
             </div> <!-- close second row -->
           </div>
           <div class="col-md-5 right" >
-            <div class="page-header charts">
+            <div class="charts-titles">
               <h3 ng-show="checkChart('pie')">Your carbon footprint</h3>
               <h3 ng-show="checkChart('bar')">Here's how you stack up against other users</h3>
               <h3 ng-show="checkChart('bubble')">Electricity use and meat intake vs. overall footprint</h3>
@@ -107,7 +103,5 @@
       </div> <!-- ng controller div -->
     </div> <!-- ng app div -->
   </div> <!-- bootstrap container -->
-
-
 </body>
-<div id="pdfContainer" style="display: none;"></div>
+

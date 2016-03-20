@@ -11,3 +11,5 @@ json.set! :average, @average
 json.set! :travel, @travel
 json.set! :housing, @home
 json.set! :food, @food
+json.set! :thermostat_down, @thermostat_down
+json.set! :thermostat_up, @thermostat_up

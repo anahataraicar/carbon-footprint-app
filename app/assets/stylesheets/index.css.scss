@@ -84,6 +84,11 @@ h3.quote {
     margin: 120px 10px 30px 5px;
     text-align: center;
 
+    .col-md-4 {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
     i {
         margin: 10px;
         color: $green;

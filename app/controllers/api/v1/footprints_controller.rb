@@ -5,7 +5,7 @@ class Api::V1::FootprintsController < ApplicationController
   def index
     profiles = []
     profiles[0] = Profile.find_by(user_id: current_user.id)
-    counter = 2
+    counter = 3
 
     while counter > 0
       other_profile = Profile.all.sample
@@ -67,11 +67,15 @@ class Api::V1::FootprintsController < ApplicationController
       @bike = current_user.calc_bike.to_f
       @lightbulb = current_user.calc_lightbulb.to_f
       @veg = current_user.calc_veg.to_f
+      @thermostat_down = 0.52 
+      @thermostat_up = 0.25
     else
       @gas = 0
       @bike = 0
       @lightbulb = 0
       @veg = 0
+      @thermostat_down = 0
+      @thermostat_up = 0
     end
 
     profiles = Profile.all

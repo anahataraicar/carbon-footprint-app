@@ -18,7 +18,6 @@ $chart-orange: #f06f5c;
 
 * { font-family: Raleway; }
 
-
 // ------------------  EDIT ---------------------------
 
 .row {
@@ -83,13 +82,11 @@ ul.nav.nav-pills { // icons
   h5 { font-size: 16px;}
 
   #percentile {
-    border-radius: 5px;
-    background-color: rgba(191,150,122,0.5);
     padding: 3% 5% 3% 5%;
 
     h3 { 
       text-align: center;
-      color: white;
+      color: $green;
     }
   }
 
@@ -248,6 +245,10 @@ table#action-table {
 
 .page-header.title {
   margin-left: 3%;
+  h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 40px;
+  }
 }
 
 
@@ -310,8 +311,8 @@ span#equivalent { font-size: 24px; }
 }
 
 
-// ----------- CHARTS ----------------------------
 
+// ------------- POPUPS ----------------------------------
 
 
 .chart-instructions {
@@ -330,12 +331,18 @@ span#equivalent { font-size: 24px; }
   color: $chart-red;
 }
 
-.page-header.charts {
+
+
+// ----------- CHARTS ----------------------------
+
+
+
+
+.charts-titles {
   h3 {text-align: center;}
   display: inline-block;
-  padding-top: 0;
-  float: right;
-  margin-top: 0;
+  padding-top: 6%;
+  font-family: 'Merriweather', serif;
 }
 
 .btn-group > ul > li > i { margin: 6px; }
@@ -352,6 +359,8 @@ span#equivalent { font-size: 24px; }
 #chart-holder {
   width: 100%;
   height: 400px;
+  display: inline-block;
+  // border: 2px solid black;
 
   #pieChartContainer {
     width: 100%;
@@ -380,12 +389,14 @@ span#equivalent { font-size: 24px; }
 
 
 .pdf-icons {
-  display: inline-block;
+  // display: inline-block;
   width: 150px;
   margin: auto;
-
-  a {color: black}
-
+  text-align: center;
+  a {
+    color: black;
+    font-size: 16px;
+  }
   i { margin: 10px; }
 }
 

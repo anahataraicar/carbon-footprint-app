@@ -1,13 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script:700|Source+Sans+Pro:700|Merriweather|Alegreya+Sans);
 @import url(https://fonts.googleapis.com/css?family=Raleway);
-@import url(https://fonts.googleapis.com/css?family=Lobster);
 
 
 $green: #779c80;
 $grey: rgb(159,168,163);
-$black: #232825;
+$black: #171a18;
 $brown: #e3e0cf;
 
 $chart-brown: #bf967a; 
@@ -389,21 +390,7 @@ span#equivalent { font-size: 24px; }
 }
 
 
-// ------------- DEVISE -----------------------
 
-body.devise-body {
-  margin-left: 43%;
-  margin-top: 5%;
-  background-color: #e3e0cf;
-  font-size: 18px;
-
-  .field { margin: 15px; }
-  .actions { margin: 10px; }
-  .devise-header {
-    font-size: 36px;
-    font-family: Raleway;
-  }
-}
 
 // --------- edit page scrolling ---------
 
@@ -425,13 +412,15 @@ body.devise-body {
 
   h4 {
     margin: 30px;
+
   }
 
   h1 {
     font-size: 70px;
     width: 60%;
     margin: auto;
-    #subtitle { font-size: 30px}
+    font-family: 'Merriweather', serif;
+    sub {font-family: 'Merriweather', serif;}
   }
 
 }

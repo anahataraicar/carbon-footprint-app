@@ -1,7 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script:700);
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script:700|Source+Sans+Pro:700|Merriweather|Alegreya+Sans);
+
 
 $green: #bed0c5; // tad bit darker green
 $grey: rgb(159,168,163);
-$black: #232825;
+$black: #171a18;
 $brown: #e3e0cf;
 
 .intro-section {
@@ -38,22 +41,30 @@ $brown: #e3e0cf;
 .col-lg-12 {
   
   div#index-title {
-    height: 400px;
-    width: 900px;
+    border-radius: 40px;
+    background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0));
+    height: 600px;
+    width: 100%;
     margin: auto;
-    margin-top: 20%;
-    // padding-top: 50px;
+    margin-top: 10%;
+    padding-top: 50px;
 
-    a { color: black; }
+    a { color: white; }
 
     h1 {
-      color: $black;
-      font-size: 120px;
-      padding: 10px;
+        color: white;
+        font-size: 150px;
+        padding: 10px;
+        font-family: 'Merriweather', serif; 
+    
+    sub {font-family: 'Merriweather', serif;} 
+    
     }
+
     h2 { 
       font-size: 50px; 
-      color: $black;
+      font-family: 'Merriweather', serif;
+      color: white;
     }
   }
 }
@@ -61,7 +72,7 @@ $brown: #e3e0cf;
 
 // ------------------ ABOUT -----------------------
 
-h3#quote {
+h3.quote {
   color: white;
 }
 
@@ -70,12 +81,13 @@ h3#quote {
 
 
 .row.instructions {
-    margin: 100px 10px 30px 5px;
+    margin: 120px 10px 30px 5px;
     text-align: center;
 
     i {
-        padding: 30px;
+        margin: 10px;
         color: $green;
+        font-size: 90px;
     }
     p { 
         color: #666666;
@@ -129,18 +141,17 @@ h3#quote {
 // ------------------- HEADER -------------------------
 
 .navbar.navbar-default {
-    padding-top: 5px;
-    background-color: transparent;
+    padding-top: 3px;
+    background-color: $black;
     border: none;
    
     a {
-        color: black;
+        color: white;
         font-size: 20px;
     }
-
     .navbar-right {
         a {
-          color: black;
+          color: white;
           font-size: 16px;
         }
     }

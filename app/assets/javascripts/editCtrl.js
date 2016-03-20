@@ -1,7 +1,13 @@
+
+app.controller('mainController', ['$scope', function($scope) {
+    $scope.message = 'HOORAY!'; 
+}]);    
+
+
 (function() {
   "use strict";
 
-  angular.module("app").controller("editCtrl", function($scope, $http, $timeout, $location, $anchorScroll) {
+  angular.module("app").controller("editCtrl", ['$scope', function($scope, $http, $timeout, $location, $anchorScroll) {
 
     var userId = gon.user_id;
 
@@ -1340,5 +1346,5 @@
     };
 
 
-  });
+  }]);
 }());

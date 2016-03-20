@@ -51,4 +51,4 @@ production:
     database: carbon-footprint-app-production
     adapter: postgresql
     encoding: unicode
-    pool: 5-
+    pool: 5-g

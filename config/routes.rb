@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   
   root 'footprints#index'
+  get '/download_pdf' => 'footprints#download_pdf'
+
   get '/footprints/:id' => 'footprints#show'
 
   namespace :api do

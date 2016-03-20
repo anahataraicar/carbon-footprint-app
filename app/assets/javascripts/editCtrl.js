@@ -103,7 +103,7 @@
                     value: bike
                 }, {
                     name: "lightbulb",
-                    caption: " Replace 5 lightbulbs with CFS", 
+                    caption: " Replace 5 lightbulbs with CFLs", 
                     value: light
                 }, {
                     name: "veg",
@@ -1116,14 +1116,18 @@
             },
             chart: {
                 type: 'pie',
-                margin: [20, 20, 20, 20],
+                // marginTop: 50,
+                marginLeft: 100,
+                // borderColor: '#000000',
+                // borderWidth: 5,
                 backgroundColor: 'transparent',
                 borderColor: 'transparent',
-                spacing: [20,20,20,20],
-                width: 500,
-                height: 500
+                width: 600,
+                height: 800
             },
             title: {
+                x: 100,
+                margin: 10,
                 style: {
                     fontSize: '26px'
                 },
@@ -1138,8 +1142,8 @@
                 pie: {
                     center: ['50%', '50%'],
                     borderColor: 'transparent',
-                    borderWidth: 0,
-                    showInLegend: true
+                    borderWidth: 0
+                    // showInLegend: true
                 },
             },
             navigation: {
@@ -1148,8 +1152,9 @@
                 }
             },   
             legend: {
-                align: 'left',
+                align: 'right',
                 verticalAlign: 'bottom',
+                y: 50,
                 layout: 'vertical',
                 labelFormatter: function () {
                     return this.name + ': ' + this.percentage.toFixed(1) + '%';
@@ -1174,8 +1179,8 @@
             }, {
                 // name: 'Total',
                 data: subData,
-                size: '70%',
-                innerSize: '60%',
+                size: '40%',
+                innerSize: '40%',
                 dataLabels: {
                     formatter: function () {
                         // display only if larger than 1

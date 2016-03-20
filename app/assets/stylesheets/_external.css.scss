@@ -380,7 +380,10 @@ span#equivalent { font-size: 24px; }
 
 .pdf-icons {
   display: inline-block;
-  margin: 10px 10px 10x 10px;
+  width: 150px;
+  margin: auto;
+
+  a {color: black}
 
   i { margin: 10px; }
 }

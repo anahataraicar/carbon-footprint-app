@@ -25,11 +25,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 
-gem 'unirest'
-
 gem 'gon'
 
-gem 'prawn'
+gem 'prawn', '~> 1.2.1'
+gem 'prawn-table', '~> 0.1.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 

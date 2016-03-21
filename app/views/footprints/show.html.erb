@@ -2,7 +2,7 @@
   <div class="container-fluid header">
   
     <div id="text-wrapper">
-      <h1>CO<sub>u</sub></h1>
+      <h2>Taking action against climate change</h2>
       <h4>Currently, the amount of carbon dioxide in the earth's atmosphere is higher than at any time in the last 650,000 years. At our current pace, approximately 23-35% of planet and animal species are risk of extinction. Before the end of the century, we can expect a global sea level rise of 1-4 feet and increase of temperatures within a range of 0.5°F to 8.6°F.</h4>
       
       <h4>2015 was the warmest year ever record. The IPCC determined that there is a greater than 90% certainty that the emissions from human activities are the cause of climate change. </h4>
@@ -38,7 +38,7 @@
         <div class="row left">
           <div class="col-md-7" style="padding-right: 0">
             <div class="page-header title">
-              <h2>YOUR CARBON DASHBOARD<small> Subtext for header</small></h2>
+              <h2>YOUR CARBON DASHBOARD</h2>
             </div>
             <div class="row">
               <div class="col-md-3">
@@ -72,7 +72,7 @@
           </div>
           <div class="col-md-5 right" >
             <div class="charts-titles">
-              <h3 ng-show="checkChart('pie')">Your carbon footprint</h3>
+              <h2 ng-show="checkChart('pie')">Your carbon footprint</h2>
               <h3 ng-show="checkChart('bar')">Here's how you stack up against other users</h3>
               <h3 ng-show="checkChart('bubble')">Electricity use and meat intake vs. overall footprint</h3>
             </div>
@@ -105,5 +105,12 @@
       </div> <!-- ng controller div -->
     </div> <!-- ng app div -->
   </div> <!-- bootstrap container -->
+
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <h5>CO<sub>u</sub><i class="fa fa-copyright"></i>Zoë Heins</h5>
+    </div>
+  </nav>
+
 </body>
 

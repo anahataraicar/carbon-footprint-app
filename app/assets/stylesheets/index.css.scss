@@ -180,6 +180,26 @@ h3.quote {
     }
 }
 
+.navbar.navbar-default.navbar-fixed-bottom {
+    background-color: #F0F4F1;
+    border: 1px solid #DFDFDF;
+    height: 40px;
+    .container {
+        margin: 0;
+        width: 100%;
+        h5 { 
+            text-align: center;
+            color: #B4BAB6;
+            margin-left: 20px;
+            margin-top: 15px;
+            i {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
 
 
 

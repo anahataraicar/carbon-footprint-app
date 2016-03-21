@@ -103,7 +103,7 @@ class Api::V1::FootprintsController < ApplicationController
                                   state: params[:state] }) 
           head :ok
         else
-          render json: { errors: "Please fill the highlighted fields" }, status: 422
+          render json: { errors: "Please complete the form before moving on" }, status: 422
         end
 
     else
@@ -115,7 +115,7 @@ class Api::V1::FootprintsController < ApplicationController
           # end
           head :ok
         else
-          render json: { errors: "Please fill the highlighted fields"}, status: 422 
+          render json: { errors: "Please complete the form before moving on"}, status: 422 
         end
     end
   end

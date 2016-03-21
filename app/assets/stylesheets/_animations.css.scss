@@ -5,12 +5,18 @@
   animation: fadeIn 2.5s;
 }
 
-
 .errors .ng-enter {
   -webkit-animation: bounceIn 0.5s;
   -moz-animation: bounceIn 0.5s;
   -o-animation: bounceIn 0.5s;
   animation: bounceIn 0.5s;
+}
+
+.errors .ng-leave {
+  -webkit-animation: fadeOut 1s;
+  -moz-animation: fadeOut 1s;
+  -o-animation: fadeOut 1s;
+  animation: fadeOut 1s;
 }
 
 .chart-instructions.ng-enter {

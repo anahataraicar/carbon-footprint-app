@@ -1,9 +1,7 @@
-
-
 (function() {
   "use strict";
 
-  angular.module("app").controller("editCtrl", ['$scope', function($scope, $http, $timeout, $location, $anchorScroll) {
+  angular.module("app").controller("editCtrl", function($scope, $http, $timeout, $location, $anchorScroll) {
 
     var userId = gon.user_id;
 
@@ -1297,6 +1295,7 @@
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
+                bordercolor: 'transparent',
                 type: 'pie',
                 backgroundColor: 'transparent'
             },
@@ -1325,8 +1324,8 @@
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: { enabled: false },
-                    // showInLegend: true,
-                    size: 100
+                    size: 100,
+                    borderWidth: 0.5
                 }
             },
             series: [{
@@ -1342,5 +1341,5 @@
     };
 
 
-  }]);
+  });
 }());

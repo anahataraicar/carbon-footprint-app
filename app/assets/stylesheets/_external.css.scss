@@ -1,49 +1,37 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
 @import url(https://fonts.googleapis.com/css?family=Oleo+Script:700|Source+Sans+Pro:700|Merriweather|Alegreya+Sans);
 @import url(https://fonts.googleapis.com/css?family=Raleway);
-
 
 $green: #779c80;
 $grey: rgb(159,168,163);
 $black: #171a18;
 $brown: #e3e0cf;
-
+$light-green: #B9CDBD;
 $chart-brown: #bf967a; 
 $chart-red: #b52d41;
 $chart-orange: #f06f5c;
 
-
 * { font-family: Raleway; }
-
-// ------------------  EDIT ---------------------------
 
 .row {
   max-width: 100%;
 }
 
 body#edit-body {
-  background-color: #E1E8E4;
-  // margin-bottom: 70px;
+  background-color: #F1F1F1;
+  padding-bottom: 70px;
 }
 
 ul.nav.nav-pills { // icons
   
-  li {
-  width: 12%;
-  }
-
-  a:hover {
-    background-color: transparent;
-  }
-
+  li { width: 12% }
+  a:hover { background-color: transparent }
   .active > a {
     background-color: transparent;
     i { color: $green }
   }
-
   i {
     color: white;
     font-size: 35px;
@@ -57,43 +45,44 @@ ul.nav.nav-pills { // icons
   margin: 2% 0% 2% 2%;
   height: 540px;
 
-  .panel-heading{
-    height: 70px;
-  }
-
-  .panel-body {
-    padding: 20px;
-
-  }
+  .panel-heading{ height: 70px }
+  .panel-body { padding: 20px }
 }
 
 .well.left {
   margin-top: 5%;
   margin-left: 7%;
   width: 100%;
+  background-color: $light-green;
+  color: white;
 }
 
 .well.bottom {
   display: inline-block;
-  background-color: white;
+  background-color: $light-green;
   width: 100%;
   max-height: 200px;
   padding: 10px;
-  h5 { font-size: 16px;}
-
+  h5 { 
+    font-size: 16px;
+    color: white; 
+  }
   #percentile {
     padding: 3% 5% 3% 5%;
-
     h3 { 
       text-align: center;
       color: $green;
     }
   }
-
   .row {
-
     .panel {
-      margin: auto;
+      margin: 5px;
+      width: 100%;
+      .panel-heading {
+        text-align: center;
+        background-color: #F5F5F5; // grey
+        color: $green;
+      }
     }
     table#legend {
       height: 90%;
@@ -104,46 +93,42 @@ ul.nav.nav-pills { // icons
   }
 }
 
-
-
 .fa.fa-circle.travel {color: $chart-brown }
 .fa.fa-circle.house {color: $chart-red }
 .fa.fa-circle.food {color: $chart-orange }
 
-#gaugeContainer {
-  width: 100%;
-  height: 100%;
-}
-
-
 .panel.panel-default > .panel-heading {
-  background-color: #B9CDBD;
+  background-color: $light-green;
+  color: white;
 }
-
 
 .panel.panel-default.progress {
+  .panel-heading { text-align: center }
   width: 100%;
-  height: 230px;
+  height: 210px;
   margin-left: 7%;
   .panel-body {
     height: 200px;
     padding: 5%;
+    #gaugeContainer {
+      width: 100%;
+      height: 150px;
+    }
   }
 }
 
 .panel.panel-default.left {
+  .panel-heading { text-align: center }
   margin-left: 7%;
   width: 100%;
 }
 
 .tab-content {
   height: 100%;
-
   .tab-pane {
     position: relative;
     height: 500px;
     width: 100%;
-
     .arrow-before {
       display: inline-block;
       position: absolute;
@@ -151,20 +136,15 @@ ul.nav.nav-pills { // icons
       left: 2%;
       color: $green;
     }
-
     .arrow-next {
       display: inline-block;
       right: 3%;
       color: $green;
       position: absolute;
       top: 65%;
-      
     }  
-
     .question {
-
       margin: 10px;
-
       h3 { 
         margin-bottom: 5%;
         margin-top: 0px;
@@ -173,9 +153,7 @@ ul.nav.nav-pills { // icons
         margin-bottom: 0; 
         position: relative;
       }
-      
       p { font-size: 18px;}
-
       .error { background-color: red; }
     }
   }
@@ -187,12 +165,10 @@ ul.nav.nav-pills { // icons
   color: $green;
 }
 
-
 .input-group {
   width: 60%;
   margin-bottom: 5%;
 }
-
 
 
 table#slider-table {
@@ -203,7 +179,6 @@ table#slider-table {
     // top - right - bottom - left
     padding: 0px 4px 8px 4px;
   }
-
   .calories { text-align: center }
   #nValueMeat { width: 200px }
 
@@ -211,7 +186,6 @@ table#slider-table {
     text-align: center;
     font-size: 12px;
   }
-
 }
 
 #tips {
@@ -220,7 +194,7 @@ table#slider-table {
 }
 
 table#action-table {
-    font-size: 16px;
+  font-size: 16px;
 
   #centered {
     text-align: center; 
@@ -233,26 +207,29 @@ table#action-table {
 
 .errors {
   position: absolute;
-  top: 84%;
-  left: 30%;
-  text-align: center;
-  h4 { color: #b52d41 }
+  top: 20%;
+  left: 70%;
+  width: 150px;
+  height: 100px;
+  
+  h4 { 
+    color: #b52d41;
+    text-align: center;
+  }
 }
 
 .page-header.title {
   margin-left: 3%;
   h2 {
-    font-family: 'Merriweather', serif;
+    // font-family: 'Merriweather', serif;
     font-size: 40px;
   }
 }
 
-
 .tooltip > .tooltip-inner { 
-  font-size: 16px;
-  padding: 10px;
+  font-size: 14px;
+  padding: 7px;
 }
-
 
 
 // -------------- SHOW / MODAL --------------------
@@ -272,12 +249,10 @@ body#show-body {
 
 #show-table {
   th, td { padding: 5px; }
-
   p { 
     margin-left: 20px; 
     font-size: 17px;
   }
-
   h4 {
     font-style: italic;
     padding: 5px;
@@ -308,10 +283,7 @@ span#equivalent { font-size: 24px; }
 }
 
 
-#submit-partial {
-  height: 300px;
-}
-
+#submit-partial { height: 300px; }
 
 
 // ------------- POPUPS ----------------------------------
@@ -325,21 +297,18 @@ span#equivalent { font-size: 24px; }
 }
 
 
-
-
-
-
 // ----------- CHARTS ----------------------------
 
 
 
 
 .charts-titles {
+  h2 {text-align: center;}
   h3 {text-align: center;}
   width: 100%;
   display: inline-block;
-  padding-top: 6%;
-  font-family: 'Merriweather', serif;
+  padding-top: 3%;
+  // font-family: 'Merriweather', serif;
 }
 
 .btn-group > ul > li > i { margin: 6px; }
@@ -385,10 +354,9 @@ span#equivalent { font-size: 24px; }
 
 #smallPieContainer {
   width: 100%;
-  height: 150px;
+  height: 130px;
   margin: auto;
 }
-
 
 .pdf-icons {
   // display: inline-block;
@@ -408,25 +376,21 @@ span#equivalent { font-size: 24px; }
 // --------- edit page scrolling ---------
 
 .affix {
-    top: 0;
-    width: 100%;
+  top: 0;
+  width: 100%;
 }
 
 .affix + .container-fluid {
- 
-    padding-top: 70px;
+  padding-top: 50px;
 }
 
 .container-fluid.header {
   background-color: #C9BEA7; //brown
   color: white;
-  height: 450px;
+  height: 400px;
   transition: top 1s;
 
-  h4 {
-    margin: 30px;
-
-  }
+  h4 { margin: 30px }
 
   h1 {
     font-size: 70px;
@@ -435,7 +399,6 @@ span#equivalent { font-size: 24px; }
     font-family: 'Merriweather', serif;
     sub {font-family: 'Merriweather', serif;}
   }
-
 }
 
 .navbar.navbar-inverse{

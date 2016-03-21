@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :profiles
   belongs_to :company
 
+
   validates :first_name, :last_name, presence: true, on: :update
 
   devise :database_authenticatable, :registerable,

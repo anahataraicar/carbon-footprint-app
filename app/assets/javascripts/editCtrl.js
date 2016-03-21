@@ -1,8 +1,4 @@
 
-app.controller('mainController', ['$scope', function($scope) {
-    $scope.message = 'HOORAY!'; 
-}]);    
-
 
 (function() {
   "use strict";

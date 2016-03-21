@@ -11,36 +11,33 @@
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/highcharts-more.js"></script>
   <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
-
-  
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  
-</head>
 
-<style>
-</style>
+</head>
 
 
 <body>
 
   <% unless @show %>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">Home</a>
-      </div>      
-        <ul class="nav navbar-nav navbar-right">
-          <% unless current_user %>
-            <li><a href="/users/sign_up">Sign up</a></a></li>
-            <li><a href="/users/sign_in">Sign in</a></li>
-          <% else current_user %>
-            <% if current_user.has_a_profile? %>
-              <li><%= link_to "Your footprint", "/footprints/#{current_user.id}" %></li>
+      </div>   
+         <!-- <div class="collapse navbar-collapse">    -->
+          <ul class="nav navbar-nav navbar-right">
+            <% unless current_user %>
+              <li><a href="/users/sign_up">Sign up</a></a></li>
+              <li><a href="/users/sign_in">Sign in</a></li>
+            <% else current_user %>
+              <% if current_user.has_a_profile? %>
+                <li><%= link_to "Your footprint", "/footprints/#{current_user.id}" %></li>
+              <% end %>
+              <li><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></li>
             <% end %>
-            <li><%= link_to "Sign out", "/users/sign_out", method: :delete if user_signed_in? %></li>
-          <% end %>
-        </ul>
+            </ul>
+          <!-- </div> -->
       </div>
     </div>
   </nav>

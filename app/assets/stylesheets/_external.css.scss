@@ -59,13 +59,13 @@ ul.nav.nav-pills { // icons
 
 .well.bottom {
   display: inline-block;
-  background-color: $light-green;
   width: 100%;
   max-height: 200px;
   padding: 10px;
+  background-color: white;
   h5 { 
     font-size: 16px;
-    color: white; 
+    color: $green; 
   }
   #percentile {
     padding: 3% 5% 3% 5%;
@@ -161,9 +161,12 @@ ul.nav.nav-pills { // icons
 
 .last-arrow {
   position: absolute;
-  top: 48%; 
+  top: 62%; 
   color: $green;
 }
+
+
+
 
 .input-group {
   width: 60%;
@@ -220,9 +223,11 @@ table#action-table {
 
 .page-header.title {
   margin-left: 3%;
+  // padding: 5px;
+  padding: 0 !important;
   h2 {
     // font-family: 'Merriweather', serif;
-    font-size: 40px;
+    font-size: 45px;
   }
 }
 
@@ -270,20 +275,25 @@ span#equivalent { font-size: 24px; }
   width: 95% !important;
 }
 
+#submit-partial { 
+  padding: 0px;
+}
+
 #modalButton {
   width: 70%;
   text-align: center;
   margin: auto; 
-  h3 {margin: 10px;}
+  button { margin: 20px }
+  h3 {margin: 10px }
 }
 
-.modal .modal-body {
+.modal.modal-body {
   height: 550px;
   overflow-y: auto;
 }
 
 
-#submit-partial { height: 300px; }
+
 
 
 // ------------- POPUPS ----------------------------------
@@ -388,22 +398,27 @@ span#equivalent { font-size: 24px; }
   background-color: #C9BEA7; //brown
   color: white;
   height: 400px;
+  width: 100%;
   transition: top 1s;
 
-  h4 { margin: 30px }
+  h4 { 
+    margin: 30px;
+    text-align: center;
+  }
 
-  h1 {
-    font-size: 70px;
-    width: 60%;
-    margin: auto;
+  h2 {
+    margin: 20px;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 900;
     font-family: 'Merriweather', serif;
-    sub {font-family: 'Merriweather', serif;}
   }
 }
 
 .navbar.navbar-inverse{
   border: 0 !important;
   z-index: 1000;
+  background-color: black;
 }
 
 .container-fluid.body {

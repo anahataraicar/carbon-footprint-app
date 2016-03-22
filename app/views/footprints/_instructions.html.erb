@@ -17,6 +17,8 @@
 </div>
 
 
-<% if !current_user %>
+<% if current_user %>
+  <a id="sign-up-button" href="/footprints/<%= current_user.id%>" class="btn">Go to my footprint</a>
+<% else %>
   <a id="sign-up-button" href="/users/sign_up" class="btn">Create my footprint</a>
 <% end %>

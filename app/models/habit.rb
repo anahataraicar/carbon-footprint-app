@@ -36,11 +36,11 @@ class Habit < ActiveRecord::Base
       value = hash[:miles].to_f * 200 / 1000 / 1000
       input1 = hash[:miles]
     elsif footprint_type == "electricity"
-      value = hash[:input].to_f * 0.000689551 / hash[:input_type].to_f
+      value = hash[:input].to_f * 0.000419551 / hash[:input_type].to_f
       input1 = hash[:input]
       input2 = hash[:input_type]
     elsif footprint_type == "natural_gas" 
-      value = hash[:input].to_f * 0.0053 / hash[:input_type].to_f
+      value = hash[:input].to_f * 0.0050 / hash[:input_type].to_f
       input1 = hash[:input]
       input2 = hash[:input_type]
     elsif footprint_type == "heating" # changed heating 8.51
@@ -55,19 +55,19 @@ class Habit < ActiveRecord::Base
       value = hash[:sqft].to_f * 0.93 / 1000
       input1 = hash[:sqft]
     elsif footprint_type == "meat"
-      value = hash[:factor].to_f * 523 * 4.52 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 523 * 4.92 / 1000 / 1000 * 365
       input1 = hash[:factor]
     elsif footprint_type == "dairy"
-      value = hash[:factor].to_f * 286 * 4.66 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 286 * 4.86 / 1000 / 1000 * 365
       input1 = hash[:factor]
     elsif footprint_type == "grains"
-      value = hash[:factor].to_f * 669 * 1.47 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 669 * 3.47 / 1000 / 1000 * 365
       input1 = hash[:factor]
     elsif footprint_type == "fruit"
       value = hash[:factor].to_f * 271 * 3.03 / 1000 / 1000 * 365
       input1 = hash[:factor]
     elsif footprint_type == "other"
-      value = hash[:factor].to_f * 736 * 3.73 / 1000 / 1000 * 365
+      value = hash[:factor].to_f * 736 * 4.73 / 1000 / 1000 * 365
       input1 = hash[:factor]
     end
   

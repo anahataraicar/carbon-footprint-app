@@ -37,7 +37,7 @@
         
         <div class="row left">
           <div class="col-md-7" style="padding-right: 0">
-            <div class="page-header title">
+            <div class="page-title">
               <h2>YOUR CARBON DASHBOARD</h2>
             </div>
             <div class="row">
@@ -46,17 +46,18 @@
                   <p>Welcome {{ firstName }} {{ lastName }}!</p>
                 </div>
                 <div class="panel panel-default progress">
-                  <div class="panel-heading">Your progress</div>
+                  <div class="panel-heading">Your progress <i class="fa fa-info-circle"></i></div>
                     <div class="panel-body">
                       <div id="gaugeContainer"></div>
                     </div>
                 </div>
                 <div class="panel panel-default left">
-                  <div class="panel-heading">Learn about:</div>
+                  <div class="panel-heading">Learn more <i class="fa fa-info-circle"></i></div>
                     <ul class="list-group">
                       <li class="list-group-item"><a href="http://www.dsireusa.org/">Incentives by state</a></li>
-                      <li class="list-group-item"><a href="https://www3.epa.gov/">EPA</a></li>
+                      <li class="list-group-item"><a href="https://www3.epa.gov/">EPA official website</a></li>
                       <li class="list-group-item"><a href="https://www.facebook.com/thedailygreen">The Daily Green</a></li>
+                      <li class="list-group-item"><a href="http://localfoods.com/">Local foods Chicago</a></li>
                     </ul>
                 </div>
               </div>
@@ -77,9 +78,7 @@
               <h3 ng-show="checkChart('bubble')">Electricity use and meat intake vs. overall footprint</h3>
             </div>
 
-                  <!-- animated popups --> 
-            <p class="chart-instructions" ng-if="chartInstructions">Try clicking a slice!</p>
-                  <!-- ******************** -->
+                 
             <div id='chart-holder'>
               <div id="pieChartContainer" ng-show="checkChart('pie')">
               </div>
@@ -97,11 +96,6 @@
               <%= render "bottom_well" %>
           </div> <!-- col-md-5 -->
         </div>  <!-- row -->
-
-       <!--  <footer class="footer">
-          <h5><strong>CO<sub>u</sub></strong>, a carbon footprint calculator</h5>
-        </footer> -->
-
       </div> <!-- ng controller div -->
     </div> <!-- ng app div -->
   </div> <!-- bootstrap container -->

@@ -11,10 +11,12 @@
           $scope.drawPieChart(pieData);
           $scope.drawGauge();
           $scope.drawSmallPieChart(pieData);
+
+          if ( pieData["total"] > 0 ) {
+            console.log("made profile!");
+          }
       });
     };
-
-
 
     $scope.init = function() {
         $scope.setUpCharts();
@@ -25,7 +27,6 @@
         $scope.totalSaved = 0;
         $scope.previousComplete = true;
         $scope.introInstructions = false;
-
         $('[data-toggle="tooltip"]').tooltip();    
     };
 
@@ -33,7 +34,7 @@
        var point = document.getElementById("point");
         $('html, body').stop().animate({
             scrollTop: $(point).offset().top
-        }, 1500, 'easeInOutExpo', function() {
+        }, 2000, 'easeInOutExpo', function() {
             bindScrollListener();
         });
         event.preventDefault();
@@ -62,6 +63,7 @@
             var barData = response.data;
             $scope.drawBarChart(barData);
             $scope.drawBubbleChart(barData);
+            $scope.updateGauge(9);
 
         });
 
@@ -193,7 +195,7 @@
     $scope.foodLegend = parseFloat(food.toFixed(1));
     $scope.totalLegend = $scope.travelLegend + $scope.housingLegend + $scope.foodLegend
 
-    var colors = ["#bf967a", "#b52d41", "#f06f5c"],
+    var colors = ["#D37B4A", "#DDC063", "#5FAFD3"],
 
         categories = ['Travel', 'Home Energy', 'Food'],
         data = [{
@@ -590,8 +592,8 @@
         var bikeBox = document.getElementById("bike");
         var lightBox = document.getElementById("lightbulb");
         var vegBox = document.getElementById("veg");
-        var heatDownBox = document.getElementById("heatUp");
-        var heatUpBox = document.getElementById("heatDown");
+        var heatDownBox = document.getElementById("heatDown");
+        var heatUpBox = document.getElementById("heatUp");
 
         if (gasBox.checked) {
             pieChart.series[1].data[0].update(pieData["vehicle"] - gas);
@@ -666,13 +668,13 @@
 
 
         if (heatUpBox.checked){
-            pieChart.series[1].data[4].update(pieData["electricity"] - heatDown);
-            pieChart.series[0].data[1].update(housing - heatDown);
-            barChart.series[1].data[0].update(housingBar[0] - heatown);
-                pieData["electricity"] = pieData["electricity"] - heatDown;
-                housing = housing - heatDown;
-                housingBar[0] = housingBar[0] - heatDown;
-                $scope.savedActions.push(heatDown);
+            pieChart.series[1].data[4].update(pieData["electricity"] - heatUp);
+            pieChart.series[0].data[1].update(housing - heatUp);
+            barChart.series[1].data[0].update(housingBar[0] - heatUp);
+                pieData["electricity"] = pieData["electricity"] - heatUp;
+                housing = housing - heatUp;
+                housingBar[0] = housingBar[0] - heatUp;
+                $scope.savedActions.push(heatUp);
         } else if (!heatUpBox.checked) {
             pieChart.series[1].data[4].update(pieData["electricity"]);
                 pieChart.series[0].data[1].update(housing);
@@ -755,11 +757,17 @@
                 $scope.chartInstructions = false; 
             }, 5000);
         }
-
         var pageStr = 'a[href="#' + (newPage) + '"]';
-        $(pageStr).tab('show');
-        
+        $(pageStr).tab('show');  
     };
+
+
+    $scope.restartForm = function() {
+        $('a[href="#1"]').tab('show')
+    }
+
+
+// -------------------- FORM STUFF ----------------------
 
 
     $scope.vehicleOptions = [
@@ -806,14 +814,14 @@
     }
 
     $scope.electricityOptions = [
-        { name: "$/year", factor: 0.0834, placeholder: "$1,020" },
+        { name: "$/year", factor: 0.0974, placeholder: "$1020" },
         { name: "kWh/year", factor: 1, placeholder: "10737 kWh" }
     ];
 
     $scope.electricityType = $scope.electricityOptions[0];
 
     $scope.naturalOptions = [ 
-      { name: "$/year", factor: 1.18, placeholder: "$550" },
+      { name: "$/year", factor: 1.28, placeholder: "$550" },
       { name: "Therms/year", factor: 1, placeholder: "443 Therms"}, 
       { name: "Cu.Ft/year", factor: 100, placeholder: "43300 Cu.Ft" }
     ];
@@ -1081,7 +1089,6 @@
 
 
     $scope.drawBubbleChart = function(bubbleData){
-        console.log(bubbleData);
         var meatData = bubbleData[4];
         var kwData = bubbleData[5];
         var totalData = bubbleData[6];
@@ -1214,7 +1221,7 @@
                 background: { // Track for Move
                     outerRadius: '112%',
                     innerRadius: '88%',
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.3).get(),
+                    backgroundColor: '#98c9c9',
                     borderWidth: 0
                 } 
             },
@@ -1242,9 +1249,9 @@
             },
             series: [{
                 name: 'Move',
-                borderColor: Highcharts.getOptions().colors[0],
+                borderColor: '#2c8b8b', // dark blue
                 data: [{
-                    color: Highcharts.getOptions().colors[0],
+                    color: '#2c8b8b',
                     radius: '100%',
                     innerRadius: '100%',
                     y: 0 // this is the point to update !!

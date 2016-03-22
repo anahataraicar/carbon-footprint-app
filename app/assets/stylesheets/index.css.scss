@@ -2,23 +2,28 @@
 @import url(https://fonts.googleapis.com/css?family=Oleo+Script:700|Source+Sans+Pro:700|Merriweather|Alegreya+Sans);
 
 
-$green: #bed0c5; // tad bit darker green
+$light-green:  #A5C663; // tad bit darker green
+$green: #567714;
 $grey: rgb(159,168,163);
 $black: #171a18;
 $brown: #e3e0cf;
 
+.container {
+    width: 100%;
+}
+
 .intro-section {
     height: 100%;
     text-align: center;
-    background: radial-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
-
+    // background: radial-gradient(rgba(86, 119, 20,0.4), rgba(86, 119, 20,0));
+    background-color: rgba(53, 79, 0,0.3);
 }
 
 .about-section {
     height: 50%;
     padding-top: 150px;
     text-align: center;
-    background: $green;
+    background: $light-green;
 }
 
 .instructions-section {
@@ -37,26 +42,38 @@ $brown: #e3e0cf;
 
 // ------------ intro ------------------
 
-.col-lg-12 {
-  div#index-title {
-    margin: auto;
-    margin-top: 10%;
-    padding-top: 50px;
-    a { color: white; }
-    h1 {
+
+div#index-title {
+    margin-left: 4%;
+    margin-top: 8%;
+    text-align:center; 
+    #circle {
+        display: block;
+        height: 600px;
+        width: 600px;
+        padding-top: 3%;
+
+        -moz-border-radius: 50%; 
+        border-radius: 50%; 
+        background-color: transparent;
+        border: 10px solid white;
         color: white;
-        font-size: 150px;
-        padding: 10px;
-        font-family: 'Merriweather', serif; 
-    sub {font-family: 'Merriweather', serif;} 
+        // text-align: center;
+        h1 {
+            font-size: 150px;
+            font-family: 'Merriweather', serif; 
+            sub {font-family: 'Merriweather', serif;} 
+        }
+        h2 { 
+          font-size: 60px; 
+          font-family: 'Merriweather', serif;
+        }
+        a { 
+            color: white; 
+        }
     }
-    h2 { 
-      font-size: 50px; 
-      font-family: 'Merriweather', serif;
-      color: white;
-    }
-  }
 }
+
 
 
 // ------------------ ABOUT -----------------------
@@ -80,7 +97,7 @@ h3.quote {
 
     i {
         margin: 10px;
-        color: $green;
+        color: $light-green;
         font-size: 90px;
     }
     p { 
@@ -91,17 +108,17 @@ h3.quote {
 
 
 #sign-up-button {
-    border: 2px solid black;
+    border: 2px solid $light-green;
     border-radius: 5px;
     padding: 5px 10px 5px 10px;
-    background-color: white;
     font-size: 20px;
-    color: $black;
-}
-
-#sign-up-button:hover{
+    background-color: $light-green;
     color: white;
-    background-color: $black;
+    
+    &:hover{
+        background-color: white;
+        color: $light-green;
+    }
 }
 
 

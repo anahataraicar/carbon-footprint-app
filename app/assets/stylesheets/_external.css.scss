@@ -9,9 +9,10 @@ $grey: rgb(159,168,163);
 $black: #171a18;
 $brown: #AA6C39;
 $light-green: #A5C663;
-$chart-brown: #bf967a; 
-$chart-red: #b52d41;
-$chart-orange: #f06f5c;
+
+$chart-blue: #407F7F; 
+$chart-red: #93493B;
+$chart-green: #617931;
 
 * { font-family: Raleway; }
 
@@ -19,13 +20,16 @@ $chart-orange: #f06f5c;
   max-width: 100%;
 }
 
+.row.left {
+  margin-left: -5px;
+}
+
 body#edit-body {
-  background-color: #F1F1F1;
+  background-color: #E7E7E7;
   padding-bottom: 70px;
 }
 
 ul.nav.nav-pills { // icons
-  
   li { width: 12% }
   a:hover { background-color: transparent }
   .active > a {
@@ -43,7 +47,7 @@ ul.nav.nav-pills { // icons
   width: 100%;
   display: inline-block;
   margin: 2% 0% 2% 2%;
-  height: 540px;
+  height: 555px;
 
   .panel-heading{ height: 70px }
   .panel-body { padding: 20px }
@@ -78,15 +82,16 @@ ul.nav.nav-pills { // icons
   }
 
   #percentile {
-    // padding: auto;
+    background-color: $light-green;
     height: 120px;
     width: 100%;
     p { 
-      font-size: 17px;
+      font-size: 16px;
       text-align: center;
-      color: $green;
+      color: white;
     }
   }
+
 
   h6 {
     text-align: center;
@@ -103,6 +108,8 @@ ul.nav.nav-pills { // icons
       color: $light-green; 
     }
   }
+
+
   .btn-lg{
     background-color: $light-green;
     color: white;
@@ -139,9 +146,9 @@ ul.nav.nav-pills { // icons
 
 
 
-.fa.fa-circle.travel {color: $chart-brown }
+.fa.fa-circle.travel {color: $chart-blue }
 .fa.fa-circle.house {color: $chart-red }
-.fa.fa-circle.food {color: $chart-orange }
+.fa.fa-circle.food {color: $chart-green }
 
 .panel.panel-default > .panel-heading {
   background-color: $light-green;
@@ -167,6 +174,8 @@ ul.nav.nav-pills { // icons
   .panel-heading { text-align: center }
   margin-left: 7%;
   width: 100%;
+  a { color: $green }
+  li { padding: 8px }
 }
 
 .tab-content {
@@ -266,7 +275,6 @@ table#action-table {
   left: 70%;
   width: 150px;
   height: 100px;
-  
   h4 { 
     color: #b52d41;
     text-align: center;
@@ -285,6 +293,8 @@ table#action-table {
   }
 }
 
+
+
 .tooltip > .tooltip-inner { 
   font-size: 14px;
   padding: 7px;
@@ -298,7 +308,6 @@ body#show-body {
   margin-left: 20px;
   margin-right: 20px;
   font-family: Raleway;
-
   h2 { margin-bottom: 15px; }
 }
 
@@ -309,26 +318,31 @@ body#show-body {
 #show-table {
   th, td { padding: 5px; }
   p { 
+    color: $green;
     margin-left: 20px; 
+    margin-right: 20px;
     font-size: 17px;
+    font-weight: bold;
   }
   h4 {
-    font-style: italic;
-    padding: 5px;
+    color: $light-green;
   }
+  i {color: $green; }
 }
 
-span#total { 
-  font-size: 40px;
-  font-weight: bold;
+.modal-header {
+  color: $green;
+  #total { 
+    font-size: 40px;
+    font-weight: bold; 
+  }
+  #equivalent { font-size: 24px; }
 }
 
-span#equivalent { font-size: 24px; }
 
 .modal-lg {
   width: 95% !important;
 }
-
 
 #modalButton {
   width: 70%;
@@ -358,22 +372,21 @@ span#equivalent { font-size: 24px; }
 // ----------- CHARTS ----------------------------
 
 
-
-
 .charts-titles {
   margin-top: 0;
   h2 {
     text-align: center;
     color: $green;
+    font-weight: 900;
   }
   h3 {
     text-align: center;
-    
+    color: $green;
+    font-weight: 900;
   }
   width: 100%;
   display: inline-block;
   padding-top: 3%;
-  // font-family: 'Merriweather', serif;
 }
 
 .btn-group > ul > li > i { margin: 6px; }
@@ -385,6 +398,7 @@ span#equivalent { font-size: 24px; }
 .btn.btn-default.dropdown-toggle {
   background-color: white;
   border-width: 1;
+  width: 115px;
 }
 
 .col-md-5.right {
@@ -453,7 +467,7 @@ span#equivalent { font-size: 24px; }
 }
 
 .container-fluid.header {
-  background-color: #407F7F; //blue 
+  background-color: $chart-blue; //blue 
   color: white;
   height: 400px;
   width: 100%;
@@ -493,6 +507,11 @@ span#equivalent { font-size: 24px; }
   &.active {
       opacity: 1;
   }
+}
+
+
+#button-popup {
+  width: 112px;
 }
 
 

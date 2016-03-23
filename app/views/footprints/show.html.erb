@@ -1,15 +1,15 @@
 <body id="edit-body">
   <div class="container-fluid header">
-  
+    
     <div id="text-wrapper">
       <h2>Taking action against climate change</h2>
-      <h4>Currently, the amount of carbon dioxide in the earth's atmosphere is higher than at any time in the last 650,000 years. At our current pace, approximately 23-35% of planet and animal species are risk of extinction. Before the end of the century, we can expect a global sea level rise of 1-4 feet and increase of temperatures within a range of 0.5°F to 8.6°F.</h4>
+      <h4>Currently, the amount of carbon dioxide in the earth's atmosphere is higher than at any time in the last 650,000 years. At our current pace, approximately 23-35% of plant and animal species are risk of extinction. Before the end of the century, we can expect a global sea level rise of 1-4 feet and increase of temperatures within a range of 0.5°F to 8.6°F.</h4>
       
       <h4>2015 was the warmest year ever record. The IPCC determined that there is a greater than 90% certainty that the emissions from human activities are the cause of climate change. </h4>
+
       <h4>Join me in the fight against climate change by learning how to manage the carbon footprint of your daily actions. </h4>
       <h4>Just fill out the survey below!</h4>
     </div>
-
     <div id="fade-point"></div>
 
   </div>
@@ -35,29 +35,38 @@
     <div ng-app="app">
       <div ng-controller="editCtrl" ng-init="init()">
         
+        <a name="scroll-to-point"></a>
+        
         <div class="row left">
           <div class="col-md-7" style="padding-right: 0">
+            
             <div class="page-title">
               <h2>YOUR CARBON DASHBOARD</h2>
             </div>
+
             <div class="row">
               <div class="col-md-3">
                 <div class="well left">
+                  <% if current_user.first_name %>
+                  <p>Welcome <%= current_user.first_name %> <%= current_user.last_name %>!</p>
+                  <% else %>
                   <p>Welcome {{ firstName }} {{ lastName }}!</p>
+                  <% end %>
                 </div>
                 <div class="panel panel-default progress">
-                  <div class="panel-heading">Your progress <i class="fa fa-info-circle"></i></div>
+                  <div class="panel-heading">Your progress</div>
                     <div class="panel-body">
                       <div id="gaugeContainer"></div>
                     </div>
                 </div>
                 <div class="panel panel-default left">
-                  <div class="panel-heading">Learn more <i class="fa fa-info-circle"></i></div>
+                  <div class="panel-heading">Learn more</div>
                     <ul class="list-group">
                       <li class="list-group-item"><a href="http://www.dsireusa.org/">Incentives by state</a></li>
                       <li class="list-group-item"><a href="https://www3.epa.gov/">EPA official website</a></li>
                       <li class="list-group-item"><a href="https://www.facebook.com/thedailygreen">The Daily Green</a></li>
                       <li class="list-group-item"><a href="http://localfoods.com/">Local foods Chicago</a></li>
+                      <li class="list-group-item"><a href="http://inhabitat.com/">Inhabitat</a></li>
                     </ul>
                 </div>
               </div>
@@ -72,10 +81,10 @@
             </div> <!-- close second row -->
           </div>
           <div class="col-md-5 right" >
-            <div class="charts-titles">
-              <h2 ng-show="checkChart('pie')">Your carbon footprint</h2>
-              <h3 ng-show="checkChart('bar')">Here's how you stack up against other users</h3>
-              <h3 ng-show="checkChart('bubble')">Electricity use and meat intake vs. overall footprint</h3>
+            <div class="charts-titles" data-toggle="tooltip" data-placement="bottom" title="Click or hover over a slice for more info!">
+              <h2 ng-show="checkChart('pie')">YOUR CARBON FOOTPRINT</h2>
+              <h3 ng-show="checkChart('bar')">HOW YOU COMPARE TO OTHER USERS</h3>
+              <h3 ng-show="checkChart('bubble')">ELECTRICITY USE AND MEAT INTAKE VS. OVERALL FOOTPRINT</h3>
             </div>
 
                  
@@ -85,13 +94,15 @@
               <div id="barChartContainer" ng-show="checkChart('bar')"></div>
               <div id="bubbleContainer" ng-show="checkChart('bubble')"></div>
             </div>
-            <div class="btn-group" ng-if="resultsVisible">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chart type <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li ng-click="switchChart('pie')"><i class="fa fa-pie-chart fa-lg"></i> Pie</li>
-              <li ng-click="switchChart('bar')"><i class="fa fa-bar-chart fa-lg"></i> Bar</li>
-              <li ng-click="switchChart('bubble')"><i class="fa fa-circle-thin fa-lg"></i> Bubble</li>
-            </ul>
+              <div id="button-popup" data-toggle="tooltip" data-placement="right" title="Click on the drop down to toggle chart type">
+              <div class="btn-group" ng-if="resultsVisible">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chart type <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li ng-click="switchChart('pie')"><i class="fa fa-pie-chart fa-lg"></i> Pie</li>
+                <li ng-click="switchChart('bar')"><i class="fa fa-bar-chart fa-lg"></i> Bar</li>
+                <li ng-click="switchChart('bubble')"><i class="fa fa-circle-thin fa-lg"></i> Bubble</li>
+              </ul>
+              </div>
             </div>
               <%= render "bottom_well" %>
           </div> <!-- col-md-5 -->

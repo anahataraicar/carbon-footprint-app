@@ -77,27 +77,46 @@ class User < ActiveRecord::Base
 
   def calc_save_gas
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "vehicle").last
-    miles = habit.input1
-    mileage = habit.input2
-    (((miles/(mileage-5)) - (miles/mileage)) * 8.887 / 1000).round(2)
+    if habit.value == 0
+      return 0
+    else
+      miles = habit.input1
+      mileage = habit.input2
+      return (((miles/(mileage-5)) - (miles/mileage)) * 8.887 / 1000).round(2)
+    end
   end
 
   def calc_bike
     habit = habit = Habit.where("user_id = ? AND footprint_type = ?", id, "vehicle").last
-    mileage = habit.input2
-    fuel_type = habit.input3
-    (1000 / mileage * fuel_type / 1000).round(2)
+    if habit.value == 0
+      return 0
+    else
+      mileage = habit.input2
+      fuel_type = habit.input3
+      return (1000 / mileage * fuel_type / 1000).round(2)
+    end
   end
+
+
 
   def calc_lightbulb
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "electricity").last
-    factor = habit.input2
-    (510.875 * 0.000689551 / factor / 10).round(2)
+    if habit.value == 0
+      return 0
+
+    else
+      factor = habit.input2
+      return (510.875 * 0.000689551 / factor / 10).round(2)
+    end
   end
 
   def calc_veg
     habit = Habit.where("user_id = ? AND footprint_type = ?", id, "meat").last
-    (habit.value).round(2)
+    if habit.value == 0
+      return 0
+    else
+      return (habit.value).round(2)
+    end
   end
 
 

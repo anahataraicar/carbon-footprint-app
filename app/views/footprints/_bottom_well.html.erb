@@ -3,26 +3,23 @@
   <div class="row" ng-if="!resultsVisible">
     <div class="col-md-7">
       <div class="panel panel-default">
-        <div class="panel-heading">Your emissions <i class="fa fa-info-circle"></i></div>
+        <div class="panel-heading">Your emissions</div>
         <div class="panel-body">
           <table id="legend">
             <tr>
               <td><i class="fa fa-circle travel"></i></td>
               <td>Travel:</td>
               <td>{{ travelLegend }} MT</td>
-              <td>{{ (travelLegend / totalLegend * 100).toFixed(1) }}%</td>
             </tr>
             <tr>
               <td><i class="fa fa-circle house"></i></td>
               <td>Home Energy:</td>
               <td>{{ housingLegend }} MT</td>
-              <td>{{ (housingLegend / totalLegend * 100).toFixed(1) }}%</td>
             </tr>
             <tr>
               <td><i class="fa fa-circle food"></i></td>
               <td>Food:</td>
               <td>{{ foodLegend }} MT</td>
-              <td>{{ (foodLegend / totalLegend * 100).toFixed(1) }}%</td>
             </tr>
           </table>
         </div>
@@ -45,8 +42,8 @@
       </div>
     </div>
      <div class="col-md-4">
-        <a href="/download_pdf" type="button" class="btn btn-default btn-lg" >
-          <h6><i class="fa fa-print fa-3x" href="/download_pdf"></i></h6>
+        <a target="_blank" href="/download_pdf" type="button" class="btn btn-default btn-lg" >
+          <h6><i class="fa fa-print fa-4x" href="/download_pdf"></i></h6>
           <h5>Print PDF of <br>your footprint</h5>
         </a>
     </div>

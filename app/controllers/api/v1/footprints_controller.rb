@@ -61,6 +61,11 @@ class Api::V1::FootprintsController < ApplicationController
   def show
     @habits = Habit.where("user_id = ?", current_user.id)
     @total = Profile.find_by(user_id: current_user.id).total_value.to_f
+    if current_user.is_done?
+      @done = true
+    else
+      @done = false
+    end
     
     if current_user.is_done?
       @gas = current_user.calc_save_gas.to_f 

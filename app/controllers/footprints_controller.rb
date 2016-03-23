@@ -11,17 +11,17 @@ class FootprintsController < ApplicationController
   end
 
   def download_pdf
-    pdf = Prawn::Document.new(:margin => [60, 60])
+    pdf = Prawn::Document.new(:margin => [50, 50])
     pdf.fill_color "d24141"
 
-    pdf.font 'Courier'
+    pdf.font 'Times-Roman'
     require "open-uri"
     profile = current_user.profiles.last
    
   
-    pdf.text "My Carbon Footprint", :color => "339933", align: :center, size: 40
+    pdf.text "MY CARBON FOOTPRINT", :color => "339933", align: :center, size: 43
     pdf.move_down 5
-    pdf.text "I create #{profile.total_value.to_s} megattones of carbon dioxide a year!", :color => "88cc00", align: :center, size: 18
+    pdf.text "I CREATE #{profile.total_value.to_s} MEGATONNES OF CAROBN DIOXIDE A YEAR!", :color => "88cc00", align: :center, size: 22
     pdf.move_down 10
     pdf.font_size 12
     habits = current_user.habits
@@ -35,15 +35,28 @@ class FootprintsController < ApplicationController
       index += 1
     end
     data.unshift(["Habit","MT CO2 produced"])
-    # pdf.move_up 
-    pdf.text "My footprint breakdown:", size: 16
-    
-    pdf.table data, :row_colors => ["f6f6f6", "d6e3d9"], :header => true do |table|
+    pdf.move_down 5
+    pdf.indent(50) do
+      pdf.text "Footprint Breakdown:", size: 20, color: "74913b"
+    end
+    pdf.move_down 5
+
+    pdf.table data, :row_colors => ["b2cb80", "74913b"], :cell_style => { border_color: "FFFFFF", :text_color => "FFFFFF", :size => 14, }, :column_widths => [145, 130] do |table|
       table.row(0).font_style = :bold
       table.rows(0..13).align = :center
     end
     pdf.font_size 14
     pdf.move_up 320
+
+
+    profiles = Profile.all.count
+    user_count = profiles.count
+    user_total_value = profiles.sum(:total_value)
+    @average = user_total_value / user_count
+     @total = Profile.find_by(user_id: current_user.id).total_value.to_f
+
+
+
     pdf.indent(300) do
       gas = current_user.calc_save_gas
       pdf.text "• By getting a more fuel efficient car, I can save #{gas} MT of CO2"
@@ -57,7 +70,9 @@ class FootprintsController < ApplicationController
       veg = current_user.calc_veg
       pdf.text "• By switching to a vegetarian diet, I can save #{veg} MT of CO2"
     end
-    pdf.move_down 110
+
+
+    pdf.move_down 190
     pdf.fill_color "00cc00"
     pdf.text "More tips to reduce my footprint!", size: 20
     pdf.move_down 8
@@ -75,6 +90,10 @@ class FootprintsController < ApplicationController
     pdf.text "• Insulate and seal your home to prevent air from entering and leaving"
     pdf.move_down 8
     pdf.text "• Lower your water usage by purchasing water efficient shower heads, toilets, faucets, dishwashers, and washing machines"
+
+    image = "#{Prawn::DATADIR}/images/prawn.png"
+
+
 
 
     send_data pdf.render, type: "application/pdf", 

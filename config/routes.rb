@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   
   root 'footprints#index'
   get '/download_pdf' => 'footprints#download_pdf'
-
-  get '/footprints/:id' => 'footprints#show'
+  get '/footprints/:id' => 'footprints#show', as: "footprints"
 
   namespace :api do
     namespace :v1 do

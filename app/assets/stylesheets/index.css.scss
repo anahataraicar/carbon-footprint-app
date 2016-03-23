@@ -6,7 +6,9 @@ $light-green:  #A5C663; // tad bit darker green
 $green: #567714;
 $grey: rgb(159,168,163);
 $black: #171a18;
-$brown: #e3e0cf;
+$chart-blue: #407F7F;
+
+
 
 .container {
     width: 100%;
@@ -27,16 +29,16 @@ $brown: #e3e0cf;
 }
 
 .instructions-section {
-    height: 70%;
+    height: 65%;
     background: white;
     text-align: center;
 }
 
 .contact-section {
-    height: 13%;
+    height: 20%;
     padding-top: 10px;
     text-align: center;
-    background: $brown;
+    background: $green;
 }
 
 
@@ -135,14 +137,18 @@ h3.quote {
     .col-md-12 {
         // width: 400px;
         // margin: auto;
+        
         text-align: center;
         h4 { 
-            margin: 10px 0px 10px 0px; 
-            display: inline-block;
+            // margin: 10px 0px 10px 0px; 
+            // display: inline-block;
             text-align: center;
         }
-        i { margin-right: 10px; }
-        a { color: $black }
+        i { 
+            margin-right: 10px; 
+            color: white;
+        }
+        a { color: white }
     }
 }
 

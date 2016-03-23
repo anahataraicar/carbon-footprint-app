@@ -6,17 +6,23 @@
     var userId = gon.user_id;
 
     $scope.setUpCharts = function() {
-      $http.get('/api/v1/footprints/:id.json').then(function(response) {
-          var pieData = response.data;
-          $scope.drawPieChart(pieData);
-          $scope.drawGauge();
-          $scope.drawSmallPieChart(pieData);
+        $http.get('/api/v1/footprints/:id.json').then(function(response) {
+            var pieData = response.data;
+            $scope.drawPieChart(pieData);
+            $scope.drawGauge();
+            $scope.drawSmallPieChart(pieData);
 
-          if ( pieData["total"] > 0 ) {
-            console.log("made profile!");
-          }
-      });
+            if ( pieData["done"] === true  ) {
+                
+                $('a[href="#8"]').tab('show');
+                $scope.resultsVisible = true;
+                $scope.modalVisible = false;
+                $scope.calculateActions(pieData);
+                $scope.submitProfile();
+            }  
+        });
     };
+
 
     $scope.init = function() {
         $scope.setUpCharts();
@@ -27,17 +33,27 @@
         $scope.totalSaved = 0;
         $scope.previousComplete = true;
         $scope.introInstructions = false;
-        $('[data-toggle="tooltip"]').tooltip();    
+        $('[data-toggle="tooltip"]').tooltip();
+
+        var wrapper = document.getElementById("text-wrapper")
+        $(wrapper).addClass("active");  
     };
 
     $scope.anchorPage = function() {
-       var point = document.getElementById("point");
+        // $(wrapper).addClass("active");
+
+
+        var point = document.getElementById("point");
         $('html, body').stop().animate({
             scrollTop: $(point).offset().top
         }, 2000, 'easeInOutExpo', function() {
             bindScrollListener();
         });
         event.preventDefault();
+
+       
+       
+
     };
 
     function bindScrollListener() {
@@ -47,7 +63,6 @@
             var rect = point.getBoundingClientRect();
 
             if (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)) {
-                console.log("on");
                 $(wrapper).addClass("active");
             } else {
                 $(wrapper).removeClass("active");
@@ -86,42 +101,53 @@
                 $scope.percentile = Math.abs($scope.percentile);
             };
 
-            var gas = pieData["saved_gas"].toFixed(2);
-            var bike = pieData["bike"].toFixed(2);
-            var light = pieData["lightbulb"].toFixed(2);
-            var veg = pieData["veg"].toFixed(2);
-            var heatDown = pieData["thermostat_down"];
-            var heatUp = pieData["thermostat_up"];
+            $scope.calculateActions(pieData);
 
-            $scope.actions = [
-                {
-                    name: "gas",
-                    caption: " Buy a more fuel efficient vehicle", 
-                    value: gas 
-                }, {
-                    name: "bike",
-                    caption: " Ride your bike 20 miles a week", 
-                    value: bike
-                }, {
-                    name: "lightbulb",
-                    caption: " Replace 5 lightbulbs with CFLs", 
-                    value: light
-                }, {
-                    name: "veg",
-                    caption: " Switch to a vegetarian diet",
-                    value: veg
-                }, {
-                    name: "heatDown", 
-                    caption: " Turn down the thermostat in winter",
-                    value: heatDown
-                }, {
-                    name: "heatUp",
-                    caption: " Turn up the thermostat in summer",
-                    value: heatUp
-                }
-            ];
         });
     };
+
+
+    $scope.calculateActions = function(pieData) {
+        var gas = pieData["saved_gas"].toFixed(2);
+        var bike = pieData["bike"].toFixed(2);
+        var light = pieData["lightbulb"].toFixed(2);
+        var veg = pieData["veg"].toFixed(2);
+        var heatDown = pieData["thermostat_down"].toFixed(2);
+        var heatUp = pieData["thermostat_up"].toFixed(2);
+        console.log(gas);
+        console.log(bike);
+        console.log(veg);
+
+        $scope.actions = [
+            {
+                name: "gas",
+                caption: " Buy a more fuel efficient vehicle", 
+                value: gas 
+            }, {
+                name: "bike",
+                caption: " Ride your bike 20 miles a week", 
+                value: bike
+            }, {
+                name: "lightbulb",
+                caption: " Replace 5 lightbulbs with CFLs", 
+                value: light
+            }, {
+                name: "veg",
+                caption: " Switch to a vegetarian diet",
+                value: veg
+            }, {
+                name: "heatDown", 
+                caption: " Turn down the thermostat in winter",
+                value: heatDown
+            }, {
+                name: "heatUp",
+                caption: " Turn up the thermostat in summer",
+                value: heatUp
+            }
+        ];
+    };
+
+
 
 
     $scope.calculateShow = function(pieData) {
@@ -182,20 +208,18 @@
 // ---------------------------------------------------
 
 
+ 
   $scope.drawPieChart = function(pieData) {
     var travel = (pieData["vehicle"] + pieData["public_transportation"] +pieData["air_travel"]);
     var housing = (pieData["home"] + pieData["electricity"] + pieData["natural_gas"] + pieData["heating"] + pieData["propane"]);
     var food = (pieData["meat"] + pieData["dairy"] + pieData["grains"] + pieData["fruit"] + pieData["other"]);
-
-    // get rid of this?
-    $scope.updatingTotal = (travel + housing + food).toFixed(2);
     
     $scope.travelLegend = parseFloat(travel.toFixed(1));
     $scope.housingLegend = parseFloat(housing.toFixed(1));
     $scope.foodLegend = parseFloat(food.toFixed(1));
-    $scope.totalLegend = $scope.travelLegend + $scope.housingLegend + $scope.foodLegend
+   
 
-    var colors = ["#D37B4A", "#DDC063", "#5FAFD3"],
+    var colors = ["#407F7F", "#93493B", "#617931"],
 
         categories = ['Travel', 'Home Energy', 'Food'],
         data = [{
@@ -285,8 +309,8 @@
                 center: ['50%', '50%'],
                 borderColor: 'transparent',
                 borderWidth: 0,
-                allowPointSelect: true
-            },
+                allowPointSelect: true   
+            }
         },
         tooltip: {
             headerFormat: '{point.key}: ',
@@ -345,7 +369,7 @@
         var housing_data = barData[2];
         var food_data = barData[3];
 
-        var colors = ["#bf967a", "#b52d41", "#f06f5c"];
+        var colors = ["#407F7F", "#93493B", "#617931"]
 
         $('#barChartContainer').highcharts({
             credits: {
@@ -478,7 +502,8 @@
 
         scope.updatingTotal = (travel + housing + food).toFixed(2);
 
-        var colors = ["#bf967a", "#b52d41", "#f06f5c"],
+
+        var colors = ["#407F7F", "#93493B", "#617931"],
         categories = ['Travel', 'Home Energy', 'Food'],
         data = [{
             y: travel,
@@ -607,7 +632,7 @@
             pieChart.series[1].data[0].update(pieData["vehicle"]);
             pieChart.series[0].data[0].update(travel);
             barChart.series[0].data[0].update(travelBar[0]);  
-        };
+        }
     
 
         if (bikeBox.checked) {
@@ -621,7 +646,21 @@
             pieChart.series[1].data[0].update(pieData["vehicle"]);
             pieChart.series[0].data[0].update(travel);
             barChart.series[0].data[0].update(travelBar[0]); 
-        };
+        }
+
+        if (vegBox.checked) {
+            pieChart.series[1].data[8].update(0);
+            pieChart.series[0].data[2].update(food - veg);
+            barChart.series[2].data[0].update(foodBar[0] - veg)
+                pieData["meat"] = pieData["meat"] - veg;
+                food = food - veg;
+                foodBar[0] = foodBar[0] - veg;
+        } else if (!vegBox.checked) {
+            pieChart.series[1].data[8].update(pieData["meat"]);
+            pieChart.series[0].data[2].update(food);
+            barChart.series[2].data[0].update(foodBar[0]);
+        }
+
 
         if (lightBox.checked) {
             pieChart.series[1].data[4].update(pieData["electricity"] - light);
@@ -635,24 +674,10 @@
             pieChart.series[1].data[4].update(pieData["electricity"]);
             pieChart.series[0].data[1].update(housing);
             barChart.series[1].data[0].update(housingBar[0]);
-        };
-
-        if (vegBox.checked) {
-            pieChart.series[1].data[8].update(0);
-            pieChart.series[0].data[2].update(food - veg);
-            barChart.series[2].data[0].update(foodBar[0] - veg)
-                pieData["meat"] = pieData["meat"] - veg;
-                food = food - veg;
-                foodBar[0] = foodBar[0] - veg;
-                $scope.savedActions.push(veg);
-        } else if (!vegBox.checked) {
-            pieChart.series[1].data[8].update(pieData["meat"]);
-            pieChart.series[0].data[2].update(food);
-            barChart.series[2].data[0].update(foodBar[0]);
-        };
+        }
 
         if (heatDownBox.checked){
-            pieChart.series[1].data[3].update(pieData["natural_gas"] - heatDown);
+            pieChart.series[1].data[5].update(pieData["natural_gas"] - heatDown);
             pieChart.series[0].data[1].update(housing - heatDown);
             barChart.series[1].data[0].update(housingBar[0] - heatDown);
                 pieData["natural_gas"] = pieData["natural_gas"] - heatDown;
@@ -660,11 +685,10 @@
                 housingBar[0] = housingBar[0] - heatDown;
                 $scope.savedActions.push(heatDown);
         } else if (!heatDownBox.checked){
-            pieChart.series[1].data[3].update(pieData["natural_gas"]);
+            pieChart.series[1].data[5].update(pieData["natural_gas"]);
             pieChart.series[0].data[1].update(housing);
             barChart.series[1].data[0].update(housingBar[0]);
         };
-
 
 
         if (heatUpBox.checked){
@@ -675,15 +699,12 @@
                 housing = housing - heatUp;
                 housingBar[0] = housingBar[0] - heatUp;
                 $scope.savedActions.push(heatUp);
+                console.log(heatUp);
         } else if (!heatUpBox.checked) {
             pieChart.series[1].data[4].update(pieData["electricity"]);
                 pieChart.series[0].data[1].update(housing);
                 barChart.series[1].data[0].update(housingBar[0]);
         };
-
-
-
-
 
 
         var total = 0;
@@ -692,8 +713,6 @@
         };
 
         $scope.totalSaved = parseFloat(total); 
-
-
         
     };
 
@@ -728,6 +747,7 @@
             } else if (type !== "vehicle" && type !== "heating" && type !== "electricity" && $scope.previousComplete === false ) {
                 $scope.errors = response.data.errors;
             };
+            
 
         }, function(response) { 
             $scope.errors = response.data.errors;
@@ -895,6 +915,7 @@
 
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
       
+        
         var formData = [
             { type: "meat", factor: meatValue }, 
             { type: "dairy", factor: dairyValue },
@@ -1077,11 +1098,7 @@
     };
 
 
-    $scope.charts = [
-        { caption: "Your carbon footprint" },
-        { caption: "Here's how you stack up against other users" },
-        { caption: "Electricity use and meat intake vs. overall footprint"}
-    ];
+   
 
 
 // -------------- BUBBLE CHART ------------------------
@@ -1182,7 +1199,7 @@
         },
         series: [{
             data: chartData,
-            color: '#b52d41'
+            color: '#407F7F'
             }]
         });
     };
@@ -1295,7 +1312,8 @@
         $scope.housingTot = housing;
         $scope.foodTot = food;
 
-        Highcharts.setOptions({ colors: ["#bf967a", "#b52d41", "#f06f5c"]});
+
+        Highcharts.setOptions({ colors: ["#407F7F", "#93493B", "#617931"]});
 
         $('#smallPieContainer').highcharts({
             chart: {
@@ -1324,7 +1342,11 @@
                 }
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                headerFormat: '{point.key}: ',
+                pointFormat: '<b>{point.percentage:.1f}%</b>',
+                style: {
+                    fontSize: '12pt'
+                }
             },
             plotOptions: {
                 pie: {
@@ -1346,8 +1368,6 @@
             }]
         });
     };
-
-
 
 
   });

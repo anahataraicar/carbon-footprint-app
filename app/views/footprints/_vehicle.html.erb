@@ -1,8 +1,9 @@
-<h3>Transportation by vehicle</h3>
+<h3>Transportation:</h3>
+<p><strong>By vehicle</strong></p>
  
 <div class="input-group">
   <input type="text" class="form-control" placeholder="22 mpg" ng-model="mileage">
-  <span class="input-group-addon" id="basic-addon">miles per gallon</span>
+  <span class="input-group-addon" id="basic-addon">average car mileage</span>
 </div>
 
 
@@ -11,7 +12,7 @@
     <div class="form-group">
       <input class="form-control" type="text" placeholder="12500 miles" ng-model="carMiles" name="miles">
     </div>
-    <span class="input-group-addon" id="basic-addon">miles per year</span>
+    <span class="input-group-addon" id="basic-addon">average miles driven per year</span>
     <div class="form-group">
       <select class='form-control' ng-model="fuelType" ng-options="vehicle.name for vehicle in vehicleOptions" >
       </select>           

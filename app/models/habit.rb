@@ -24,7 +24,11 @@ class Habit < ActiveRecord::Base
 
   def calculate_habit(footprint_type, hash)
     if footprint_type == "vehicle"
-      value = hash[:miles].to_f / hash[:mileage].to_f * hash[:fuel_type].to_f / 1000
+      if hash[:mileage] == "0"
+        value = 0
+      else 
+        value = hash[:miles].to_f / hash[:mileage].to_f * hash[:fuel_type].to_f / 1000
+      end
       input1 = hash[:miles]
       input2 = hash[:mileage]
       input3 = hash[:fuel_type]

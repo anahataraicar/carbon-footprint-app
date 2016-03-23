@@ -21,8 +21,7 @@ class FootprintsController < ApplicationController
   
     pdf.text "MY CARBON FOOTPRINT", :color => "339933", align: :center, size: 43
     pdf.move_down 5
-    pdf.text "I CREATE #{profile.total_value.to_s} MEGATONNES OF CAROBN DIOXIDE A YEAR!", :color => "88cc00", align: :center, size: 22
-    pdf.move_down 10
+   
     pdf.font_size 12
     habits = current_user.habits
     pdf.fill_color "000000"
@@ -46,37 +45,51 @@ class FootprintsController < ApplicationController
       table.rows(0..13).align = :center
     end
     pdf.font_size 14
-    pdf.move_up 320
+    pdf.move_up 385
 
 
-    profiles = Profile.all.count
-    user_count = profiles.count
-    user_total_value = profiles.sum(:total_value)
-    @average = user_total_value / user_count
-     @total = Profile.find_by(user_id: current_user.id).total_value.to_f
+    user_count = Profile.all.count
+    user_total_value = Profile.all.sum(:total_value)
+    average = user_total_value / user_count
+    total = Profile.find_by(user_id: current_user.id).total_value.to_f
+    difference = total - average
+    percent = (difference / average * 100).round(2)
 
-
-
-    pdf.indent(300) do
-      gas = current_user.calc_save_gas
-      pdf.text "• By getting a more fuel efficient car, I can save #{gas} MT of CO2"
-      pdf.move_down 10
-      bike = current_user.calc_bike
-      pdf.text "• By riding my bike 20 miles a week, I can save #{bike} MT of CO2"
-      pdf.move_down 10
-      light = current_user.calc_lightbulb
-      pdf.text "• By replacing 5 regular lightbulbs with CFLs, I can save #{light} MT of CO2"
-      pdf.move_down 10
-      veg = current_user.calc_veg
-      pdf.text "• By switching to a vegetarian diet, I can save #{veg} MT of CO2"
+    if percent > 0 
+      string = "worse"
+    else
+      string = "better"
+      percent = percent.abs
     end
 
+    pdf.indent(305) do
+       pdf.text "I create #{profile.total_value.to_s} MEGATONNES of carbon dioxide a year, which makes me #{percent.to_s}% #{string} than the average user!", :color => "88cc00", align: :center, size: 18
+      pdf.move_down 10
+      pdf.fill_color "617931"
+      pdf.text "I can save...", size: 17
+      pdf.move_down 10
+      gas = current_user.calc_save_gas
+      pdf.text "• #{gas} MT of CO2 by driving a more fuel efficient car"
+      pdf.move_down 12
+      bike = current_user.calc_bike
+      pdf.text "• #{bike} MT of CO2 by riding my bike 20 miles a week,"
+      pdf.move_down 10
+      light = current_user.calc_lightbulb
+      pdf.text "• #{light} MT of CO2 by replacing 5 regular lightbulbs with CFLs"
+      pdf.move_down 10
+      veg = current_user.calc_veg
+      pdf.text "• #{veg} MT of CO2 by switching to a vegetarian diet"
+      pdf.move_down 10
+      pdf.text "• 0.25 MT of CO2 by turning up the thermostat in the summer"
+      pdf.move_down 10
+      pdf.text "• 0.52 MT of CO2 by turning down the thermostat in the winter"
+    end
 
-    pdf.move_down 190
+    pdf.move_down 30
     pdf.fill_color "00cc00"
     pdf.text "More tips to reduce my footprint!", size: 20
     pdf.move_down 8
-    pdf.font_size 12
+    pdf.font_size 14
     pdf.text "• When possible, walk, carpool, or take public transportation"
     pdf.move_down 8
     pdf.text "• Use fuel efficient driving techniques by avoiding speeding and unnecessary acceleration"
@@ -90,11 +103,6 @@ class FootprintsController < ApplicationController
     pdf.text "• Insulate and seal your home to prevent air from entering and leaving"
     pdf.move_down 8
     pdf.text "• Lower your water usage by purchasing water efficient shower heads, toilets, faucets, dishwashers, and washing machines"
-
-    image = "#{Prawn::DATADIR}/images/prawn.png"
-
-
-
 
     send_data pdf.render, type: "application/pdf", 
                           disposition: "inline",

@@ -11,9 +11,7 @@
             $scope.drawPieChart(pieData);
             $scope.drawGauge();
             $scope.drawSmallPieChart(pieData);
-
             if ( pieData["done"] === true  ) {
-                
                 $('a[href="#8"]').tab('show');
                 $scope.resultsVisible = true;
                 $scope.modalVisible = false;
@@ -40,9 +38,6 @@
     };
 
     $scope.anchorPage = function() {
-        // $(wrapper).addClass("active");
-
-
         var point = document.getElementById("point");
         $('html, body').stop().animate({
             scrollTop: $(point).offset().top
@@ -114,9 +109,6 @@
         var veg = pieData["veg"].toFixed(2);
         var heatDown = pieData["thermostat_down"].toFixed(2);
         var heatUp = pieData["thermostat_up"].toFixed(2);
-        console.log(gas);
-        console.log(bike);
-        console.log(veg);
 
         $scope.actions = [
             {
@@ -301,7 +293,7 @@
         },
         yAxis: {
             title: {
-                text: 'MT CO2/year'
+                text: 'tons CO2/year'
             }
         },
         plotOptions: {
@@ -314,7 +306,7 @@
         },
         tooltip: {
             headerFormat: '{point.key}: ',
-            pointFormat: '{point.y:.2f} MT CO2',
+            pointFormat: '{point.y:.2f} tons CO2',
             style: {
                 fontSize: '12pt',
                 padding: 13
@@ -348,7 +340,7 @@
             dataLabels: {
                 formatter: function () {
                     // display only if larger than 1
-                    return this.y > 0.5 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + ' MT' : null;
+                    return this.y > 0.5 ? '<b>' + this.point.name + ':</b> ' + this.y.toFixed(2) + ' tons' : null;
                 },
                 color: 'black',
                 distance: 19,
@@ -404,7 +396,7 @@
                 },
                 title: {
                     margin: 20,
-                    text: 'MT CO2 / year',
+                    text: 'ton CO2 / year',
                     style: {
                         fontSize: '15px',
                     }
@@ -433,7 +425,7 @@
             },
             tooltip: {
                 // headerFormat: '{point.x}',
-                pointFormat: '{series.name}: {point.y:.2f} MT CO2',
+                pointFormat: '{series.name}: {point.y:.2f} tons CO2',
                 // useHTML: true,
                 style: {
                     fontSize: '12pt',
@@ -1144,28 +1136,28 @@
             gridLineWidth: 1,
             gridLineColor: '#cccccc',
             title: {
-                text: 'MT CO2 from electricity use',
+                text: 'ton CO2 from electricity use',
                 margin: 20, 
                 style: {
                     fontSize: '16px'
                 },
             },
             labels: {
-                format: '{value} MT'
+                format: '{value} tons'
             }
         },
         yAxis: {
             startOnTick: false,
             endOnTick: false,
             title: {
-                text: 'MT CO2 from meat intake',
+                text: 'tons CO2 from meat intake',
                 margin: 20, 
                 style: {
                     fontSize: '16px'
                 },
             },
             labels: {
-                format: '{value} MT'
+                format: '{value} tons'
             },
             maxPadding: 0.2,
             gridLineWidth: 1,
@@ -1175,9 +1167,9 @@
             useHTML: true,
             headerFormat: '<table>',
             pointFormat: 
-                '<tr><th>Electricity use:</th><td>{point.x} MT</td></tr>' +
-                '<tr><th>Meat intake:</th><td>{point.y} MT</td></tr>' +
-                '<tr><th>Overall footprint:</th><td>{point.z} MT</td></tr>',
+                '<tr><th>Electricity use:</th><td>{point.x} tons</td></tr>' +
+                '<tr><th>Meat intake:</th><td>{point.y} tons</td></tr>' +
+                '<tr><th>Overall footprint:</th><td>{point.z} tons</td></tr>',
             footerFormat: '</table>',
             followPointer: true,
             style: {

@@ -35,7 +35,7 @@ $chart-blue: #407F7F;
 }
 
 .contact-section {
-    height: 20%;
+    height: 9%;
     padding-top: 10px;
     text-align: center;
     background: $green;
@@ -135,17 +135,16 @@ h3.quote {
 
 .row.contact-info {
     .col-md-12 {
-        // width: 400px;
-        // margin: auto;
-        
-        text-align: center;
+      
+        margin-left: 20px;
         h4 { 
             // margin: 10px 0px 10px 0px; 
-            // display: inline-block;
+            display: inline-block;
             text-align: center;
         }
         i { 
-            margin-right: 10px; 
+            margin-right: 5px; 
+            margin-left: 5px;
             color: white;
         }
         a { color: white }

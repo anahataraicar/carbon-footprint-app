@@ -16,6 +16,12 @@ $chart-green: #617931;
 
 * { font-family: Raleway; }
 
+body#edit-body {
+  background-color: #E7E7E7;
+  padding-bottom: 70px;
+}
+
+
 .row {
   max-width: 100%;
 }
@@ -24,10 +30,7 @@ $chart-green: #617931;
   margin-left: -5px;
 }
 
-body#edit-body {
-  background-color: #E7E7E7;
-  padding-bottom: 70px;
-}
+
 
 ul.nav.nav-pills { // icons
   li { width: 12% }
@@ -62,87 +65,87 @@ ul.nav.nav-pills { // icons
 }
 
 
-.well.bottom {
-  display: inline-block;
+
+
+.well.bottom.one {
   width: 100%;
   height: 190px;
-  // padding: 0;
   background-color: white;
-  
   .row {
-    // padding: 0;
+    width: 100%;
+    height: 100%;
     margin: 0;
-    width: 100%;
-    .col-md-7 {
-      padding-top: auto;
-    }
-    .col-md-7 {
-      padding: auto;
-    }
-  }
-
-  #percentile {
-    background-color: $light-green;
-    height: 120px;
-    width: 100%;
-    p { 
-      font-size: 16px;
-      text-align: center;
-      color: white;
-    }
-  }
-
-
-  h6 {
-    text-align: center;
-    i { 
-      text-align: center;
-      color: $light-green; 
-    }
-  }
-  h5 {
-    text-align: center;
-    font-size: 14px;
-    margin: 0;
-    a { 
-      color: $light-green; 
-    }
-  }
-
-
-  .btn-lg{
-    background-color: $light-green;
-    color: white;
-    width: 100%;
-    height: 120px;
-    padding: auto;
-    h6 {
-      i { color: white; }
-    }
-    &:hover {
-      background-color: $green;
-      color: white;
-      h6 { i { color: white; } }
-    }
-  }
-  
   .panel {
-    margin: auto;
-    width: 95%;
-    height: 150px;
-    .panel-heading {
-      text-align: center;
-      color: white;
+      .panel-heading {
+        text-align: center;
+        color: white;
+      }
+      .panel-body {
+        table#legend {
+          height: 90%;
+          width: 100%;
+          font-size: 14px;
+        td { padding: 3px; }
+        } 
+      }
+    }   
+    .average-label {
+      text-decoration: underline;
+      // margin-bottom: 5px;
+    }
+
+    .col-md-5 {
+      height: 160px;
+
+      #smallPieContainer { 
+        width: 100%;
+        height: 100%;
+        margin: auto;
+      }
     }
   }
-
-  table#legend {
-    height: 90%;
-    width: 100%;
-    font-size: 14px;
-    td { padding: 3px; }
-  }  
 }
+
+
+
+.well.bottom.two {
+  width: 100%;
+  height: 150px;
+  background-color: white;
+
+  .row {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+ 
+
+    .btn-lg {
+      width: 100%;
+      height:110px;
+    }
+
+    #percentile {
+      background-color: $light-green;
+      border-radius: 8px;
+      width: 100%;
+      height:110px;
+      p { 
+        font-size: 14px;
+        text-align: center;
+        color: white;
+      }
+    }
+
+    .btn-lg.print {
+      width: 100%;
+      margin: 0;
+      height:110px;
+    }
+  }
+}
+
+
 
 
 
@@ -220,13 +223,6 @@ ul.nav.nav-pills { // icons
   }
 }
 
-.last-arrow {
-  position: absolute;
-  top: 62%; 
-  color: $green;
-}
-
-
 
 
 .input-group {
@@ -252,18 +248,18 @@ table#slider-table {
   }
 }
 
+
 #tips {
   text-align: center;
   margin-bottom: 20px;
 }
 
+
 table#action-table {
   font-size: 16px;
-
   #centered {
     text-align: center; 
   }
-  
   td.action-value { text-align: center }
   td { padding: 10px }
 }
@@ -293,8 +289,6 @@ table#action-table {
   }
 }
 
-
-
 .tooltip > .tooltip-inner { 
   font-size: 14px;
   padding: 7px;
@@ -303,6 +297,7 @@ table#action-table {
 
 // -------------- SHOW / MODAL --------------------
 // ------------------------------------------------
+
 
 body#show-body {
   margin-left: 20px;
@@ -392,7 +387,7 @@ body#show-body {
 .btn-group > ul > li > i { margin: 6px; }
 .btn-group {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .btn.btn-default.dropdown-toggle {
@@ -430,29 +425,6 @@ body#show-body {
     float: right;
   }
 }
-
-#smallPieContainer {
-  width: 100%;
-  height: 130px;
-  margin: auto;
-}
-
-.pdf-icons {
-  // display: inline-block;
-  width: 100%;
-  margin: auto;
-  text-align: center;
-  a {
-    color: $green;
-    font-size: 16px;
-  }
-  i { 
-    margin: 10px; 
-    color: $green; 
-  }
-}
-
-
 
 
 // --------- edit page scrolling ---------

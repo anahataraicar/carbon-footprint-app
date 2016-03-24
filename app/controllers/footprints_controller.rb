@@ -86,7 +86,7 @@ class FootprintsController < ApplicationController
     end
 
     pdf.move_down 30
-    pdf.fill_color "00cc00"
+    pdf.fill_color "339933"
     pdf.text "More tips to reduce my footprint!", size: 20
     pdf.move_down 8
     pdf.font_size 14

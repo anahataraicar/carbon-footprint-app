@@ -1,6 +1,6 @@
-<div class="well bottom">
+<div class="well bottom one" ng-if="!resultsVisible">
   
-  <div class="row" ng-if="!resultsVisible">
+  <div class="row" >
     <div class="col-md-7">
       <div class="panel panel-default">
         <div class="panel-heading">Your emissions</div>
@@ -26,13 +26,16 @@
       </div>
     </div> <!-- panel -->
     <div class="col-md-5">
-       <h5>Average footprint of other users</h5>
       <div id="smallPieContainer"></div>
     </div>
   </div>
-              <!-- RESULTS VISIBLE  -->
+</div>
 
-  <div class="row" ng-if="resultsVisible">
+
+
+              <!-- RESULTS VISIBLE  -->
+<div class="well bottom two" ng-if="resultsVisible">
+  <div class="row" >
     <div class="col-md-4">
       <button type="button" class="btn btn-default btn-lg" ng-click="restartForm()">Recalculate<br> your footprint</button>
     </div>    
@@ -42,8 +45,8 @@
       </div>
     </div>
      <div class="col-md-4">
-        <a target="_blank" href="/download_pdf" type="button" class="btn btn-default btn-lg" >
-          <h6><i class="fa fa-print fa-4x" href="/download_pdf"></i></h6>
+        <a target="_blank" href="/download_pdf" type="button" class="btn btn-default btn-lg print" >
+          <h6><i class="fa fa-print fa-2x" href="/download_pdf"></i></h6>
           <h5>Print PDF of <br>your footprint</h5>
         </a>
     </div>

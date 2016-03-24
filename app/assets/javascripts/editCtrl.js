@@ -906,7 +906,6 @@
 
 
     $scope.submitFood = function(meatValue, dairyValue, grainsValue, fruitValue, otherValue, direction) {
-      
         
         var formData = [
             { type: "meat", factor: meatValue }, 
@@ -980,7 +979,6 @@
       d3.select("#nValueFruit").property("value", nValuefruit);
     }
 
-
     // OTHER
 
     d3.select("#nValueOther").on("input", function () {
@@ -993,8 +991,6 @@
       d3.select("#text-slider-Other").text(nValueOther);
       d3.select("#nValueOther").property("value", nValueOther);
     }
-
-
 
 
 // ---------- SUBMIT INTRO!!!!!! ------------------------
@@ -1197,8 +1193,6 @@
     };
 
 
-
-
     $scope.drawGauge = function() {
         $('#gaugeContainer').highcharts({
         // Highcharts.chart('#gaugeContainer', {
@@ -1279,11 +1273,9 @@
                     'zIndex': 10
                 })
                 .translate(190, 26)
-            
         });
 
         var chart = $('#gaugeContainer').highcharts();
-        // console.log(chart.series[0].data[0].y);
     };
 
     $scope.updateGauge = function(page) {
@@ -1304,7 +1296,6 @@
         $scope.housingTot = housing;
         $scope.foodTot = food;
 
-
         Highcharts.setOptions({ colors: ["#407F7F", "#93493B", "#617931"]});
 
         $('#smallPieContainer').highcharts({
@@ -1314,8 +1305,8 @@
                 plotShadow: false,
                 bordercolor: 'transparent',
                 type: 'pie',
-                backgroundColor: 'transparent'
-            },
+                backgroundColor: 'transparent',
+                marginLeft: 40            },
             legend: {
                 align: 'right',
                 verticalAlign: 'top',
@@ -1324,8 +1315,13 @@
                 itemMarginBottom: 8
             },
             title: {
-                text: '',
-                fontSize: '2px'
+                text: 'Average footprint <br>of other <br>users',
+                align: 'left',
+                margin: 0,
+                style: {
+                    fontSize: '10pt',
+                    color: '#567714'
+                }
             },
             credits: { enabled: false },
             navigation: {
@@ -1344,7 +1340,10 @@
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    dataLabels: { enabled: false },
+                    dataLabels: { 
+                        enabled: false
+                        
+                    },
                     size: 100,
                     borderWidth: 0.5
                 }
@@ -1354,7 +1353,7 @@
                 colorByPoint: true,
                 data: [
                   { name: 'Travel', y: travel }, 
-                  { name: 'Home Electricity', y: housing }, 
+                  { name: 'Home<br> Electricity', y: housing }, 
                   { name: 'Food', y: food }
                 ]
             }]

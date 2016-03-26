@@ -1,7 +1,13 @@
+
+// (function() {
+//   "use strict";
+//   app.controller("postCtrl",["$scope", "$http", "$compile", function($scope, $http, $compile){
+
+
 (function() {
   "use strict";
 
-  angular.module("app").controller("editCtrl", function($scope, $http, $timeout, $location, $anchorScroll) {
+  app.controller('editCtrl', ['$scope', '$http', '$timeout', '$location', function($scope, $http, $timeout, $location) {
 
     var userId = gon.user_id;
 
@@ -1361,5 +1367,5 @@
     };
 
 
-  });
+  }]);
 }());

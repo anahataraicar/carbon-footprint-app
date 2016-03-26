@@ -98,8 +98,6 @@ class FootprintsController < ApplicationController
     pdf.move_down 8
     pdf.text "• Reduce, reuse, and recycle"
     pdf.move_down 8
-    pdf.text "• Reduce, reuse, and recycle"
-    pdf.move_down 8
     pdf.text "• Insulate and seal your home to prevent air from entering and leaving"
     pdf.move_down 8
     pdf.text "• Lower your water usage by purchasing water efficient shower heads, toilets, faucets, dishwashers, and washing machines"

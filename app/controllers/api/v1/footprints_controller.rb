@@ -10,10 +10,11 @@ class Api::V1::FootprintsController < ApplicationController
     while counter > 0
       other_profile = Profile.all.sample
       user = other_profile.user
-      if user.is_done?
-        profiles << other_profile
-        counter = counter - 1
-      end
+      
+      ## user is done?
+      profiles << other_profile
+      counter = counter - 1
+    
     end
 
     names = []
@@ -36,10 +37,9 @@ class Api::V1::FootprintsController < ApplicationController
     while counter > 0
       other_profile = Profile.all.sample
       user = other_profile.user
-      if user.is_done?
-        profiles << other_profile
-        counter = counter - 1
-      end
+      # user is done??
+      profiles << other_profile
+      counter = counter - 1
     end
 
     totals = []

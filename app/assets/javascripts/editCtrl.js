@@ -1,9 +1,3 @@
-
-// (function() {
-//   "use strict";
-//   app.controller("postCtrl",["$scope", "$http", "$compile", function($scope, $http, $compile){
-
-
 (function() {
   "use strict";
 

@@ -9,7 +9,6 @@ class Api::V1::FootprintsController < ApplicationController
 
     while counter > 0
       other_profile = Profile.all.sample
-      user = other_profile.user
       
       ## user is done?
       profiles << other_profile

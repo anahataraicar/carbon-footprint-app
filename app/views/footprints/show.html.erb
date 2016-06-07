@@ -38,14 +38,14 @@
         <a name="scroll-to-point"></a>
         
         <div class="row left">
-          <div class="col-md-7" style="padding-right: 0">
+          <div class="col-md-7 col-lg-7" style="padding-right: 0">
             
             <div class="page-title">
               <h2>YOUR CARBON DASHBOARD</h2>
             </div>
 
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 col-lg-3">
                 <div class="well left">
                   <% if current_user.first_name %>
                   <p>Welcome <%= current_user.first_name %> <%= current_user.last_name %>!</p>
@@ -80,7 +80,7 @@
               </div>
             </div> <!-- close second row -->
           </div>
-          <div class="col-md-5 right" >
+          <div class="col-md-5 right">
             <div class="charts-titles" data-toggle="tooltip" data-placement="bottom" title="Click or hover over a slice for more info!">
               <h2 ng-show="checkChart('pie')">YOUR CARBON FOOTPRINT</h2>
               <h3 ng-show="checkChart('bar')">HOW YOU COMPARE TO OTHER USERS</h3>

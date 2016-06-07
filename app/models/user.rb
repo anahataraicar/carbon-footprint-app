@@ -58,20 +58,13 @@ class User < ActiveRecord::Base
     sum.round(2)
   end
 
-  def is_done? ## probably wont need this anymore 
-    done = "yes"
-
+  def is_done? ## might not need this anymore 
+    result = true
     habits.each do |habit|
       if !(habit.input1)
-        done = "no"
+        result = false
       end
     end
-
-    if done == "no"
-      return false
-    else
-      return true
-    end    
   end
 
 

@@ -1,8 +1,8 @@
 (function() {
   "use strict";
 
-  app.controller('editCtrl', ['$scope', '$http', '$timeout', '$location', function($scope, $http, $timeout, $location) {
-
+    angular.module('app').controller('editCtrl', function($scope, $http, $timeout, $location) {
+    
     var userId = gon.user_id;
 
     $scope.setUpCharts = function() {
@@ -11,16 +11,9 @@
             $scope.drawPieChart(pieData);
             $scope.drawGauge();
             $scope.drawSmallPieChart(pieData);
-            if ( pieData["done"] === true  ) {
-                $('a[href="#8"]').tab('show');
-                $scope.resultsVisible = true;
-                $scope.modalVisible = false;
-                $scope.calculateActions(pieData);
-                $scope.submitProfile();
-            }  
+            
         });
     };
-
 
     $scope.init = function() {
         $scope.setUpCharts();
@@ -45,10 +38,6 @@
             bindScrollListener();
         });
         event.preventDefault();
-
-       
-       
-
     };
 
     function bindScrollListener() {
@@ -1067,7 +1056,6 @@
         $('#intro-arrow').tooltip('show');
     };
 
-    window.scope=$scope;
 
 // ------------ MODAL -----------------------------------
 
@@ -1361,5 +1349,5 @@
     };
 
 
-  }]);
+    });
 }());

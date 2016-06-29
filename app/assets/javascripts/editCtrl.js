@@ -481,7 +481,7 @@
         $scope.housingLegend = housing.toFixed(1);
         $scope.foodLegend = food.toFixed(1);
 
-        scope.updatingTotal = (travel + housing + food).toFixed(2);
+        $scope.updatingTotal = (travel + housing + food).toFixed(2);
 
 
         var colors = ["#407F7F", "#93493B", "#617931"],

@@ -91,7 +91,7 @@ class Api::V1::FootprintsController < ApplicationController
     @travel = habits.sum(:value).to_f
     habits = Habit.where("footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ?", "electricity", "natural_gas", "heating", "propane")
     @home = habits.sum(:value).to_f
-    habits = Habit.where("footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ?", "meat", "dairy", "grains", "fruit", "other")
+    habits = Habit.where("footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ? OR footprint_type = ?", "meat", "dairy`", "grains", "fruit", "other")
     @food = habits.sum(:value).to_f
 
   end
